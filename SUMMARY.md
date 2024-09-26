@@ -112,3 +112,6 @@
 * [Amplitude Batch Event Upload API](amplitude-batch-event-upload-api.md)
 * [SnapChat- Conversions API](snapchat-conversions-api.md)
 * [Fetch Audience](fetch-audience.md)
+* [Amazon - S3](amazon-s3.md)
+* [Snowflake - Audience](snowflake-audience.md)
+* [Snowflake - Data store](snowflake-data-store.md)
