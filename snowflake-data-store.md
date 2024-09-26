@@ -5,9 +5,13 @@ MadConnect integrates with Snowflake to allow seamless loading of reporting data
 
 
 ```
+
+
 |   Source/Destination   |   Connector Type         |   Data Type    |   Description                                                             |   Supported Actions   |
 | ---------------------- | ------------------------ | -------------- | ------------------------------------------------------------------------- | --------------------- |
 | Destination            | Cost Per Connector (CPC) | Reporting Data | Load reporting data from source platforms directly into Snowflake tables. | Get                   |
+
+
 ```
 
 
