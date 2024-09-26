@@ -21,5 +21,5 @@ To configure Amazon S3 as source,
 1. Go to My Platforms. Make sure the Amazon S3 tile displays in your instance of My Platforms.
 2. Click Amazon S3 tile.
 3. Add the AWS Account ID, AWS External ID and AWS role ARN\*
-4. Save the settings.
+4. Save the settings
 
