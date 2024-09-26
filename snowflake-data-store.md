@@ -2,11 +2,13 @@
 
 MadConnect integrates with Snowflake to allow seamless loading of reporting data from various source platforms directly into Snowflake tables or views. This connector enables businesses to centralize their advertising, audience, or campaign data within Snowflake for more efficient data analysis, reporting, and optimization.
 
-| **Source/Destination** | **Connector Type**       | **Data Type**  | **Description**                                                                                      | **Supported Actions** |
+
+
+```
+|   Source/Destination   |   Connector Type         |   Data Type    |   Description                                                                                        |   Supported Actions   |
 | ---------------------- | ------------------------ | -------------- | ---------------------------------------------------------------------------------------------------- | --------------------- |
 | Destination            | Cost Per Connector (CPC) | Reporting Data | Load reporting data from source platforms directly into Snowflake tables or views for data analysis. | Get                   |
-
-***
+```
 
 #### Prerequisites
 
