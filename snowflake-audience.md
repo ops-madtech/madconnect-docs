@@ -9,16 +9,14 @@ MadConnect integrates with Snowflake, enabling businesses to seamlessly connect 
 \
 **Schema**&#x20;
 
-{% code fullWidth="false" %}
 ```
 | Key           | Data Type | Example                                                                 |
 | ------------- | --------- | ----------------------------------------------------------------------- |
 | \<ID>         | String    | It can be any value such as TDID, UID2, EMAIL etc. Refer to table below |
 | segment\_id   | String    | 22343245                                                                |
 | segment\_name | String    | Sport Lover                                                             |
-| action        | String    | Possible options are add/remove/opt-out                                 |
+| action        | String    | Possible options are add/remove/opt-out 
 ```
-{% endcode %}
 
 Possible value of ids
 
