@@ -9,28 +9,7 @@ MadConnect integrates with Snowflake, enabling businesses to seamlessly connect 
 \
 **Schema**&#x20;
 
-| Key           | Data Type | Example                                                                 |
-| ------------- | --------- | ----------------------------------------------------------------------- |
-| \<ID>         | String    | It can be any value such as TDID, UID2, EMAIL etc. Refer to table below |
-| segment\_id   | String    | 22343245                                                                |
-| segment\_name | String    | Sport Lover                                                             |
-| action        | String    | Possible options are add/remove/opt-out                                 |
-
 \
-Field Data           Type                               Example                            Description
-
-Key                       String                             TDID, UID2, EMAIL         Unique identifier for the audience                    \
-&#x20;                                                                                                                  member (e.g., TDID, UID2, Email).
-
-segment\_id        String                             123456                                ID associated with the audience                           \
-&#x20;                                                                                                                   segment.
-
-segment\_name String Sport Lover Name of the audience segment.
-
-action String add Action to be taken on the audience (options include add, remove, or opt-out).
-
-
-
 
 
 Possible value of ids
