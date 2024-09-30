@@ -2,9 +2,15 @@
 
 MadConnect supports adding your data to first-party data segments in The Trade Desk. Enhance your The Trade Desk platform with real-time data directly from your data sources. Keeping your data current empowers your team to deliver exceptional advertising experiences. Leverage the full potential of The Trade Desk for audience activation through the First-Party Data API, ensuring your campaigns are always optimized and effectively targeted.
 
-| CONNECTOR TYPE | DATA TYPE | CONNECTOR                | DESCRIPTION                                                                 | SUPPORTED ACTIONS |
-| -------------- | --------- | ------------------------ | --------------------------------------------------------------------------- | ----------------- |
-| Destination    | Audience  | First Party Data (UID2s) | Sync your first-party IDs (UID2, RampID) from any source to The Trade Desk. | Add               |
+CONNECTOR TYPE: Destination
+
+DATA TYPE: Audience
+
+CONNECTOR: First Party Data (UID2s)
+
+DESCRIPTION: Sync your first-party IDs (UID2, RampID) from any source to The Trade Desk.
+
+SUPPORTED ACTIONS: Add
 
 Prerequisites:
 
