@@ -4,8 +4,9 @@
 
 MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling advertisers to effectively manage and target their audiences on Facebook. With this connector, businesses can sync customer data directly from their data sources to Meta, ensuring more precise and impactful audience targeting.
 
-| Source / Destination | Connector Type | Data Type        | Description                                                                                                                                                | Supported Actions |
+|                      |                |                  |                                                                                                                                                            |                   |
 | -------------------- | -------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Source / Destination | Connector Type | Data Type        | Description                                                                                                                                                | Supported Actions |
 | Destination          | CPC            | Custom Audiences | Custom audiences allow advertisers to target their ads to a specific set of people with whom they have already established a relationship on/off Facebook. | Add / Remove      |
 
 ***
