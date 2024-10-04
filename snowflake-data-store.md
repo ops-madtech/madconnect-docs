@@ -26,6 +26,14 @@ To set up the **Snowflake - Datastore** connector in MadConnect, ensure the foll
 
 * MADCONNECTUSER has access to the table used to receive data
 
+```
+// Commands for granting MADCONNECT application access to the table 
+GRANT USAGE ON DATABASE <DATABASE_NAME> TO APPLICATION MADCONNECT;
+GRANT USAGE ON SCHEMA <DATABASE_NAME>.<SCHEMA_NAME> TO APPLICATION MADCONNECT;
+GRANT CREATE STAGE ON SCHEMA <DATABASE_NAME>.<SCHEMA_NAME> TO APPLICATION MADCONNECT;
+GRANT CREATE TABLE ON SCHEMA <DATABASE_NAME>.<SCHEMA_NAME> TO APPLICATION MADCONNECT;
+```
+
 #### Example Report Types
 
 This connector supports loading reporting data such as:

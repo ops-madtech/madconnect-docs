@@ -6,6 +6,19 @@ MadConnect integrates with Snowflake, enabling businesses to seamlessly connect 
 
 **Data Type:** Audiences.
 
+#### Prerequisites
+
+To set up the **Snowflake - Audience** connector in MadConnect, ensure the following prerequisites are met:
+
+* MADCONNECTUSER has access to the table containing audience data
+
+```
+// Commands for granting MADCONNECT application access to the table 
+GRANT USAGE ON DATABASE <DATABASE_NAME> TO APPLICATION MADCONNECT;
+GRANT USAGE ON SCHEMA <DATABASE_NAME>.<SCHEMA_NAME> TO APPLICATION MADCONNECT;
+GRANT SELECT ON TABLE <DATABASE_NAME>.<SCHEMA_NAME>.<TABLE_NAME> TO APPLICATION MADCONNECT;
+```
+
 \
 **Schema**&#x20;
 
