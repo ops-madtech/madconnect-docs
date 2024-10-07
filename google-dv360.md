@@ -21,24 +21,16 @@ MadConnect enables seamless integration with DV360 Customer Match, allowing you 
 
 To activate audiences on Google DV360 using MadConnect, ensure the following prerequisites are met:
 
-**Meet Google's Requirements for Using Customer Match**:
-
-* **Policy Compliance**: The advertiser account must have a good history of policy compliance.
-* **Payment History**: The advertiser account must have a good payment history.
-* **Allowlisting**: Customers with compliant accounts are automatically allowlisted by Google.
-
-**Account Requirements**:
-
-* **OAuth Authentication**: Authenticate Google DV360 Account destination using OAuth.
-* **Compliant Advertiser Account**: Ensure the account adheres to Google's Customer Match requirements.
-
-**Credentials**:
-
-* You can obtain your Google DV360 Account Credentials from your account settings in the Google Marketing Platform.
-
-**Ensure the Audience(s) exist in the DV360 account.**
-
-
+1. **Meet Google's Requirements for Using Customer Match**:
+   * **Policy Compliance**: The advertiser account must have a good history of policy compliance.
+   * **Payment History**: The advertiser account must have a good payment history.
+   * **Allowlisting**: Customers with compliant accounts are automatically allowlisted by Google.
+2. **Account Requirements**:
+   * **OAuth Authentication**: Authenticate Google DV360 Account destination using OAuth.
+   * **Compliant Advertiser Account**: Ensure the account adheres to Google's Customer Match requirements.
+3. **Credentials**:
+   * You can obtain your Google DV360 Account Credentials from your account settings in the Google Marketing Platform.
+4. **Ensure the Audience(s) exist in the DV360 account.**
 
 Warning: Verify that data upload features have been approved for the proposed audience's parent partner by first trying to create a Customer Match audience under a relevant advertiser in the UI. If data upload has not been enabled, attempts to create or update Customer Match audiences will return an error.
 
