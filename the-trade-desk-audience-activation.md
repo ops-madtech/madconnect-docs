@@ -1,29 +1,51 @@
 # The Trade Desk - Audience Activation
 
+#### TheTradeDesk First-Party Data Connector Overview
+
 MadConnect supports adding your data to first-party data segments in The Trade Desk. Enhance your The Trade Desk platform with real-time data directly from your data sources. Keeping your data current empowers your team to deliver exceptional advertising experiences. Leverage the full potential of The Trade Desk for audience activation through the First-Party Data API, ensuring your campaigns are always optimized and effectively targeted.
 
-CONNECTOR TYPE: Destination
+***
 
-DATA TYPE: Audience
+**Connector Overview**
 
-CONNECTOR: First Party Data (UID2s)
+* **Source / Destination**: Destination
+* **Data Type**: Audience
+* **Description**: Sync your first-party IDs (UID2, RampID) from any source to The Trade Desk.
+* **Supported Actions**: Add / Remove
 
-DESCRIPTION: Sync your first-party IDs (UID2, RampID) from any source to The Trade Desk.
+***
 
-SUPPORTED ACTIONS: Add
+**Prerequisites**
 
-Prerequisites:
+To activate the connector, ensure the following:
 
-* Connect with your TTD representative for any paperwork needed for audience activation.
-* Ensure that the Segment IDs being used exist in your TTD account. If not, create the Segment and communicate the Segment ID to the data provider.
+1. **Contact TTD Representative**:
+   * Connect with your The Trade Desk representative for any paperwork needed for audience activation.
+   * Paperwork includes an **Access Letter** giving MadConnect permission to transfer data and a **UID2 Agreement**.
+2. **Authentication Requirements**:
+   * **Advertiser ID**: Obtain the Advertiser ID for the TTD account.
+   * **Advertiser Secret Key**: Retrieve the secret key from The Trade Desk UI under _**Advertiser Preferences**_ > _**Seat Identifiers & Keys**_. If the secret key is unavailable, reach out to your TTD Account Manager for assistance.
 
-To send data to your first-party data segments using MadConnect, you will need the following to authenticate:
+***
 
-* Advertiser ID
-* Advertiser Secret Key
+**Configure Connector**
 
-You can obtain your decoded advertiser secret key for uploading first-party data from your advertiser preferences page in The Trade Desk UI; Advertiser Preferences > Seat Identifiers & Keys. If you can't find your secret key, contact your Account Manager. When you send data, the included secret key is validated against the secret key the platform has on file for the Advertiser ID.
+To configure the The Trade Desk First-Party Data API connector in MadConnect, follow these steps:
 
-For more information on the First Party Data API, please review [TTD documentation](https://partner.thetradedesk.com/v3/portal/data/doc/FirstPartyDataIntegration).
+1. **Add Platform**:
+   * Navigate to **My Platforms** in the MadConnect UI.
+   * Click on **Add Platform** and select **The Trade Desk - First-Party Data** from the available platform tiles.
+2. **Destination Configuration**:
+   * Once The Trade Desk platform is added, click **Configure** on the platform tile under **My Platforms**.
+3. **Authentication Details**:
+   * In the **Configuration** tab, input the required **Advertiser ID** and **Advertiser Secret Key**.
+   * The Advertiser Secret Key can be retrieved from _**Advertiser Preferences > Seat Identifiers & Keys**_ in the TTD UI.
+   * Ensure the secret key is cross-checked with the one stored by The Trade Desk for the corresponding Advertiser ID.
+4. **Verify**:
+   * Once authentication is complete, you can verify that the connection is properly configured under **My Platforms**.
+
+For more information on the First-Party Data API, please review the[ TTD documentation.](https://partner.thetradedesk.com/v3/portal/data/doc/post-data-advertiser-firstparty#supported-ids)
+
+***
 
 \
