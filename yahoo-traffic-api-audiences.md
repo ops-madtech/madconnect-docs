@@ -1,19 +1,62 @@
 # Yahoo Traffic API - Audiences
 
-Yahoo! is a global technology company offering a diverse range of internet services. As a pioneer in digital media, Yahoo! provides news, entertainment, and communication platforms. With a commitment to innovation, Yahoo! remains a leading force in shaping the digital experiences of millions worldwide.
+#### Yahoo DSP - Audiences Overview
 
-An audience is a collection of consumers with similar interests, habits, or online and offline behaviors. The Yahoo DSP enables you to build audiences that are most responsive to your campaigns, are most likely to convert, or are otherwise advantageous.\
-[https://developer.yahooinc.com/dsp/api/docs/traffic/audience/about-audience.html](https://developer.yahooinc.com/dsp/api/docs/traffic/audience/about-audience.html)&#x20;
+MadConnect supports updating Yahoo DSP audiences, allowing you to seamlessly include email and phone number audiences.
 
-**Connection Type:** Destination.
+Yahoo DSP helps you build and target audiences with similar interests, habits, or behaviors, enhancing your campaign effectiveness. With MadConnect, you can easily update these audiences, ensuring your marketing efforts are always directed at the most responsive and relevant consumers.
 
-**Data Type:** Audiences.
+***
 
-### Configuring Yahoo DSP as a Destination
+**Connector Overview**
 
-To configure Yahoo DSP as destination,
+* **Connector Type**: Destination
+* **Data Type**: Audience
+* **Description**: Sync your Email and Phone Numbers to update audiences in Yahoo DSP for activation.
+* **Supported Actions**: Add&#x20;
 
-1. Go to My Platforms. Make sure Yahoo DSP displays in your instance of My Platforms.
-2. Click Yahoo DSP.
-3. Login using your Yahoo Ads Account.
-4. Click allow to authenticate using OAuth 2.0
+***
+
+**Prerequisites**
+
+1. **Enable DSP API**:&#x20;
+   * Contact your Yahoo DSP Account Manager or Product Support to enable the DSP API for your account.
+2. **Existing Audience Segment**:&#x20;
+   * Ensure the audience segment already exists in the Yahoo DSP platform. MadConnect can update existing segments but does not create new segments with Yahoo DSP.
+3. **Credentials Required for Authentication**:
+   * **Client ID**
+   * **Client Secret**\
+     If the DSP API is not enabled, you will see a message indicating that the Client ID and Client Secret are “undefined.” Contact your Yahoo DSP Account Manager or Product Support to resolve this.
+
+***
+
+**Steps to Obtain Credentials:**
+
+1. **Get Client ID and Secret**:
+   * Open the DSP UI and select your name in the upper-right corner.
+   * Select **My Account** and then the **Activate** button.
+   * Agree to the terms of service to receive a success message with your Client ID and Secret.
+   * Copy and store the Client ID and Secret safely.
+
+***
+
+**Configure Connector:**
+
+1. Navigate to the **My Platforms** Section:
+   * In the MadConnect UI, go to the **My Platforms** section.
+2. Add a New Platform:
+   * Click on **Add Platform**.
+3. Select **Yahoo DSP - Custom Audiences**:
+   * Choose the **Yahoo DSP - Custom Audiences** tile and click on **Configure**.
+4. Go to **Configuration**:
+   * Navigate to the **Configuration** tab.
+5. Enter **Client ID** and **Client Key**:
+   * Manually enter your Yahoo DSP **Client ID** and **Client Key** into the provided fields.
+6. **Verify** Configuration:
+   * Ensure the connector status is marked as **Configured** under **My Platforms**.
+
+For more information on Yahoo DSP Authentication, please review the [Yahoo DSP Documentation](https://developer.yahooinc.com/dsp/api/docs/traffic/audience/about-audience.html).
+
+***
+
+\
