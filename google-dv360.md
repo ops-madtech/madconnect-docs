@@ -84,6 +84,28 @@ To successfully send an audience to DV360, it's necessary to create an empty cus
 8. **Share the Unique Audience ID**:
    * Provide the unique ID to the appropriate team or entity responsible for activating the audience.
 
+**Audience Schema Requirements**
+
+To successfully send data to TheTradeDesk First Party API via MadConnect, the following minimum schema must be used:
+
+1. \<ID> Field
+   * **Field Name**: email\_hash, phone\_hash, maid
+   * **Data Type**: String (Hashed)
+   * **Description**: This field contains the hashed emails or phone numbers or non-hashed MAIDs of the audience members.
+   * **Accepted Hashing Algorithms**: SHA-256
+   * **Example**: A hashed email such as 5d41402abc4b2a76b9719d911017c592.
+2. Segment ID Field
+   * **Field Name**: segment\_id
+   * **Data Type**: String
+   * **Description**: The unique ID assigned by Google for the specific audience segment.
+   * **Example**: 123456
+3. Action Field
+   * **Field Name**: action
+   * **Data Type**: String
+   * **Description**: Specifies whether to add or remove the user from the audience.
+   * **Accepted Values**: add, remove
+   * **Example**: add
+
 For more information on Google DV360 Audience Activation, please review the[ Google Customer Match documentation](https://developers.google.com/display-video/api/guides/audiences/upload-customer-match).
 
 ***
