@@ -44,6 +44,27 @@ To configure the The Trade Desk First-Party Data API connector in MadConnect, fo
 4. **Verify**:
    * Once authentication is complete, you can verify that the connection is properly configured under **My Platforms**.
 
+**Audience Schema Requirements**
+
+To successfully send data to The Trade Desk First Party API via MadConnect, the following minimum schema must be used:
+
+1. \<ID> Field
+   * **Field Name**: TDID, UID2, DAID&#x20;
+   * **Data Type**: String (Hashed)
+   * **Description**: This field contains the accepted First Party ID as listed by The Trade Desk [documentation](https://partner.thetradedesk.com/v3/portal/data/doc/post-data-advertiser-firstparty#supported-ids).
+   * **Example**: A raw UID2 value such as 48MjlfIUZpOKNAm9nod7/jCLAXUYsnE1tpVHQSDS0uo=.
+2. Segment Name Field
+   * **Field Name**: segment\_name
+   * **Data Type**: String
+   * **Description**: The name of the new audience you are creating OR name of existing audience to update as it appears in TTD UI.
+   * **Example**: q1\_campaign\_signups
+3. Action Field
+   * **Field Name**: action
+   * **Data Type**: String
+   * **Description**: Specifies whether to add or remove the user from the audience.
+   * **Accepted Values**: add, remove
+   * **Example**: add
+
 For more information on the First-Party Data API, please review the[ TTD documentation.](https://partner.thetradedesk.com/v3/portal/data/doc/post-data-advertiser-firstparty#supported-ids)
 
 ***
