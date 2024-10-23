@@ -36,8 +36,8 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
    * Click on "Add Platform."
 3. **Select Meta - Custom Audiences**
    * Choose the "Meta - Custom Audiences" tile and click "Configure."
-4. **Go to Destination Configuration**
-   * Open the "Destination Configuration" tab.
+4. **Go to Configuration**
+   * Open the "Configuration" tab.
 5. **Sign in with Meta**
    * Click "Sign in with Meta" and log in using your Meta account credentials.
 6. **Authorize MadConnect**
