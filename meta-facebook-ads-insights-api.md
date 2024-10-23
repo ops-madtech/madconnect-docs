@@ -56,38 +56,38 @@ Below are the standard dimensions and metrics available for reporting. This list
 
 **Dimensions**
 
-* date\_start
-* date\_stop
-* account\_id
-* account\_name
-* ad\_id
-* ad\_name
-* adset\_id
-* adset\_name
-* buying\_type
-* campaign\_id
-* campaign\_name
-* conversion\_values
-* device\_platform
-* media\_asset
-* objective
-* publisher\_platform
-* user\_segment\_key
+1. date\_start
+2. date\_stop
+3. account\_id
+4. account\_name
+5. ad\_id
+6. ad\_name
+7. adset\_id
+8. adset\_name
+9. buying\_type
+10. campaign\_id
+11. campaign\_name
+12. conversion\_values
+13. device\_platform
+14. media\_asset
+15. objective
+16. publisher\_platform
+17. user\_segment\_key
 
 **Metrics**
 
-* actions
-* clicks
-* conversions
-* impressions
-* inline\_link\_clicks
-* reach
-* spend
-* video\_continuous\_2\_sec\_watched\_actions
-* video\_p100\_watched\_actions
-* video\_p25\_watched\_actions
-* video\_p50\_watched\_actions
-* video\_p75\_watched\_actions
+1. actions
+2. clicks
+3. conversions
+4. impressions
+5. inline\_link\_clicks
+6. reach
+7. spend
+8. video\_continuous\_2\_sec\_watched\_actions
+9. video\_p100\_watched\_actions
+10. video\_p25\_watched\_actions
+11. video\_p50\_watched\_actions
+12. video\_p75\_watched\_actions
 
 ***
 
