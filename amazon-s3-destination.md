@@ -25,14 +25,10 @@ MadConnect integrates with **Amazon S3** to securely transfer and store data wit
 
 To set up Amazon S3 as a destination, the following must be provided:
 
-1. **AWS Account ID**
-   * Identifies the AWS account that owns the S3 bucket.
-2. **AWS Role ARN**
-   * Provide the IAM role ARN with permissions to allow data uploads to the S3 bucket.
-3. **AWS External ID**
-   * Use the external ID provided by MadConnect to configure secure cross-account access in the AWS IAM role.
-4. **Bucket URI**
-   * Specify the URI of the destination S3 bucket (e.g., `s3://your-bucket-name`).
+1. **AWS Role ARN**
+   * Provide the MadConnect role ARN with permissions to allow data uploads to the S3 bucket.
+2. **Bucket URI**
+   * Specify the URI of the destination S3 bucket in Create Connection screen (e.g., `s3://your-bucket-name/prefix`).
 
 ***
 
@@ -44,9 +40,7 @@ To set up Amazon S3 as a destination, the following must be provided:
    * Click on **Add Platform** and select **Amazon S3** from the list.
 3. **Go to Destination Configuration:**
    * In the **Configuration** tab, enter the required credentials:
-     * AWS Account ID
-     * AWS Role ARN
-     * AWS External ID
+     * MadConnect Role ARN
      * Bucket URI
 4. **Test and Save Configuration:**
    * Verify the connection and save the configuration. Ensure the status is marked as **Configured** under **My Platforms**.
