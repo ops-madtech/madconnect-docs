@@ -1,9 +1,3 @@
----
-description: >-
-  Learn how to deploy mparticle connector as a source and destination on
-  MadConnect.
----
-
 # mParticle - Events
 
 ![](https://lh7-us.googleusercontent.com/Q8emtVgduOrId7OkscCawIrq-k-NTuGqKx9TuoRj1Rx-N1ChgEop3mncZoiOHA2L3vi4cQ36aHdXIV7nNJU73us3attk8Mhf4Em49U18f-8\_8l4rcD7RhOWhZpaMG7PPSD1H-ZlVkzHVG0fOOrpLvg)
