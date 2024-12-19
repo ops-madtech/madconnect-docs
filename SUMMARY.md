@@ -118,3 +118,4 @@
 * [DV360 - Reporting](dv360-reporting.md)
 * [Snapchat - Reporting](snapchat-reporting.md)
 * [Amazon S3 - Destination](amazon-s3-destination.md)
+* [TikTok Customer File – Audience Activation](tiktok-customer-file-audience-activation.md)
