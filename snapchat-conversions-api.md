@@ -1,105 +1,111 @@
 # SnapChat- Conversions API
 
-![](<.gitbook/assets/image (5).png>)
+<div align="left"><figure><img src=".gitbook/assets/image.png" alt="" width="375"><figcaption></figcaption></figure></div>
 
-#### Snapchat Marketing API for Customer Lists - Connection Overview
+## **Snapchat Ads – Conversions API Connector Overview**
 
-MadConnect integrates seamlessly with the Snapchat Marketing API, enabling you to manage customer lists by adding or removing records for targeted advertising. This connector allows you to efficiently sync your customer data directly to Snapchat, ensuring your campaigns reach the right audience.
+MadConnect enables seamless integration with Snapchat Ads, allowing advertisers to sync conversion event data from mobile apps or websites. This integration supports real-time tracking and precise optimization of campaigns based on custom or offline conversion events.
 
 ***
 
-**Connector Overview**
+### **Connector Overview**
 
 * **Source / Destination**: Destination
-* **Data Type**: Audience
-* **Description**: Manage Snapchat customer lists by adding or removing records for targeted campaigns.
-* **Supported Actions**: Add, Remove
+* **Data Type**: Conversions
+* **Description**: Sync conversion data from your platform to Snapchat Ads, enabling optimization of your campaigns using web or app-based conversion events.
+* **Supported Actions**: Add
 
 ***
 
-**Prerequisites**
+### **Prerequisites**
 
-To set up the Snapchat Marketing API for Customer Lists in MadConnect, ensure the following prerequisites are met:
+To activate the connector, ensure the following:
 
-1. **Authenticate using OAuth:**
-   * Navigate to the connector configuration and authenticate your Snapchat account using OAuth.
-2. **Ensure Existing Audience(s):**
-   * Verify that the audience(s) you plan to update already exist in the Snapchat Ads Manager. MadConnect can update existing audiences but does not create new ones at this time.
+1. **Active Snapchat Ads Account**
+   * Ensure you have an active Snapchat Ads account with permissions to manage conversion events.
+2. **OAuth Authentication**
+   * Use OAuth to authenticate and grant permissions for managing conversion data through MadConnect.
+3. **Conversion Schema Preparation**
+   * Prepare your conversion data file according to Snapchat’s required schema (details provided below).
 
 ***
 
-**Configure Connector**
+### **Configure Connector**
 
-1. **Navigate to the My Platforms Section:**
-   * In the MadConnect UI, go to the "My Platforms" section.
-2. **Add a New Platform:**
-   * Click on "Add Platform."
-3. **Select Snapchat - Customer Lists:**
-   * Choose the "Snapchat - Customer Lists" tile and click on "Configure."
-4. **Go to Configuration:**
-   * Navigate to the "Configuration" tab.
-5. **Sign in with Snapchat:**
-   * Click the "Sign in with Snapchat" button.
-6. **Authenticate with Snapchat:**
+1. **Navigate to the My Platforms Section**
+   * In the MadConnect UI, go to the **"My Platforms"** section.
+2. **Add a New Platform**
+   * Click on **"Add Platform."**
+3. **Select Snapchat - Conversions**
+   * Choose the **"Snapchat - Conversions"** tile and click on **"Configure."**
+4. **Go to Configuration**
+   * Navigate to the **"Configuration"** tab.
+5. **Sign in with Snapchat**
+   * Click the **"Sign in with Snapchat"** button to authenticate using OAuth.
+6. **Authenticate with Snapchat**
    * You will be redirected to Snapchat’s login page. Sign in using your Snapchat account credentials.
-7. **Authorize MadConnect:**
-   * Grant MadConnect permission to access and manage your Snapchat account.
-8. **Verify Configuration:**
-   * Ensure the connector status is marked as "Configured" under My Platforms.
+7. **Authorize MadConnect**
+   * Grant MadConnect permission to access and manage your Snapchat Ads account.
+8. **Verify Configuration**
+   * Ensure the connector status is marked as **"Configured"** under **My Platforms.**
 
 ***
 
-**Create a Customer List Audience**
+### **Conversion Schema Requirements**
 
-To create an empty Customer List Audience in Snapchat:
+To send conversion data to Snapchat Ads, the following schema must be adhered to:
 
-1. **Log in to Ads Manager:**
-   * Click the menu in the top left corner and select "Audiences."
-2. **Click New Audience:**
-   * Select "Custom Audience" and choose "Customer List."
-3. **Create a Name:**
-   * Provide a name for the Audience.
-4. **Select the Data Type:**
-   * Choose the data type for the Audience – Email, Phone Number, or Mobile Ad ID.
-5. **Create the Audience:**
-   * Save the empty audience.
-6. **Obtain the Snapchat Segment ID:**
-   * Provide the Segment ID to your representative.
+#### **Required Fields**
 
-***
-
-**Where Can I Find My Snapchat Segment ID?**
-
-To obtain your Snapchat Segment ID, follow these steps:
-
-1. Log in to your Snapchat Ads Manager: Go to your dashboard.
-2. Go to Assets > Audiences: Under the Audience Library, select the required audience.
-3. Copy the Segment ID: The ID appears after /audiences/custom-audience/ in the URL of the resulting page.
-
-***
-
-**Audience Schema Requirements**
-
-To successfully send data to Snapchat Ads as audiences via MadConnect, the following minimum schema must be used:
-
-1. \<ID> Field
-   * **Field Name**: EMAIL\_HASH, PHONE\_HASH
-   * **Data Type**: String (Hashed)
-   * **Description**: This field contains the hashed emails or phone numbers or unhashed MAIDs of the audience members
-   * **Accepted Hashing Algorithms**: SHA-256
-   * **Example**: A hashed email such as 5d41402abc4b2a76b9719d911017c592.
-2. Segment ID Field
-   * **Field Name**: segment\_id
+1. **Event Name**
+   * **Field Name**: event\_name
    * **Data Type**: String
-   * **Description**: The unique ID assigned by Snapchat Ads for the specific audience segment.
-   * **Example**: 123456
-3. Action Field
-   * **Field Name**: action
+   * **Description**: Specifies the type of conversion event (e.g., purchase, sign-up, add-to-cart).
+   * **Example**: purchase
+2. **Timestamp**
+   * **Field Name**: event\_time
+   * **Data Type**: Integer (Unix Timestamp)
+   * **Description**: The timestamp of the conversion event.
+   * **Example**: 1705508777
+3. **Action Source**
+   * **Field Name**: action\_source
    * **Data Type**: String
-   * **Description**: Specifies whether to add or remove the user from the audience.
-   * **Accepted Values**: add, remove
-   * **Example**: add
+   * **Description**: The origin of the conversion event (e.g., MOBILE\_APP, WEB).
+   * **Example**: MOBILE\_APP
+4. **User Data**
+   * **Field Name**: user\_data
+   * **Data Type**: Object
+   * **Description**: Includes at least one identifier for matching:
+     * em (hashed email)
+     * ph (hashed phone number)
+     * client\_ip\_address & client\_user\_agent (for web events)
+     * madid (Mobile Advertising ID for app events)
+   *   **Example**:
 
+       ```
+       json
+       ```
 
+       Copy code
 
-For more detailed instructions on the Snapchat Marketing API and managing customer lists, refer to the [Snapchat Marketing API](https://developers.snap.com/api/marketing-api/Ads-API/customer-lists) documentation.
+       { "em": \["e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"], "ph": \["7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"] }
+5. **Conversion Value**
+   * **Field Name**: conversion\_value
+   * **Data Type**: Float
+   * **Description**: The monetary value of the conversion event (e.g., purchase amount).
+   * **Example**: 29.99
+6. **Currency**
+   * **Field Name**: currency
+   * **Data Type**: String (ISO 4217 Format)
+   * **Description**: The currency of the conversion value.
+   * **Example**: USD
+
+For details on parameters accepted by the Snapchat Ads Conversion API, please refer to [Snapchat’s documentation](https://developers.snap.com/api/marketing-api/Conversions-API/Parameters).
+
+***
+
+### **Important Notes**
+
+1. **Data Privacy**
+   * Ensure all user identifiers are hashed using SHA-256 before syncing to Snapchat Ads.
+
