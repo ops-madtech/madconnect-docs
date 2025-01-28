@@ -1,46 +1,128 @@
 # The Trade Desk - Raw Offline Measurement Conversion
 
-![](https://lh7-us.googleusercontent.com/wup3xBIBtaYy7UVLc1ABg55E98QIuY7WHthBrZInsQP40gI5Z\_ilROMdvobYgmdtPHQ66X9\_urGMGsZRmHGeSUTmxtGqq1pxo2fqCq16kBz762EbRkDHB5OFLOk58xvVDiuZL6NG2c9SL9xCyTcuvQ)
+![](https://lh7-us.googleusercontent.com/wup3xBIBtaYy7UVLc1ABg55E98QIuY7WHthBrZInsQP40gI5Z_ilROMdvobYgmdtPHQ66X9_urGMGsZRmHGeSUTmxtGqq1pxo2fqCq16kBz762EbRkDHB5OFLOk58xvVDiuZL6NG2c9SL9xCyTcuvQ)
 
-The [Trade Desk](https://www.thetradedesk.com/) is an online, demand-side platform that provides a self-service platform enabling ad buyers to manage data-driven digital advertising campaigns using their own teams across various advertising formats, including display, video, and social, and on a multitude of devices, including computers,mobile devices, and connected TV.
+## The Trade Desk – Offline Conversions Connector Overview
 
-Offline conversions can include use cases such as attributing in-store sales, place visits, or custom events. To facilitate insights into conversions in verticals where purchases predominantly occur offline, The Trade Desk enables partners and trusted marketplace providers to send offline measurement data to the platform and then use it for attribution and targeting.
+MadConnect's The Trade Desk – Offline Conversions API Connector enables advertisers to upload user-level offline conversions directly to The Trade Desk. This integration supports use cases such as attributing in-store sales, visits, custom events, and more, ensuring comprehensive tracking and optimization of campaigns.
 
-[https://partner.thetradedesk.com/v3/portal/data/doc/DataOfflineMeasurement](https://partner.thetradedesk.com/v3/portal/data/doc/DataOfflineMeasurement)
+### Connector Overview
 
-**Connection Type:** Destination.
+* **Source / Destination**: Destination
+* **Data Type**: Conversions
+* **Description**: Transmit offline conversion data, including events such as purchases or visits, directly to The Trade Desk to enhance measurement and optimize campaign performance.
+* **Supported Actions**: Add
 
-**Data Type:** Events.
+***
 
-#### Getting The Trade Desk API Credentials
+### Prerequisites
 
-1. &#x20;Log in to the TTD platform using your API credentials.
-2. &#x20;At the top-right of the Developer Portal, click the User Profile icon, and select Manage API Tokens. The API Tokens page appears.
-3. &#x20;Click GENERATE TOKEN. The Generate API Token dialog appears.
-4. &#x20;Enter a descriptive name for your token. For example, include the tool name for which it be used or any other details that will help you distinguish between multiple tokens later.
-5. &#x20;Select the token lifetime based on your key rotation strategy and integration needs. Recommended: at least 6 months.
-6. &#x20;Click GENERATE TOKEN. A confirmation message appears with an API token.
-7. &#x20;Copy the displayed API token, save it to your secrets management system for future reference, and then close the message.
+To activate this connector, ensure the following:
 
-#### Configuring Trade Desk - Raw Offline Measurement Conversion as Destination
+1. **Active The Trade Desk Account**
+   * Maintain an active The Trade Desk account with permissions to manage offline conversion events.
+2. **Data Provider ID**
+   * Obtain a valid `DataProviderId` from your The Trade Desk Technical Account Manager.
+   * Ensure the `DataProviderId` matches the `OfflineDataProviderId` field in the associated tracking tag.
+3. **Tracking Tags**
+   * Set up offline tracking tags using The Trade Desk platform or tracking tag endpoints.
+4. **Authentication Credentials**
+   * Obtain the following credentials:
+     * **Advertiser ID**
+     * **Advertiser Secret Key**
+     * **Offline Data Provider ID**
+5. **Conversion Data Preparation**
+   * Prepare your offline conversion data following The Trade Desk schema, ensuring all required fields are included and formatted correctly.
 
-To configure Trade Desk Raw Offline Conversions as destination,
+***
 
-1. &#x20;Goto to the The Trade Desk Raw Offline Conversions destination configuration page.
-2. &#x20;Copy the TTD token in the token field.
-3. &#x20;Click on the save button to save the credentials.
-4. &#x20;Connector is now configured. Connection can be created using TTD Raw Offline Conversion as destination
+### Configure Connector
 
-#### Data Attributes for Raw Offline Measurement Conversion Data
+1. **Add Platform**
+   * Navigate to **My Platforms** in the MadConnect UI.
+   * Click on **Add Platform** and select **The Trade Desk – Offline Conversions** from the available platform tiles.
+2. **Destination Configuration**
+   * Once the platform is added, click **Configure** on the platform tile under **My Platforms**.
+3. **Authenticate with The Trade Desk**
+   * Enter the following credentials into the configuration:
+     * **Advertiser Secret Key**
+   * MadConnect will validate these credentials to ensure secure data uploads.
+4. **Verify Configuration**
+   * Ensure the connector status is marked as **Configured** under **My Platforms**.
 
-Destination
+***
 
-Offline tag creation
+### Conversion Schema Requirements
 
-| <p><code>{</code></p><p>    <code>"AdvertiserId": "advert12",</code></p><p>    <code>"TrackingTagName": "2022 Widget Phone Sales",</code></p><p>    <code>"OfflineDataProviderId": "provid34"</code></p><p><code>}</code></p> |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+To send offline conversion data to The Trade Desk, adhere to the following schema:
 
-Upload offline conversion events:
+#### Data Provider ID
 
-| <p><code>{</code></p><p>    <code>"OfflineDataProviderId": "provid34",</code></p><p>    <code>"AdvertiserId": "advert12",</code></p><p>    <code>"PageStartIndex": 0,</code></p><p>    <code>"PageSize": 10</code></p><p><code>}</code></p> |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+* **Field Name**: `DataProviderId`
+* **Data Type**: String
+* **Description**: The provider ID supplied by your The Trade Desk Technical Account Manager.
+* **Example**: `dataproviderABC`
+
+#### Items (Event Details)
+
+* **Field Name**: `Items`
+* **Data Type**: Array of objects
+* **Description**: Contains event details for offline conversions.
+
+Each object in the `Items` array must include:
+
+1. **Impression ID (Optional)**
+   * **Field Name**: `ImpressionId`
+   * **Data Type**: GUID
+   * **Description**: A unique identifier linking the conversion to an impression. Required if no other ID is provided.
+   * **Example**: `49gCBlwj-9d33-0927-s9g7-sd7nF3D248d5`
+2. **Tracking Tag ID**
+   * **Field Name**: `TrackingTagId`
+   * **Data Type**: String
+   * **Description**: The ID of the offline tracking tag.
+   * **Example**: `bjsks98`
+3. **Timestamp**
+   * **Field Name**: `TimestampUtc`
+   * **Data Type**: String (ISO 8601 format)
+   * **Description**: The time of the conversion event in UTC.
+   * **Example**: `2023-03-23T22:11:13.2311903Z`
+4. **Event Name (Required for Merchant Catalog)**
+   * **Field Name**: `EventName`
+   * **Data Type**: String
+   * **Description**: A user-defined event name, such as `purchase`, `addtocart`, or `viewitem`.
+   * **Example**: `purchase`
+5. **Value (Optional)**
+   * **Field Name**: `Value`
+   * **Data Type**: Decimal
+   * **Description**: The monetary value of the conversion.
+   * **Example**: `19.98`
+6. **Value Currency (Optional)**
+   * **Field Name**: `ValueCurrency`
+   * **Data Type**: String
+   * **Description**: The currency of the conversion value, in ISO 4217 format.
+   * **Example**: `USD`
+7. **Country (Optional)**
+   * **Field Name**: `Country`
+   * **Data Type**: String
+   * **Description**: The country where the conversion occurred, in ISO 3 format.
+   * **Example**: `USA`
+8. **Region (Required if Country is USA)**
+   * **Field Name**: `Region`
+   * **Data Type**: String
+   * **Description**: The region where the conversion occurred.
+   * **Example**: `NY`
+9. **Order ID (Optional)**
+   * **Field Name**: `OrderId`
+   * **Data Type**: String
+   * **Description**: A unique identifier for the transaction or conversion event.
+   * **Example**: `abc123XyZ`
+
+***
+
+### Important Notes
+
+* **Data Privacy**: Ensure compliance with GDPR, CCPA, and other regional privacy regulations by providing accurate privacy settings when applicable.
+* **Batch Uploads**: Consolidate multiple conversions into fewer API calls to improve efficiency and reduce potential errors.
+* **Timeliness**: Submit conversion data within 1–3 days of the transaction date. Data older than 25 days may not be processed.
+
+For more details, refer to [The Trade Desk Offline Conversion API Documentation](https://partner.thetradedesk.com/v3/portal/data/doc/post-providerapi-offlineconversion).
