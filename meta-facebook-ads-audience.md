@@ -43,8 +43,6 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 7. **Verify Configuration**
    * Ensure the platform status is marked as "Configured" under My Platforms.
 
-
-
 ***
 
 #### **Audience Schema Requirements for Meta Ads – Custom Audiences**
@@ -53,34 +51,55 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 
 **ID Field**
 
-* **Field Name:** `email_hash`, `phone_hash`, `maid`
-* **Data Type:** String (Hashed for emails and phone numbers; plain for MAID)
-* **Description:** Contains the hashed emails, phone numbers, or plain Mobile Advertising IDs (MAIDs) of the audience members.
-* **Accepted Hashing Algorithm:** SHA-256
-* **Example:**
-  * Email: `5d41402abc4b2a76b9719d911017c592`
-  * Phone: `98f6bcd4621d373cade4e832627b4f6`
-  * MAID: `cdda802e-fb9c-47ad-0794d394c912`
+* **Field Name:** `email_hash`, `phone_hash`, `maid`, `fname_hash`, `lnname_hash`, `zip_hash`, `country_code_hash`, `dobm`, `dobd_hash`, `doby_hash`
+* **Data Type:** String (Hashed where required)
+* **Description:**\
+  Contains audience member identifiers used for matching in Meta. The following ID types are supported:
+  * **`EMAIL`** – SHA-256 hashed email addresses.
+    * _Before hashing:_ Trim whitespace and convert to lowercase.
+    * _Example:_ `5d41402abc4b2a76b9719d911017c592`
+  * **`PHONE`** – SHA-256 hashed phone numbers.
+    * _Before hashing:_ Remove symbols/letters and prefix with country code if not using the `country` field.
+    * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
+  * **`FN` / `LN`** – SHA-256 hashed first and last names.
+    * _Before hashing:_ Convert to lowercase, remove punctuation, and use Roman characters where possible.
+    * _Example:_
+      * First Name (`FN`): `6dcd4ce23d88e2ee9568ba546c007c63`
+      * Last Name (`LN`): `7c6a180b36896a0a8c02787eeafb0e4c`
+  * **`ZIP`** – SHA-256 hashed zip code.
+    * _For US:_ First 5 digits only.
+    * _For UK:_ Area/District/Sector format.
+  * **`COUNTRY`** – SHA-256 hashed two-letter country code (ISO 3166-1 alpha-2).
+    * _Example:_ `us`
+  * **`DOBM`, `DOBD`, `DOBY`** – SHA-256 hashed birth month, day, and year.
+    * _Format:_
+      * **DOBM (MM):** `01-12`
+      * **DOBD (DD):** `01-31`
+      * **DOBY (YYYY):** `1900` to current year
+  * **`MADID`** – Mobile Advertiser ID (**not hashed**)
+    * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
+
+💡 _For a complete list of supported match identifiers and multi-key matching guidelines, review the official_ [_Meta Custom Audiences Documentation._](https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/#external_identifiers)
 
 **Segment ID Field**
 
 * **Field Name:** `segment_id`
 * **Data Type:** String
-* **Description:** The unique identifier for the specific audience segment assigned by Meta.
+* **Description:** The unique ID assigned by Meta for the specific audience segment.
 * **Example:** `987654321`
 
 **Segment Name Field**
 
 * **Field Name:** `segment_name`
 * **Data Type:** String
-* **Description:** The name of the audience segment to be created in Meta. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Meta.
+* **Description:** The name of the audience to be created in Meta. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Meta and return the assigned `segment_id`.
 * **Example:** `Winter Campaign Audience`
 
 **Action Field**
 
 * **Field Name:** `action`
 * **Data Type:** String
-* **Description:** Specifies the intended action for the audience member—either adding or removing the user from the segment.
+* **Description:** Specifies whether to **add** or **remove** the user from the audience.
 * **Accepted Values:** `add`, `remove`
 * **Example:** `add`
 
@@ -89,13 +108,19 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 #### **💡 How the Schema Works in MadConnect:**
 
 * **Audience Creation:**
-  * If a `segment_name` is provided and `segment_id` is missing, MadConnect will automatically create a **new audience** in Meta using the provided name.
-  * **Action must be `add`** when creating a new audience.
+  * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in Meta using the provided name.
+  * The **`action`** field must be set to `add` during audience creation.
 * **Managing Existing Audiences:**
-  * If `segment_id` is provided, IDs will be **added** or **removed** based on the `action` field.
-  * The **`id`** field serves as the matching identifier (e.g., `email_hash`, `UID2`, `MAID`), ensuring proper alignment with Meta’s audience matching requirements.
+  * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
+  * **Any valid ID field sent to Meta that the platform supports will be used for matching.** This allows flexibility for matching on a wide range of identifiers, from hashed emails and phone numbers to non-hashed Mobile Advertiser IDs (MADID).
+* **Hashing Guidelines:**
+  * **SHA-256 hashing is required** for all personal identifiers except for **External Identifiers**, **App User IDs**, **Page Scoped User IDs**, and **MAID**.
+  * Normalize data before hashing (e.g., lowercase, remove whitespace/special characters).
+  * Names (first/last) support special characters and non-Roman alphabets but should include Romanized versions for better match rates.
 * **UI Enhancements:**
-  * When creating a new audience, additional fields (e.g., audience source, duration) can be configured directly within the **MadConnect UI**.
-  * These settings can be updated at the **connection level** as needed.
+  * Users can configure metadata (e.g., **audience source**, **duration**) using dropdowns in the **MadConnect UI**.
+  * These settings can be modified at the **connection level** as needed.
+
+
 
 For more details on Meta Custom Audiences, please refer to the[ Meta Custom Audiences documentation](https://www.facebook.com/business/help/744354708981227).
