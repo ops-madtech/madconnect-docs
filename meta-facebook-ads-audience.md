@@ -4,10 +4,12 @@
 
 #### Meta Ads -Custom  Audiences Overview
 
-MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling advertisers to effectively manage and target their audiences on Meta platforms, including Facebook and Instagram. With this connector, businesses can sync customer data directly from their data sources to Meta, ensuring more precise and impactful audience targeting.
+MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling advertisers to effectively manage and target their audiences on Meta platforms, including Facebook and Instagram. With this connector, businesses can sync customer data directly from their data sources to Meta, ensuring more precise and impactful audience targeting.\
+
 
 ***
 
+\
 **Connector Overview**
 
 * **Connector Type**: Destination
@@ -17,6 +19,8 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 
 ***
 
+####
+
 #### Prerequisites
 
 1. **Active Meta Ads Account**
@@ -25,6 +29,8 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
    * Authenticate your Meta Ads account using OAuth within MadConnect.
 
 ***
+
+####
 
 #### Configure Connector
 
@@ -44,6 +50,8 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
    * Ensure the platform status is marked as "Configured" under My Platforms.
 
 ***
+
+####
 
 #### **Audience Schema Requirements for Meta Ads – Custom Audiences**
 
@@ -81,6 +89,7 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 
 💡 _For a complete list of supported match identifiers and multi-key matching guidelines, review the official_ [_Meta Custom Audiences Documentation._](https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/#external_identifiers)
 
+\
 **Segment ID Field**
 
 * **Field Name:** `segment_id`
@@ -95,7 +104,7 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 * **Description:** The name of the audience to be created in Meta. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Meta and return the assigned `segment_id`.
 * **Example:** `Winter Campaign Audience`
 
-**Action Field**
+[**Action Field**](#user-content-fn-1)[^1]
 
 * **Field Name:** `action`
 * **Data Type:** String
@@ -104,6 +113,8 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 * **Example:** `add`
 
 ***
+
+####
 
 #### **💡 How the Schema Works in MadConnect:**
 
@@ -124,3 +135,5 @@ To successfully send data to **Meta Custom Audiences** via **MadConnect**, the f
 
 
 For more details on Meta Custom Audiences, please refer to the[ Meta Custom Audiences documentation](https://www.facebook.com/business/help/744354708981227).
+
+[^1]: 
