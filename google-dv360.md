@@ -64,71 +64,64 @@ To configure the DV360 Customer Match connector in MadConnect, follow these step
 
 To successfully send data to **Google DV360 Customer Match API** via **MadConnect**, the following minimum schema must be used:
 
-**ID Field**
-
-* **Field Name:** `email_hash`, `phone_hash`, `maid`, `zip_code`, `hashedFirstName`, `hashedLastName`, `countryCode`
-* **Data Type:** String (Hashed for personal identifiers; plain for MAID and location data)
-* **Description:**\
-  Contains audience member identifiers used for matching in DV360. The following ID types are supported:
-  * `email_hash` – SHA-256 hashed email addresses.
-    * _Before hashing:_ Remove all whitespace and convert to lowercase.
-    * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-  * `phone_hash` – SHA-256 hashed phone numbers.
-    * _Before hashing:_ Format using **E.164** (includes country calling code).
-    * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
-  * `zip_code` – Member’s postal zip code.
-    * _Must be used with:_ `countryCode`, `hashedFirstName`, and `hashedLastName`.
-  * `fname_hash` – SHA-256 hashed first name.
-    * _Before hashing:_ Remove whitespace and convert to lowercase.
-    * _Example:_ `6dcd4ce23d88e2ee9568ba546c007c63`
-    * _Must be used with:_ `countryCode`, `hashedLastName`, and `zipCodes`.
-  * `lname_hash` – SHA-256 hashed last name.
-    * _Before hashing:_ Remove whitespace and convert to lowercase.
-    * _Example:_ `7c6a180b36896a0a8c02787eeafb0e4c`
-    * _Must be used with:_ `countryCode`, `hashedFirstName`, and `zipCodes`.
-  * `country_code` – Two-letter country code of the member.
-    * _Example:_ `US`
-    * _Must be used with:_ `hashedFirstName`, `hashedLastName`, and `zipCodes`.
-  * `maid` – Mobile Advertising ID (non-hashed).
-    * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
+1. **ID Field**
+   * **Field Name:** `email_hash`, `phone_hash`, `maid`, `zip_code`, `fname_hash`, `lname_hash`, `country_code`
+   * **Data Type:** String (Hashed for personal identifiers; plain for MAID and location data)
+   * **Description:** Contains audience member identifiers used for matching in DV360. The following ID types are supported:
+     * `email_hash` – SHA-256 hashed email addresses.
+       * _Before hashing:_ Remove all whitespace and convert to lowercase.
+       * _Example:_ `5d41402abc4b2a76b9719d911017c592`
+     * `phone_hash` – SHA-256 hashed phone numbers.
+       * _Before hashing:_ Format using **E.164** (includes country calling code).
+       * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
+     * `zip_code` – Member’s postal zip code.
+       * _Must be used with:_ `country_code`, `fname_hash`, and `lname_hash`.
+       * `fname_hash` – SHA-256 hashed first name.
+       * _Before hashing:_ Remove whitespace and convert to lowercase.
+       * _Example:_ `6dcd4ce23d88e2ee9568ba546c007c63`
+       * _Must be used with:_ `country_code`, `lname_hash`, and `zip_code`.
+     * `lname_hash` – SHA-256 hashed last name.
+       * _Before hashing:_ Remove whitespace and convert to lowercase.
+       * _Example:_ `7c6a180b36896a0a8c02787eeafb0e4c`
+       * _Must be used with:_ `country_code`, `fname_hash`, and `zip_code`.
+     * `country_code` – Two-letter country code of the member.
+       * _Example:_ `US`
+       * _Must be used with:_ `fname_hash`, `lname_hash`, and `zip_code`.
+     * `maid` – Mobile Advertising ID (non-hashed).
+       * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
 
 _For a complete list of supported match identifiers and formatting guidelines, review the official_ [_DV360 Customer Match Documentation._](https://developers.google.com/display-video/api/reference/rest/v3/firstAndThirdPartyAudiences#contactinfo)
 
-**Segment ID Field**
-
-* **Field Name:** `segment_id`
-* **Data Type:** String
-* **Description:** The unique ID assigned by Google for the specific audience segment.
-* **Example:** `123456`
-
-**Segment Name Field**
-
-* **Field Name:** `segment_name`
-* **Data Type:** String
-* **Description:** The name of the audience to be created in DV360. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in DV360 and return the assigned `segment_id`.
-* **Example:** `Spring Sale Audience`
-
-**Action Field**
-
-* **Field Name:** `action`
-* **Data Type:** String
-* **Description:** Specifies whether to **add** or **remove** the user from the audience.
-* **Accepted Values:** `add`, `remove`
-* **Example:** `add`
+2. **Segment ID Field**
+   * **Field Name:** `segment_id`
+   * **Data Type:** String
+   * **Description:** The unique ID assigned by Google for the specific audience segment.
+   * **Example:** `123456`
+3. **Segment Name Field**
+   * **Field Name:** `segment_name`
+   * **Data Type:** String
+   * **Description:** The name of the audience to be created in DV360. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in DV360 and return the assigned `segment_id`.
+   * **Example:** `Spring Sale Audience`
+4. **Action Field**
+   * **Field Name:** `action`
+   * **Data Type:** String
+   * **Description:** Specifies whether to **add** or **remove** the user from the audience.
+   * **Accepted Values:** `add`, `remove`
+   * **Example:** `add`
 
 ***
 
 #### **💡 How the Schema Works in MadConnect:**
 
-* **Audience Creation:**
-  * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in DV360 using the provided name.
-  * The **`action`** field must be set to `add` during audience creation.
-* **Managing Existing Audiences:**
-  * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
-  * **Any valid ID field sent to DV360 that the platform supports will be used for matching.** This includes hashed emails, hashed phone numbers, MAIDs, and multi-field combinations like zip code, country code, and hashed names.
-* **UI Enhancements:**
-  * Users can configure additional metadata (e.g., **audience source**, **lifespan**) via drop downs in the **MadConnect UI**.
-  * These settings can be modified at the **connection level** as needed.
+1. **Audience Creation:**
+   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in DV360 using the provided name.
+   * The **`action`** field must be set to `add` during audience creation.
+2. **Managing Existing Audiences:**
+   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
+   * **Any valid ID field sent to DV360 that the platform supports will be used for matching.** This includes hashed emails, hashed phone numbers, MAIDs, and multi-field combinations like zip code, country code, and hashed names.
+3. **UI Enhancements:**
+   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) via drop downs in the **MadConnect UI**.
+   * These settings can be modified at the **connection level** as needed.
 
 For more information on Google DV360 Audience Activation, please review the[ Google Customer Match documentation](https://developers.google.com/display-video/api/guides/audiences/upload-customer-match).
 
