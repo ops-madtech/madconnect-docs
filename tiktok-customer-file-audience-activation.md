@@ -17,8 +17,8 @@ MadConnect empowers advertisers to activate their customer data on TikTok, enabl
    * Ensure you have an active TikTok Ads account with permissions to manage Customer File Audiences.
 2. **OAuth Authentication**
    * Authenticate your TikTok Ads account within MadConnect using OAuth.
-3. **Audience File Requirements**
-   * Prepare a file containing customer data with hashed or plain identifiers following TikTok's guidelines (details in schema requirements). Ensure files meet the accepted formats and hashing standards.
+3. **Ensure the data for activation contains necessary inputs:**
+   * Confirm that the audience data aligns with MadConnect’s standard schema, including required fields such as user\_id, segment\_id, segment\_name, and action.
 
 ### **Configure Connector**
 
@@ -39,41 +39,62 @@ MadConnect empowers advertisers to activate their customer data on TikTok, enabl
 
 ### **Schema Requirements for TikTok Customer File – Audience Activation**
 
-To upload a customer file to TikTok via MadConnect, ensure the file meets the following format:
+To successfully send data to **TikTok Customer File Audiences** via **MadConnect**, the following minimum schema must be used:
 
-#### **Single ID Type Format**
+1. **ID Field**
+   * **Field Name:** `email_hash`, `phone_hash`, `maid`
+   * **Data Type:** String (Hashed for personal identifiers; plain or hashed for MAID)
+   * **Description:** Contains the identifiers used for audience matching on TikTok.
+   * **Supported Identifiers:**
+     * **email\_hash** – SHA-256 hashed email addresses.
+     * **`phone_hash`** – SHA-256 hashed phone numbers.
+     * **`maid`** – Mobile Advertising ID (uploaded in plain text or hashed using SHA-256).
+       * **Example:**
+         * Email: `5d41402abc4b2a76b9719d911017c592`
+         * Phone: `98f6bcd4621d373cade4e832627b4f6`
+         * MAID: `cdda802e-fb9c-47ad-0794d394c912`
+2. **Segment ID Field**
+   * **Field Name:** `segment_id`
+   * **Data Type:** String
+   * **Description:** The unique ID assigned by TikTok Ads for the specific audience segment.
+     * Used for adding/removing members from existing audiences.
+   * **Example:** `987654321`
+3. **Segment Name Field**
+   * **Field Name:** `segment_name`
+   * **Data Type:** String
+   * **Description:** The name of the audience to be created in TikTok.
+     * If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in TikTok.
+   * **Example:** `Holiday Campaign Audience`
+4. **Action Field**
+   * **Field Name:** `action`
+   * **Data Type:** String
+   * **Description:** Specifies whether to **add** or **remove** the user from the audience.
+     * Required for both audience creation and member management.
+   * **Accepted Values:** `add`, `remove`
+   * **Example:** `add`
 
-* **Description**: Each row contains a single identifier (email, phone, or MAID) hashed using SHA-256.
-* **Sample file with one ID type:**
+***
 
-| 9f5326721cb782c |
-| --------------- |
-| 9f5326721cb782c |
+### **💡 How the Schema Works in MadConnect:**
 
-#### **Multiple ID Types Format**
-
-* **Description**: Each row can contain multiple identifiers—email, phone, and MAID, with emails and phone numbers hashed using SHA-256.
-* **Sample file with multiple ID types:**
-
-| email\_SHA256   | phone\_SHA256   | MAID            |
-| --------------- | --------------- | --------------- |
-| 9f5326721cb782c | 9f5326721cb782c | 9f5326721cb782c |
-| 9f5326721cb782c | 9f5326721cb782c | 9f5326721cb782c |
-
-#### **Accepted Hashing Algorithm**
-
-* **Hashing Algorithm**: SHA-256 for emails and phone numbers. MAIDs can be uploaded as plain text.
-* **Example (SHA-256 Hash)**:
-  * Email: 9f5326721cb782c
-  * Phone: 9f5326721cb782c
-  * MAID: 9f5326721cb782c
-
-#### Email Specific Normalization
-
-Assuming an email address is generalized to this format: local-part.123+suffix@domain.com (example)
-
-* Remove '+' and any characters following the '+' symbol until '@'. After normalization, the above example will be: local-part.123@domain.com.
-* Remove all possible '.' within the username before '@'. After normalization, the above example will be: local-part123@domain.com .
-* Email addresses need to be lowercased before hashing.
+1. **Audience Creation:**
+   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in TikTok using the provided name.
+   * The **`action`** field must be set to `add` during audience creation.
+2. **Managing Existing Audiences:**
+   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
+   * Multiple identifiers can be included in a single request (e.g., **email**, **phone**, and **MAID**) to maximize match rates.
+3. **Accepted Hashing Algorithm:**
+   * **SHA-256** is required for **emails** and **phone numbers**.
+   * **MAIDs** can be uploaded in plain text or hashed using SHA-256.
+4. **Data Normalization Before Hashing:**
+   * **Email:**
+     * Remove whitespace and convert to lowercase.
+     * Normalize by removing '+' and any following characters before '@'.
+     * Remove all '.' characters in the username before '@'.
+   * **Phone:**
+     * Remove symbols, letters, and leading zeroes.
+     * Include the country code if applicable.
+   * **MAID:**
+     * Can be uploaded unhashed or hashed.
 
 For additional guidance on TikTok Customer File Audience Activation, refer to the [TikTok Business API documentation on Customer File Audiences](https://business-api.tiktok.com/portal/docs?id=1747012327159809) and [File Upload Requirements](https://business-api.tiktok.com/portal/docs?id=1739940567842818).
