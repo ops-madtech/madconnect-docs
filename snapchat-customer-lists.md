@@ -1,4 +1,4 @@
-# SnapChat- Conversions API
+# SnapChat- Customer Lists
 
 ![](<.gitbook/assets/image (5).png>)
 
@@ -12,8 +12,8 @@ MadConnect integrates seamlessly with the Snapchat Marketing API, enabling you t
 
 * **Source / Destination**: Destination
 * **Data Type**: Audience
-* **Description**: Manage Snapchat customer lists by adding or removing records for targeted campaigns.
-* **Supported Actions**: Add, Remove
+* **Description**: Manage Snapchat customer lists by creating audiences or updating existing audiences by adding or removing members.
+* **Supported Actions**: Create / Add / Remove
 
 ***
 
@@ -23,8 +23,8 @@ To set up the Snapchat Marketing API for Customer Lists in MadConnect, ensure th
 
 1. **Authenticate using OAuth:**
    * Navigate to the connector configuration and authenticate your Snapchat account using OAuth.
-2. **Ensure Existing Audience(s):**
-   * Verify that the audience(s) you plan to update already exist in the Snapchat Ads Manager. MadConnect can update existing audiences but does not create new ones at this time.
+2. **Ensure the data for activation contains necessary inputs:**
+   * Confirm that the audience data aligns with MadConnect’s standard schema, including required fields such as user\_id, segment\_id, segment\_name, and action.
 
 ***
 
@@ -49,25 +49,7 @@ To set up the Snapchat Marketing API for Customer Lists in MadConnect, ensure th
 
 ***
 
-**Create a Customer List Audience**
-
-To create an empty Customer List Audience in Snapchat:
-
-1. **Log in to Ads Manager:**
-   * Click the menu in the top left corner and select "Audiences."
-2. **Click New Audience:**
-   * Select "Custom Audience" and choose "Customer List."
-3. **Create a Name:**
-   * Provide a name for the Audience.
-4. **Select the Data Type:**
-   * Choose the data type for the Audience – Email, Phone Number, or Mobile Ad ID.
-5. **Create the Audience:**
-   * Save the empty audience.
-6. **Obtain the Snapchat Segment ID:**
-   * Provide the Segment ID to your representative.
-
-***
-
+\
 **Where Can I Find My Snapchat Segment ID?**
 
 To obtain your Snapchat Segment ID, follow these steps:
@@ -78,28 +60,69 @@ To obtain your Snapchat Segment ID, follow these steps:
 
 ***
 
-**Audience Schema Requirements**
+#### **Audience Schema Requirements for Snapchat Ads – Custom Audiences**
 
-To successfully send data to Snapchat Ads as audiences via MadConnect, the following minimum schema must be used:
+To successfully send data to **Snapchat Ads** as audiences via **MadConnect**, the following minimum schema must be used:
 
-1. \<ID> Field
-   * **Field Name**: EMAIL\_HASH, PHONE\_HASH
-   * **Data Type**: String (Hashed)
-   * **Description**: This field contains the hashed emails or phone numbers or unhashed MAIDs of the audience members
-   * **Accepted Hashing Algorithms**: SHA-256
-   * **Example**: A hashed email such as 5d41402abc4b2a76b9719d911017c592.
-2. Segment ID Field
-   * **Field Name**: segment\_id
-   * **Data Type**: String
-   * **Description**: The unique ID assigned by Snapchat Ads for the specific audience segment.
-   * **Example**: 123456
-3. Action Field
-   * **Field Name**: action
-   * **Data Type**: String
-   * **Description**: Specifies whether to add or remove the user from the audience.
-   * **Accepted Values**: add, remove
-   * **Example**: add
+1. **ID Field**
+   * **Field Name:** `EMAIL_SHA256`, `PHONE_SHA256`, `MOBILE_AD_ID_SHA256`
+   * **Data Type:** String (Hashed for personal identifiers; unhashed for MAIDs)
+   * **Data :** String (Hashed for personal identifiers; unhashed for MAIDs)
+   * **Description:**
+     * Contains audience member identifiers used for matching in Snapchat.
+     * **Only one type of identifier can be used per request** — mixing multiple identifier types (e.g., emails and phone numbers) in a single request is **not supported**.
+   * **Supported ID Types:**
+     * **`EMAIL_SHA256`** – SHA-256 hashed email addresses.
+       * _Before hashing:_ Remove whitespace and convert to lowercase.
+       * _Example:_ `5d41402abc4b2a76b9719d911017c592`
+     * **`PHONE_SHA256`** – SHA-256 hashed phone numbers.
+       * _Before hashing:_ Remove symbols, letters, and leading zeroes. Include the country code if applicable.
+       * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
+     * **`MOBILE_AD_ID_SHA256`** – SHA-256 hashed Mobile Advertising ID (MAID).
+       * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
+
+💡 _For a complete list of supported match identifiers and formatting guidelines, review the official_ [_Snapchat Ads API Documentation_](https://developers.snap.com/api/marketing-api/Ads-API/customer-lists)_._
+
+2. **Segment ID Field**
+   * **Field Name:** `segment_id`
+   * **Data Type:** String
+   * **Description:**
+     * The unique ID assigned by Snapchat Ads for the specific audience segment.
+     * Used for adding/removing members from existing audiences.
+     * _Example:_ `123456`
+3. **Segment Name Field**
+   * **Field Name:** `segment_name`
+   * **Data Type:** String
+   * **Description:**
+     * The name of the audience to be created in Snapchat.
+     * If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Snapchat and return the assigned `segment_id`.
+     * _Example:_ `Holiday Campaign Audience`
+4. **Action Field**
+   * **Field Name:** `action`
+   * **Data Type:** String
+   * **Description:**
+     * Specifies whether to **add** or **remove** the user from the audience.
+     * Required for both audience creation and member management.
+     * **Accepted Values:** `add`, `remove`
+     * _Example:_ `add`
+
+***
+
+#### **💡 How the Schema Works in MadConnect:**
+
+1. **Audience Creation:**
+   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in Snapchat using the provided name.
+   * The **`action`** field must be set to `add` during audience creation.
+2. **Managing Existing Audiences:**
+   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
+   * **Only one identifier type can be used per request.** For example, a request can include only **hashed emails** or only **hashed phone numbers**, but not both.
+3. **Continuous Audience Updates:**
+   * Users can be **added to a segment at any time**.
+   * Snapchat supports flexible matching using either **email**, **phone number**, or **mobile advertising IDs**, but only **one type per request**.
+4. **UI Enhancements:**
+   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) using dropdowns in the **MadConnect UI**.
+   * These settings can be modified at the **connection level** as needed.
 
 
 
-For more detailed instructions on the Snapchat Marketing API and managing customer lists, refer to the [Snapchat Marketing API](https://developers.snap.com/api/marketing-api/Ads-API/customer-lists) documentation.
+For more detailed instructions on the Snapchat Marketing API and managing customer lists, refer to the [Snapchat Marketing API](snapchat-customer-lists.md#snapchat-marketing-api-for-customer-lists-connection-overview) documentation.
