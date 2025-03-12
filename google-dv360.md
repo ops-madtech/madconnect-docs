@@ -28,10 +28,18 @@ To activate audiences on Google DV360 using MadConnect, ensure the following pre
 2. **Account Requirements**:
    * **OAuth Authentication**: Authenticate Google DV360 Account destination using OAuth.
    * **Compliant Advertiser Account**: Ensure the account adheres to Google's Customer Match requirements.
-3. **Credentials**:
-   * You can obtain your Google DV360 Account Credentials from your account settings in the Google Marketing Platform.
 
-Warning: Verify that data upload features have been approved for the proposed audience's parent partner by first trying to create a Customer Match audience under a relevant advertiser in the UI. If data upload has not been enabled, attempts to create or update Customer Match audiences will return an error.
+#### **⚠️ Important Notes on DV360 Customer Match**
+
+1. **Consent Requirement:**
+   * Currently, the **MadConnect DV360 connector** pushes IDs with the **consent state set to "granted."**
+   * Customers **must ensure** that they send **only those IDs** for which both **user\_data** and **personalization consent** have been **explicitly granted** by the user.
+   * Any IDs uploaded **without proper consent** may not comply with **Google’s policies** and could result in data rejection or enforcement actions.
+2. **Verify Data Upload Eligibility:**
+   * **Before sending data via MadConnect**, customers must **confirm that data upload features are enabled** for the audience's parent partner.
+   * To verify:
+     * Attempt to create a **Customer Match audience** manually within **DV360’s UI** under a relevant advertiser.
+     * If **data upload is not enabled**, any attempt to create or update **Customer Match audiences** via API will result in an **error**.
 
 ***
 
@@ -57,8 +65,6 @@ To configure the DV360 Customer Match connector in MadConnect, follow these step
    * After successful authentication, you will be redirected back to MadConnect, where the configuration will be completed.
 
 ***
-
-
 
 #### **Audience Schema Requirements for DV360 – Customer Match**
 
