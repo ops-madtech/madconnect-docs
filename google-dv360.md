@@ -71,28 +71,28 @@ To configure the DV360 Customer Match connector in MadConnect, follow these step
 To successfully send data to **Google DV360 Customer Match API** via **MadConnect**, the following minimum schema must be used:
 
 1. **ID Field**
-   * **Field Name:** `email_hash`, `phone_hash`, `maid`, `zip_code`, `fname_hash`, `lname_hash`, `country_code`
+   * **Field Name:** `email_sha256`, `phone_sha256`, `maid`, `postal_code`, `fname_sha256`, `lname_sha256`, `country_code`
    * **Data Type:** String (Hashed for personal identifiers; plain for MAID and location data)
    * **Description:** Contains audience member identifiers used for matching in DV360. The following ID types are supported:
-     * `email_hash` – SHA-256 hashed email addresses.
+     * `email_sha256` – SHA-256 hashed email addresses.
        * _Before hashing:_ Remove all whitespace and convert to lowercase.
        * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-     * `phone_hash` – SHA-256 hashed phone numbers.
+     * `phone_sha256` – SHA-256 hashed phone numbers.
        * _Before hashing:_ Format using **E.164** (includes country calling code).
        * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
-     * `zip_code` – Member’s postal zip code.
-       * _Must be used with:_ `country_code`, `fname_hash`, and `lname_hash`.
-       * `fname_hash` – SHA-256 hashed first name.
-       * _Before hashing:_ Remove whitespace and convert to lowercase.
-       * _Example:_ `6dcd4ce23d88e2ee9568ba546c007c63`
-       * _Must be used with:_ `country_code`, `lname_hash`, and `zip_code`.
-     * `lname_hash` – SHA-256 hashed last name.
+     * `postal_code` – Member’s postal zip code.
+       * _Must be used with:_ `country_code`, `fname_sha256`, and `lname_sha256`.
+       * `fname_sha256` – SHA-256 hashed first name.
+       * _Example:_ `12345`
+       * _Must be used with:_ `country_code`, `lname_sha256`, and `postal_code`.
+     * `lname_sha256` – SHA-256 hashed last name.
        * _Before hashing:_ Remove whitespace and convert to lowercase.
        * _Example:_ `7c6a180b36896a0a8c02787eeafb0e4c`
-       * _Must be used with:_ `country_code`, `fname_hash`, and `zip_code`.
+       * _Must be used with:_ `country_code`, `fname_sha256`, and `postal_code`.
      * `country_code` – Two-letter country code of the member.
        * _Example:_ `US`
-       * _Must be used with:_ `fname_hash`, `lname_hash`, and `zip_code`.
+       * Use ISO two-letter [country codes](https://developers.google.com/adwords/api/docs/appendix/codes-formats#country-codes).
+       * _Must be used with:_ `fname_sha256`, `lname_sha256`, and `postal_code`.
      * `maid` – Mobile Advertising ID (non-hashed).
        * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
 
