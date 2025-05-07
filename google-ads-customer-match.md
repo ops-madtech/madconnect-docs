@@ -18,12 +18,12 @@ MadConnect enables seamless integration with the Google Ads Customer Match API, 
 
 ### **Prerequisites**
 
-* **Account Eligibility**: Your Google Ads account must meet Google’s eligibility criteria for Customer Match (good compliance and billing history).
-* **OAuth Authentication**: MadConnect uses OAuth to authenticate your Google Ads account. You will be prompted to sign in and grant permission to manage audiences.
-* **Required Permissions**: During OAuth, the following scopes are requested:
-  * Manage your Google Ads campaigns
-  * Manage your audience lists
-  * View and manage your account reports
+1. **Account Eligibility**: Your Google Ads account must meet Google’s eligibility criteria for Customer Match (good compliance and billing history).
+2. **OAuth Authentication**: MadConnect uses OAuth to authenticate your Google Ads account. You will be prompted to sign in and grant permission to manage audiences.
+3. **Required Permissions**: During OAuth, the following scopes are requested:
+   * Manage your Google Ads campaigns
+   * Manage your audience lists
+   * View and manage your account reports
 
 ***
 
@@ -70,26 +70,33 @@ To successfully send data to the Google Ads Customer Match API via MadConnect, t
        * `fname_sha256`: SHA-256 hashed lowercase first name
        * `lname_sha256`: SHA-256 hashed lowercase last name
        * `country_code`: ISO 3166-1 alpha-2 country code
-         * **Upload Guidance:**
-           * For contact info, set `upload_key_type` to `CONTACT_INFO`.
-             * **Before hashing:**
-               * Trim whitespace.
-               * Lowercase all values (email, names, address).
-               * Format phone numbers to E.164 (e.g., `+12125650000`).
-             * **Hashing:**
-               * SHA-256 hash is required for email, phone, first/last names.
-               * **Mailing address matching** requires:
-                 * `country_code`, `postal_code`, `fname_sha256`, and `lname_sha256`
-             * For CRM IDs:
-               * Set `upload_key_type` to `CRM_ID`
-               * Provide advertiser-generated `third_party_user_id`
-             * For Mobile IDs:
-               * Set `upload_key_type` to `MOBILE_ADVERTISING_ID`
-               * Provide the `maid` and `app_id`
+
+{% hint style="info" %}
+
+
+**Upload Guidance:**
+
+* For contact info, set `upload_key_type` to `CONTACT_INFO`.
+  * **Before hashing:**
+    * Trim whitespace.
+    * Lowercase all values (email, names, address).
+    * Format phone numbers to E.164 (e.g., `+12125650000`).
+  * **Hashing:**
+    * SHA-256 hash is required for email, phone, first/last names.
+    * **Mailing address matching** requires:
+      * `country_code`, `postal_code`, `fname_sha256`, and `lname_sha256`
+  * For CRM IDs:
+    * Set `upload_key_type` to `CRM_ID`
+    * Provide advertiser-generated `third_party_user_id`
+  * For Mobile IDs:
+    * Set `upload_key_type` to `MOBILE_ADVERTISING_ID`
+    * Provide the `maid` and `app_id`
+{% endhint %}
+
 2. **Segment ID Field**
-   * **Field Name**: `segment_id`
-   * **Data Type**: String
-   * **Description**: The unique user list ID in Google Ads. Required for updating or removing existing audiences.
+   1. **Field Name**: `segment_id`
+   2. **Data Type**: String
+   3. **Description**: The unique user list ID in Google Ads. Required for updating or removing existing audiences.
 3. **Segment Name Field**
    * **Field Name**: `segment_name`
    * **Data Type**: String
@@ -104,14 +111,14 @@ To successfully send data to the Google Ads Customer Match API via MadConnect, t
 
 ### 💡 **How the Schema Works in MadConnect**
 
-* **Audience Creation**:
-  * If `segment_name` is provided without a `segment_id`, MadConnect creates the segment in Google Ads and stores the returned `segment_id`.
-  * The `action` must be `add` when creating an audience.
-* **Managing Existing Audiences**:
-  * With a known `segment_id`, MadConnect will append or remove users based on the `action` field.
-  * Any supported ID type can be used in the request.
-* **UI Enhancements**:
-  * Additional metadata such as `membership_life_span` and `upload_key_type` can be configured in the MadConnect UI when setting up the connection.
+1. **Audience Creation**:
+   * If `segment_name` is provided without a `segment_id`, MadConnect creates the segment in Google Ads and stores the returned `segment_id`.
+   * The `action` must be `add` when creating an audience.
+2. **Managing Existing Audiences**:
+   * With a known `segment_id`, MadConnect will append or remove users based on the `action` field.
+   * Any supported ID type can be used in the request.
+3. **UI Enhancements**:
+   * Additional metadata such as `membership_life_span` and `upload_key_type` can be configured in the MadConnect UI when setting up the connection.
 
 For more details, refer to the [Google Ads Customer Match documentation](https://developers.google.com/google-ads/api/docs/remarketing/audience-segments/customer-match).
 
