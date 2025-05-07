@@ -59,36 +59,33 @@ MadConnect enables seamless integration with the Google Ads Customer Match API, 
 
 To successfully send data to the Google Ads Customer Match API via MadConnect, the following minimum schema must be used:
 
-1.  **ID Field**
-
-    * **Field Name**: `email_sha256`, `phone_sha256`, `maid`, `postal_code`, `fname_sha256`, `lname_sha256`, `country_code`
-    * **Data Type**: String (Hashed for PII; plain for MAID and location fields)
-    * **Description**:
-      * `email_sha256`: SHA-256 hashed lowercase email address
-      * `phone_sha256`: SHA-256 hashed phone number in E.164 format
-      * `maid`: Mobile Advertising ID (non-hashed)
-      * `postal_code`: Zip or postal code (used with `country_code`, `fname_sha256`, and `lname_sha256`)
-      * `fname_sha256`: SHA-256 hashed lowercase first name
-      * `lname_sha256`: SHA-256 hashed lowercase last name
-      * `country_code`: ISO 3166-1 alpha-2 country code
-
-    **Upload Guidance:**
-
-    * For contact info, set `upload_key_type` to `CONTACT_INFO`.
-      * **Before hashing:**
-        * Trim whitespace.
-        * Lowercase all values (email, names, address).
-        * Format phone numbers to E.164 (e.g., `+12125650000`).
-      * **Hashing:**
-        * SHA-256 hash is required for email, phone, first/last names.
-      * **Mailing address matching** requires:
-        * `country_code`, `postal_code`, `fname_sha256`, and `lname_sha256`
-    * For CRM IDs:
-      * Set `upload_key_type` to `CRM_ID`
-      * Provide advertiser-generated `third_party_user_id`
-    * For Mobile IDs:
-      * Set `upload_key_type` to `MOBILE_ADVERTISING_ID`
-      * Provide the `maid` and `app_id`
+1. **ID Field**
+   * **Field Name**: `email_sha256`, `phone_sha256`, `maid`, `postal_code`, `fname_sha256`, `lname_sha256`, `country_code`
+   * **Data Type**: String (Hashed for PII; plain for MAID and location fields)
+     * **Description**:
+       * `email_sha256`: SHA-256 hashed lowercase email address
+       * `phone_sha256`: SHA-256 hashed phone number in E.164 format
+       * `maid`: Mobile Advertising ID (non-hashed)
+       * `postal_code`: Zip or postal code (used with `country_code`, `fname_sha256`, and `lname_sha256`)
+       * `fname_sha256`: SHA-256 hashed lowercase first name
+       * `lname_sha256`: SHA-256 hashed lowercase last name
+       * `country_code`: ISO 3166-1 alpha-2 country code
+         * **Upload Guidance:**
+           * For contact info, set `upload_key_type` to `CONTACT_INFO`.
+             * **Before hashing:**
+               * Trim whitespace.
+               * Lowercase all values (email, names, address).
+               * Format phone numbers to E.164 (e.g., `+12125650000`).
+             * **Hashing:**
+               * SHA-256 hash is required for email, phone, first/last names.
+               * **Mailing address matching** requires:
+                 * `country_code`, `postal_code`, `fname_sha256`, and `lname_sha256`
+             * For CRM IDs:
+               * Set `upload_key_type` to `CRM_ID`
+               * Provide advertiser-generated `third_party_user_id`
+             * For Mobile IDs:
+               * Set `upload_key_type` to `MOBILE_ADVERTISING_ID`
+               * Provide the `maid` and `app_id`
 2. **Segment ID Field**
    * **Field Name**: `segment_id`
    * **Data Type**: String
