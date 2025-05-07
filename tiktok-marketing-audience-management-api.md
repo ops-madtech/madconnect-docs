@@ -1,6 +1,6 @@
 # TikTok Marketing - Audience Management API
 
-![](https://lh7-us.googleusercontent.com/-kPbeFBJpZqW\_8FCf85212FqYj6RITRO0ELqraJIMnLF-u1Zl0e3g0MJR-EgLsw9Nc1gxEkLmNhEm7qKR5KW16i9RoKbtNcZ9do4YzygoU8P7UBAhNUX8iCPqmXVqnzzQBqqp0YYXZcGN7r0ovybOA)\
+![](https://lh7-us.googleusercontent.com/-kPbeFBJpZqW_8FCf85212FqYj6RITRO0ELqraJIMnLF-u1Zl0e3g0MJR-EgLsw9Nc1gxEkLmNhEm7qKR5KW16i9RoKbtNcZ9do4YzygoU8P7UBAhNUX8iCPqmXVqnzzQBqqp0YYXZcGN7r0ovybOA)\
 \
 **TikTok Audiences Connector Overview (Streaming API)**
 
@@ -53,10 +53,10 @@ MadConnect integrates seamlessly with TikTok’s Streaming API to manage audienc
 To successfully send data to TikTok via the Streaming API, the following schema must be used:
 
 1. **\<ID> Field**
-   * **Field Name:** `email_hash`, `phone_hash`, `maid`
+   * **Field Name:** `email_sha256`, `phone_256`, `maid_sha256` , `maid_md5`
    * **Data Type:** String (Hashed for emails/phones; plain for MAID)
    * **Description:** Contains the hashed emails, phone numbers, or non-hashed MAIDs of audience members.
-   * **Accepted Hashing Algorithm:** SHA-256 for emails/phone numbers.
+   * **Accepted Hashing Algorithm:** SHA-256 for emails, phone numbers, and MAIDs. MD5 Hashed also supported for MAIDs only.
    * **Example:**
      * **Email:** `5d41402abc4b2a76b9719d911017c592`
      * **MAID:** `cdda802e-fb9c-47ad-0794d394c912`
@@ -73,6 +73,18 @@ To successfully send data to TikTok via the Streaming API, the following schema 
    * **Example:** `add`
 
 ***
+
+#### **💡 How the Schema Works in MadConnect:**
+
+1. **Audience Creation:**
+   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in TikTok using the provided name.
+   * The **`action`** field must be set to `add` during audience creation.
+2. **Managing Existing Audiences:**
+   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
+   * **Any valid ID field sent to TikTok that the platform supports will be used for matching.** This includes hashed emails, hashed phone numbers, and MAIDs.
+3. **UI Enhancements:**
+   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) via drop downs in the **MadConnect UI**.
+   * These settings can be modified at the **connection level** as needed.
 
 For more detailed instructions, refer to the [TikTok Business API](https://business-api.tiktok.com/portal/docs?id=1739940585975809) documentation.
 
