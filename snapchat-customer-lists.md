@@ -65,20 +65,20 @@ To obtain your Snapchat Segment ID, follow these steps:
 To successfully send data to **Snapchat Ads** as audiences via **MadConnect**, the following minimum schema must be used:
 
 1. **ID Field**
-   * **Field Name:** `EMAIL_SHA256`, `PHONE_SHA256`, `MOBILE_AD_ID_SHA256`
+   * **Field Name:** `email_sha256`, `email_sha256`, `maid_sha256`
    * **Data Type:** String (Hashed for personal identifiers; unhashed for MAIDs)
    * **Data :** String (Hashed for personal identifiers; unhashed for MAIDs)
    * **Description:**
      * Contains audience member identifiers used for matching in Snapchat.
      * **Only one type of identifier can be used per request** — mixing multiple identifier types (e.g., emails and phone numbers) in a single request is **not supported**.
    * **Supported ID Types:**
-     * **`EMAIL_SHA256`** – SHA-256 hashed email addresses.
+     * `email_sha256` – SHA-256 hashed email addresses.
        * _Before hashing:_ Remove whitespace and convert to lowercase.
        * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-     * **`PHONE_SHA256`** – SHA-256 hashed phone numbers.
+     * `email_sha256` – SHA-256 hashed phone numbers.
        * _Before hashing:_ Remove symbols, letters, and leading zeroes. Include the country code if applicable.
        * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
-     * **`MOBILE_AD_ID_SHA256`** – SHA-256 hashed Mobile Advertising ID (MAID).
+     * `maid_sha256` – SHA-256 hashed Mobile Advertising ID (MAID).
        * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
 
 💡 _For a complete list of supported match identifiers and formatting guidelines, review the official_ [_Snapchat Ads API Documentation_](https://developers.snap.com/api/marketing-api/Ads-API/customer-lists)_._
@@ -120,7 +120,7 @@ To successfully send data to **Snapchat Ads** as audiences via **MadConnect**, t
    * Users can be **added to a segment at any time**.
    * Snapchat supports flexible matching using either **email**, **phone number**, or **mobile advertising IDs**, but only **one type per request**.
 4. **UI Enhancements:**
-   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) using dropdowns in the **MadConnect UI**.
+   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) using drop downs in the **MadConnect UI**.
    * These settings can be modified at the **connection level** as needed.
 
 
