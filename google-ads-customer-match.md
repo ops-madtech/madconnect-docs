@@ -70,29 +70,6 @@ To successfully send data to the Google Ads Customer Match API via MadConnect, t
        * `fname_sha256`: SHA-256 hashed lowercase first name
        * `lname_sha256`: SHA-256 hashed lowercase last name
        * `country_code`: ISO 3166-1 alpha-2 country code
-
-{% hint style="info" %}
-
-
-**Upload Guidance:**
-
-* For contact info, set `upload_key_type` to `CONTACT_INFO`.
-  * **Before hashing:**
-    * Trim whitespace.
-    * Lowercase all values (email, names, address).
-    * Format phone numbers to E.164 (e.g., `+12125650000`).
-  * **Hashing:**
-    * SHA-256 hash is required for email, phone, first/last names.
-    * **Mailing address matching** requires:
-      * `country_code`, `postal_code`, `fname_sha256`, and `lname_sha256`
-  * For CRM IDs:
-    * Set `upload_key_type` to `CRM_ID`
-    * Provide advertiser-generated `third_party_user_id`
-  * For Mobile IDs:
-    * Set `upload_key_type` to `MOBILE_ADVERTISING_ID`
-    * Provide the `maid` and `app_id`
-{% endhint %}
-
 2. **Segment ID Field**
    1. **Field Name**: `segment_id`
    2. **Data Type**: String
