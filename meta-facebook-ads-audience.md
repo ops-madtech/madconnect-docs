@@ -51,7 +51,7 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 To successfully send data to **Meta Custom Audiences** via **MadConnect**, the following minimum schema must be used:
 
 1. **ID Field**
-   * **Field Name:** `email_hash`, `phone_hash`, `maid`, `fname_hash`, `lnname_hash`, `zip_hash`, `country_code_hash`, `dobm`, `dobd_hash`, `doby_hash`
+   * **Field Name:** `email_sha256`, `phone_sha256`, `maid`, `fname_sha256`, `lname_sha256`, `postal_code_sha256`, `country_code_sha256`, `dobm_sha256`, `dobd_sha256`, `doby_sha256`
    * **Data Type:** String (Hashed where required)
    * **Description:** Contains audience member identifiers used for matching in Meta. The following ID types are supported:
      * **`EMAIL`** – SHA-256 hashed email addresses.
