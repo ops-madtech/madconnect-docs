@@ -19,12 +19,10 @@ MadConnect enables seamless audience activation on Yahoo DSP by syncing hashed e
 1. **Enable DSP API**
    * Contact your Yahoo DSP Account Manager or Product Support to enable DSP API access for your account.
    * If the DSP API is not enabled, you will see a message in MadConnect indicating that the Client ID and Client Secret are "undefined."
-2. **Audience Segment Must Exist**
-   * Ensure the target segment already exists in Yahoo DSP. MadConnect cannot create new audiences within Yahoo DSP.
-3. **Client Credentials Required**
+2. **Client Credentials Required**
    * **Client ID**
    * **Client Secret**
-4. **Steps to Obtain Client ID and Secret**:
+3. **Steps to Obtain Client ID and Secret**:
    * Log into Yahoo DSP UI.
    * Click your name in the upper-right corner.
    * Select **My Account** and then click the **Activate** button.
