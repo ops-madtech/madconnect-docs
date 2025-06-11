@@ -51,33 +51,22 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 
 To successfully send data to **Meta Custom Audiences** via **MadConnect**, the following minimum schema must be used:
 
-1. **ID Field**
-   * **Field Name:** `email_sha256`, `phone_sha256`, `maid`, `fname_sha256`, `lname_sha256`, `postal_code_sha256`, `country_code_sha256`, `dobm_sha256`, `dobd_sha256`, `doby_sha256`
-   * **Data Type:** String (Hashed where required)
-   * **Description:** Contains audience member identifiers used for matching in Meta. The following ID types are supported:
-     * **`EMAIL`** – SHA-256 hashed email addresses.
-       * _Before hashing:_ Trim whitespace and convert to lowercase.
-       * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-     * **`PHONE`** – SHA-256 hashed phone numbers.
-       * _Before hashing:_ Remove symbols/letters and prefix with country code if not using the `country` field.
-       * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
-     * **`FN` / `LN`** – SHA-256 hashed first and last names.
-       * _Before hashing:_ Convert to lowercase, remove punctuation, and use Roman characters where possible.
-       * _Example:_
-         * First Name (`FN`): `6dcd4ce23d88e2ee9568ba546c007c63`
-         * Last Name (`LN`): `7c6a180b36896a0a8c02787eeafb0e4c`
-     * **`ZIP`** – SHA-256 hashed zip code.
-       * _For US:_ First 5 digits only.
-       * _For UK:_ Area/District/Sector format.
-     * **`COUNTRY`** – SHA-256 hashed two-letter country code (ISO 3166-1 alpha-2).
-       * _Example:_ `us`
-     * **`DOBM`, `DOBD`, `DOBY`** – SHA-256 hashed birth month, day, and year.
-       * _Format:_
-         * **DOBM (MM):** `01-12`
-         * **DOBD (DD):** `01-31`
-         * **DOBY (YYYY):** `1900` to current year
-         * **`MADID`** – Mobile Advertiser ID (**not hashed**)
-           * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
+1.  **ID Field(s) for Matching**
+
+
+
+    | **ID Type**  | **Field Name**        | **Hashed** | **Formatting Guidelines**                                                   | **Example**                        |
+    | ------------ | --------------------- | ---------- | --------------------------------------------------------------------------- | ---------------------------------- |
+    | Email        | `email_sha256`        | Yes        | Trim whitespace, lowercase before hashing                                   | `5d41402abc4b2a76b9719d911017c592` |
+    | Phone        | `phone_sha256`        | Yes        | Remove symbols/letters, prefix with country code if `country_code` not used | `98f6bcd4621d373cade4e832627b4f6`  |
+    | First Name   | `fname_sha256`        | Yes        | Lowercase, remove punctuation, convert to Roman characters                  | `6dcd4ce23d88e2ee9568ba546c007c63` |
+    | Last Name    | `lname_sha256`        | Yes        | Same as First Name                                                          | `7c6a180b36896a0a8c02787eeafb0e4c` |
+    | Zip Code     | `postal_code_sha256`  | Yes        | US: First 5 digits only. UK: Area/District/Sector format                    | –                                  |
+    | Country Code | `country_code_sha256` | Yes        | ISO 3166-1 alpha-2 format (e.g., `us`), lowercase before hashing            | `us` → hashed                      |
+    | Birth Month  | `dobm_sha256`         | Yes        | Format MM (01–12), hash the result                                          | `01` → hashed                      |
+    | Birth Day    | `dobd_sha256`         | Yes        | Format DD (01–31), hash the result                                          | `15` → hashed                      |
+    | Birth Year   | `doby_sha256`         | Yes        | Format YYYY (1900–current), hash the result                                 | `1990` → hashed                    |
+    | Mobile Ad ID | `maid`                | No         | Not hashed; standard device ID                                              | `cdda802e-fb9c-47ad-0794d394c912`  |
 
 💡 _For a complete list of supported match identifiers and multi-key matching guidelines, review the official_ [_Meta Custom Audiences Documentation._](https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/#external_identifiers)
 
