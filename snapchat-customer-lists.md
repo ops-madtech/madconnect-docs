@@ -65,7 +65,7 @@ To obtain your Snapchat Segment ID, follow these steps:
 To successfully send data to **Snapchat Ads** as audiences via **MadConnect**, the following minimum schema must be used:
 
 1. **ID Field**
-   * **Field Name:** `email_sha256`, `email_sha256`, `maid_sha256`
+   * **Field Name:** `email_sha256`, `phone_sha256`, `maid_sha256`
    * **Data Type:** String (Hashed for personal identifiers; unhashed for MAIDs)
    * **Data :** String (Hashed for personal identifiers; unhashed for MAIDs)
    * **Description:**
@@ -75,7 +75,7 @@ To successfully send data to **Snapchat Ads** as audiences via **MadConnect**, t
      * `email_sha256` – SHA-256 hashed email addresses.
        * _Before hashing:_ Remove whitespace and convert to lowercase.
        * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-     * `email_sha256` – SHA-256 hashed phone numbers.
+     * `phone_sha256` – SHA-256 hashed phone numbers.
        * _Before hashing:_ Remove symbols, letters, and leading zeroes. Include the country code if applicable.
        * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
      * `maid_sha256` – SHA-256 hashed Mobile Advertising ID (MAID).

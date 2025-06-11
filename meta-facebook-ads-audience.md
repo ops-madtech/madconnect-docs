@@ -8,13 +8,14 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 
 ***
 
-\
-**Connector Overview**
+### **Connector Overview**
 
-* **Connector Type**: Destination
-* **Data Type**: Custom Audiences
-* **Description**: Custom audiences allow advertisers to target their ads to a specific set of people with whom they have already established a relationship.
-* **Supported Actions**: Create / Add / Remove
+| Field                 | Description                                                                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Connector Type**    | Destination                                                                                                                                |
+| **Data Type**         | Custom Audiences                                                                                                                           |
+| **Description**       | Custom audiences allow advertisers to target their ads to a specific set of people with whom they have already established a relationship. |
+| **Supported Actions** | Create / Add / Remove                                                                                                                      |
 
 ***
 
