@@ -130,3 +130,4 @@
 * [Criteo Commerce Growth - Audience Activation](criteo-commerce-growth-audience-activation.md)
 * [Google Ads - Conversions](google-ads-conversions.md)
 * [Salesforce Marketing Cloud - REST API Bulk Data Extensions](salesforce-marketing-cloud-rest-api-bulk-data-extensions.md)
+* [Yahoo DSP - Conversions](yahoo-dsp-conversions.md)

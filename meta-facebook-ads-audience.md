@@ -2,7 +2,7 @@
 
 ![](<.gitbook/assets/image (16).png>)
 
-#### Meta Ads -Custom  Audiences Overview
+## Meta Ads -Custom  Audiences Overview
 
 MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling advertisers to effectively manage and target their audiences on Meta platforms, including Facebook and Instagram. With this connector, businesses can sync customer data directly from their data sources to Meta, ensuring more precise and impactful audience targeting.
 
