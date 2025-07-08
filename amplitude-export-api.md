@@ -1,6 +1,6 @@
 # Amplitude Export API
 
-![](<.gitbook/assets/image (1).png>)
+![](<.gitbook/assets/image (1) (1).png>)
 
 Amplitude is a leading product intelligence platform, empowering businesses to optimize user experiences and drive growth. With advanced analytics and behavioral insights, Amplitude enables teams to make data-driven decisions, enhance product performance, and create impactful digital experiences across various industries.
 

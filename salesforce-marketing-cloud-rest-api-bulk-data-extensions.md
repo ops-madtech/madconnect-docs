@@ -23,9 +23,12 @@ The Salesforce Marketing Cloud - Data Extensions connector allows you to securel
 Before activating this connector, ensure you have the following:
 
 1. **Active Salesforce Marketing Cloud Account** with access to the REST API.
-2. Before you connect MadConnect to Salesforce Marketing Cloud (SFMC), you need to create an installed package in SFMC for MadConnect to use.
+2. Before you connect MadConnect to Salesforce Marketing Cloud (SFMC), you need to c**reate an installed package** in SFMC for MadConnect to use.
+3. Locate the **Client ID**, **Client Secret**, **Subdomain**, and **External Key**.
 
-**How to obtain the credentials**
+
+
+**Creating an Installed Package in SFMC**
 
 1. In SFMC, navigate to **Setup → Apps → Installed Packages** and select **New**.
 2. Enter a package name (e.g., “MadConnect Integration”) and choose **Create with enhanced functionality**.
@@ -33,8 +36,22 @@ Before activating this connector, ensure you have the following:
 4. Under **Permissions**, enable at minimum:
    * DataExtensionRead
    * DataExtensionWrite
-5. Click **Save**. The **Client ID** and **Client Secret** appear in the component details.
-   1. Use this information when configuring the connector within MadConnect.
+5. Click **Save**. The **Client ID,** **Client Secret,** and **Subdomain** appear in the component details.
+   * Use this information when configuring the connector & connection within MadConnect.
+   * The subdomain is the part of the Authentication base URI after `https://` and before `.auth.marketingcloudapis.com/`.&#x20;
+     1. For example, if your Authentication base URI is `https://bd5xjh-acgt3456xc7o.auth.marketingcloudapis.com/`, your subdomain is `bd5xjh-acgt3456xc7o`&#x20;
+
+
+
+**Locating the an External Key**
+
+1. **Log in to Marketing Cloud** and choose the business unit you want.
+2. Open **Contact Builder** from the App Switcher (square grid icon).
+3. Click the **Data Extensions** tab in the Contact Builder menu bar.
+4. In the left-hand folder tree, click the folder that holds your data extension (or click **Data Extensions** to see everything).
+5. In the list on the right, find the **External Key** column—each row shows the key.
+
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -51,6 +68,8 @@ Before activating this connector, ensure you have the following:
    * **Click Save**
 4. **Verify Configuration**
    * Once validated, your connector will display as **Configured** in the platform.
+5. Enter in Additional Details when creating connection
+   * Enter **Subdomain** and **External Key** values during the Create Connection step.&#x20;
 
 ***
 
