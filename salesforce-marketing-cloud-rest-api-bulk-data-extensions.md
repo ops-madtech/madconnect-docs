@@ -1,6 +1,6 @@
 # Salesforce Marketing Cloud - REST API Bulk Data Extensions
 
-## **Salesforce Marketing Cloud - Data Extensions Connector Overview**
+**Salesforce Marketing Cloud - Data Extensions Connector Overview**
 
 ### **Introduction**
 
@@ -52,8 +52,6 @@ Before activating this connector, ensure you have the following:
 5. In the list on the right, find the **External Key** column—each row shows the key.
 
 <figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
-
-
 
 ***
 
