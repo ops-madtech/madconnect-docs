@@ -23,22 +23,20 @@ The Salesforce Marketing Cloud - Data Extensions connector allows you to securel
 Before activating this connector, ensure you have the following:
 
 1. **Active Salesforce Marketing Cloud Account** with access to the REST API.
-2. **CustomerKey** of the Data Extension you wish to update. This key identifies the target Data Extension in your Marketing Cloud instance.
+2. Before you connect MadConnect to Salesforce Marketing Cloud (SFMC), you need to create an installed package in SFMC for MadConnect to use.
 
-You can obtain your CustomerKey by navigating to:
+**How to obtain the credentials**
 
-> Email Studio → Subscribers → Data Extensions → \[Your DE] → Properties → External Key (CustomerKey)
+1. In SFMC, navigate to **Setup → Apps → Installed Packages** and select **New**.
+2. Enter a package name (e.g., “MadConnect Integration”) and choose **Create with enhanced functionality**.
+3. Select **Add Component → API Integration → Server-to-Server**.
+4. Under **Permissions**, enable at minimum:
+   * DataExtensionRead
+   * DataExtensionWrite
+5. Click **Save**. The **Client ID** and **Client Secret** appear in the component details.
+   1. Use this information when configuring the connector within MadConnect.
 
-***
 
-### **Authentication**
-
-This connector uses **OAuth2 Authorization Code Flow**. During setup:
-
-1. Click **"Sign in with Salesforce"** from the configuration screen.
-2. You will be redirected to Salesforce’s login page.
-3. Enter your credentials and authorize MadConnect.
-4. MadConnect securely retrieves the access token to authenticate future data transfers.
 
 ***
 
@@ -49,10 +47,9 @@ This connector uses **OAuth2 Authorization Code Flow**. During setup:
 2. **Add New Platform**
    * Select **Salesforce Marketing Cloud - Data Extensions** and click **"Configure."**
 3. **Sign in with Salesforce**
-   * Use OAuth login to connect securely.
-4. **Authorize Access**
-   * Grant MadConnect access to manage your Data Extensions.
-5. **Verify Configuration**
+   * **Enter Client ID** and **Client Secret**
+   * **Click Save**
+4. **Verify Configuration**
    * Once validated, your connector will display as **Configured** in the platform.
 
 ***
@@ -61,7 +58,7 @@ This connector uses **OAuth2 Authorization Code Flow**. During setup:
 
 Your data **must** match the schema of your target Data Extension in Salesforce. Field names are **case-sensitive** and must align with column names in Salesforce.
 
-#### **Example**
+#### **Example Schema**
 
 | Field Name    | Type    | Example                                         |
 | ------------- | ------- | ----------------------------------------------- |
