@@ -8,13 +8,13 @@ The Salesforce Marketing Cloud - Data Extensions connector allows you to securel
 
 ### **Connector Overview**
 
-| Attribute                | Value                                                                                                                                                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Source / Destination** | Destination                                                                                                                                                                                                   |
-| **Connector Type**       | Audience                                                                                                                                                                                                      |
-| **Data Type**            | Customer Data                                                                                                                                                                                                 |
-| **Description**          | Sync customer data to Salesforce Marketing Cloud Data Extensions. This connector allows you to insert customer records into your pre-configured Data Extensions for marketing personalization and automation. |
-| **Supported Actions**    | Add                                                                                                                                                                                                           |
+| Attribute                | Value                                                                                                                                                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Source / Destination** | Destination                                                                                                                                                                                                                                                  |
+| **Connector Type**       | Audience                                                                                                                                                                                                                                                     |
+| **Data Type**            | Customer Data                                                                                                                                                                                                                                                |
+| **Description**          | Sync customer data to Salesforce Marketing Cloud Data Extensions. This connector allows you to create/update/delete data extension and insert/upsert customer records into your pre-configured Data Extensions for marketing personalization and automation. |
+| **Supported Actions**    | Add                                                                                                                                                                                                                                                          |
 
 ***
 
@@ -43,7 +43,7 @@ Before activating this connector, ensure you have the following:
 
 
 
-**Locating the an External Key**
+**Locating the an External Key (Required for adding data to an existing data extension)**
 
 1. **Log in to Marketing Cloud** and choose the business unit you want.
 2. Open **Contact Builder** from the App Switcher (square grid icon).
@@ -71,7 +71,13 @@ Before activating this connector, ensure you have the following:
 
 ***
 
-### **Schema Requirements**
+### Connection Configuration Requirements
+
+<table><thead><tr><th width="192" valign="middle">Field Name</th><th width="116" valign="middle">Option</th><th>Description</th></tr></thead><tbody><tr><td valign="middle">Operation Type</td><td valign="middle">Create </td><td>Creating and uploading data a new Data Extension. At-least one row of valid data is needed for successful execution</td></tr><tr><td valign="middle">Operation Type</td><td valign="middle">Update</td><td>Updating and uploading data to an existing Data Extension. At-least one row of valid data is needed for successful execution</td></tr><tr><td valign="middle">Operation Type</td><td valign="middle">Delete</td><td>Deleting an existing Data Extension. No data upload will be done but at-least one row of valid data is needed for successful execution</td></tr><tr><td valign="middle">Operation Type</td><td valign="middle">Add Data</td><td>Uploading data to an existing Data Extension</td></tr><tr><td valign="middle">API Type</td><td valign="middle">Insert</td><td>Uses the Insert API to push records to an existing Data Extension</td></tr><tr><td valign="middle">API Type</td><td valign="middle">Upsert</td><td>Users the Upsert API to push record to an existing Data Extension</td></tr><tr><td valign="middle">Subdomain</td><td valign="middle">-</td><td>Subdomain of the base URI generated in Pre-requisites step</td></tr><tr><td valign="middle">Data Extension Name</td><td valign="middle">-</td><td>Name of the Data Extension. Required for Operation Type options - Create and Update </td></tr><tr><td valign="middle">Data Extension Key</td><td valign="middle">-</td><td>ID of the Data Extension. Required for Operation Type options - Update, Delete and Add Data</td></tr><tr><td valign="middle">Category ID</td><td valign="middle">-</td><td>ID of the folder which contains the Data Extension. Required for Operation Type options - Create and Update</td></tr><tr><td valign="middle">Schema Json</td><td valign="middle">-</td><td><p>Fields Json array without the "fields" key. </p><p>Example: </p><p>[<br> {<br>  "description": "The mobile phone number of the contact.",<br>  "isActive": true,<br>  "isHidden": false,<br>  "isInheritable": false,<br>  "isNullable": true,<br>  "isOverridable": false,<br>  "isPrimaryKey": false,<br>  "isReadOnly": false,<br>  "isTemplateField": false,<br>  "length": 50,<br>  "maskType": "None",<br>  "mustOverride": false,<br>  "name": "PhoneNumber",<br>  "storageType": "Plain",<br>  "type": "Text"<br> }<br>]</p></td></tr></tbody></table>
+
+***
+
+### &#x20;**Schema Requirements**
 
 Your data **must** match the schema of your target Data Extension in Salesforce. Field names are **case-sensitive** and must align with column names in Salesforce.
 
