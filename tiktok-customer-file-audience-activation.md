@@ -24,8 +24,7 @@ MadConnect enables advertisers to activate first-party customer data directly wi
 2. **EU Policy Compliance:**
    * TikTok requires advertisers targeting EU users to confirm compliance with their Politics, Governments, and Elections Advertising Policy by January 10, 2026.
    * Failure to confirm may restrict campaign management via API.\
-     **Complete this confirmation within TikTok Ads Manager under Account Settings → Compliance.**\
-
+     **Complete this confirmation within TikTok Ads Manager under Account Settings → Compliance.**
 
 ***
 
@@ -38,28 +37,23 @@ Before configuring the TikTok connector in MadConnect, ensure the following:
    * You’ll be prompted to log in through TikTok’s OAuth screen during setup.
 2. **Audience Schema Alignment**
    * Verify your audience data aligns with MadConnect’s Standard Audience Schema.
-   * The following fields are required for TikTok uploads:\
+   * The following fields are required for TikTok uploads:
 
-
-| user\_id <**email\_sha256**, **phone\_sha256**, **maid**> | d7984b9599199b83cc213f19cb2906d2 | Hashed user identifiers used for audience matching.                            |
+| **Field**                                                 | **Example**                      | **Description**                                                                |
 | --------------------------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------ |
+| user\_id <**email\_sha256**, **phone\_sha256**, **maid**> | d7984b9599199b83cc213f19cb2906d2 | Hashed user identifiers used for audience matching.                            |
 | **segment\_id**                                           | 987654321                        | TikTok-assigned ID for an existing audience. Used for add/remove operations.   |
 | **segment\_name**                                         | Holiday Campaign Audience        | Used to create new TikTok audiences if no segment\_id is provided.             |
 | **action**                                                | add / remove                     | Indicates whether to add or remove users. Use 'add' when creating an audience. |
 
-\
 
 
 3. **Hashing Rules:**
-
-* Use SHA-256 for emails and phone numbers.
-* MAIDs can be uploaded plain or SHA-256 hashed.
-* Data must be normalized before hashing:
-  * Email: lowercase, trim spaces, remove “+” and subsequent characters before “@”, and remove “.” from username.
-  * Phone: digits only, include country code, remove leading zeros.\
-    \
-
-
+   * Use SHA-256 for emails and phone numbers.
+   * MAIDs can be uploaded plain or SHA-256 hashed.
+     1. Data must be normalized before hashing:
+        1. Email: lowercase, trim spaces, remove “+” and subsequent characters before “@”, and remove “.” from username.
+        2. Phone: digits only, include country code, remove leading zeros.
 4. **Advertiser ID:**
    * You’ll need the **TikTok Advertiser ID** for the account you want to connect to.
    * Locate this by:
@@ -68,7 +62,7 @@ Before configuring the TikTok connector in MadConnect, ensure the following:
          * Example → https://ads.tiktok.com/i18n/nb\_creation/create/objectives?aadvid=**XXXXXXXXXXXXXXXXXXX**
          * Or selecting your advertiser name in the top right corner and noting the value after **ID**:
 
-<figure><img src=".gitbook/assets/unknown (2).png" alt=""><figcaption></figcaption></figure>
+<div data-with-frame="true"><figure><img src=".gitbook/assets/unknown (2).png" alt=""><figcaption></figcaption></figure></div>
 
 
 
@@ -97,9 +91,7 @@ Before configuring the TikTok connector in MadConnect, ensure the following:
 #### Step 4: Schedule or Transfer
 
 1. Choose **Manual** Transfer to run a one-time load, or **Scheduled** Transfer for recurring audience syncs.
-2. MadConnect will hash, validate, and upload only compliant records to TikTok’s API.\
-   \
-
+2. MadConnect will hash, validate, and upload only compliant records to TikTok’s API.
 
 ***
 
@@ -121,5 +113,3 @@ TikTok Customer File Audience Activation through MadConnect provides:
 * Automated updates through manual or scheduled jobs
 
 For additional guidance on TikTok Customer File Audience Activation, refer to the[ TikTok Business API documentation on Customer File Audiences](https://business-api.tiktok.com/portal/docs?id=1747012327159809) and[ File Upload Requirements](https://business-api.tiktok.com/portal/docs?id=1739940567842818).
-
-\
