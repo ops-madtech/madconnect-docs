@@ -132,3 +132,4 @@
 * [Salesforce Marketing Cloud - REST API Bulk Data Extensions](salesforce-marketing-cloud-rest-api-bulk-data-extensions.md)
 * [Yahoo DSP - Conversions](yahoo-dsp-conversions.md)
 * [TikTok - Events](tiktok-events.md)
+* [Pinterest - Customer List Audience](pinterest-customer-list-audience.md)
