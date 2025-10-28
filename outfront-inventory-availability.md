@@ -51,49 +51,6 @@ Multiple filters can be combined. Empty filters return all available data for au
 
 ***
 
-#### 📊 Data Outputs
-
-The connector produces two core data sets, available as **Parquet, or direct warehouse tables**:
-
-**Inventory Availability Data**
-
-Represents summarized market- and format-level availability.
-
-| Field               | Description                                            |
-| ------------------- | ------------------------------------------------------ |
-| `market_name`       | Market or DMA name                                     |
-| `media_format`      | Display type (Poster, Bulletin, Digital Display, etc.) |
-| `digital_units`     | Count of digital faces available                       |
-| `static_units`      | Count of static faces available                        |
-| `available_units`   | Total units available within filter criteria           |
-| `sold_units`        | Units currently sold                                   |
-| `occupancy_rate`    | Percentage of sold vs total                            |
-| `avg_rate`          | Average four-week net rate (USD)                       |
-| `total_impressions` | Aggregate weekly 18+ impressions                       |
-| `last_updated`      | Snapshot date/time of data retrieval                   |
-
-***
-
-**Inventory Units Data**
-
-Provides granular, unit-level detail for planners and analysts.
-
-| Field                     | Description                              |
-| ------------------------- | ---------------------------------------- |
-| `unit_id`                 | Unique Outfront identifier for each unit |
-| `market_name`             | Market/DMA the unit belongs to           |
-| `media_format`            | Physical or digital format               |
-| `is_digital`              | Boolean flag                             |
-| `address`                 | Street or location metadata              |
-| `lat` / `lon`             | Coordinates of the unit                  |
-| `net_rate`                | Four-week rate (USD)                     |
-| `weekly_impressions`      | Estimated weekly impressions (18+)       |
-| `availability_status`     | Sold / Available                         |
-| `start_date` / `end_date` | Booking window of the record             |
-| `last_updated`            | Timestamp of data snapshot               |
-
-***
-
 #### Setting Up the Connector in MadConnect
 
 1. **Add Platform**
