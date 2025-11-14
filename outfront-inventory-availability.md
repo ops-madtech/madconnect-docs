@@ -20,9 +20,7 @@ MadConnect’s **Outfront – Inventory Availability** connector enables teams t
 
 **Platform Prerequisites**
 
-{% stepper %}
-{% step %}
-### Authentication
+#### Authentication
 
 You must have the following credentials to authenticate the connector to Outfront’s inventory data service. MadConnect stores them securely and manages token refresh.
 
@@ -30,19 +28,15 @@ You must have the following credentials to authenticate the connector to Outfron
 * Client ID
 * Client Secret
 * Scope (access permissions for Outfront data)
-{% endstep %}
 
-{% step %}
-### Access Requirements
+#### Access Requirements
 
 * Active Outfront partner account with data-access entitlement
 * Network permissions allowing outbound HTTPS connections to the Outfront service
-{% endstep %}
-{% endstepper %}
 
 ***
 
-**Filters & Parameters**
+#### **Filters & Parameters**
 
 The connector supports flexible filtering so users can narrow the returned data set before ingestion. Common filters include:
 
@@ -59,43 +53,33 @@ The connector supports flexible filtering so users can narrow the returned data 
 
 ***
 
-**Setting Up the Connector in MadConnect**
+#### **Setting Up the Connector in MadConnect**
 
-{% stepper %}
-{% step %}
-### Add Platform
+#### Add Platform
 
 * Go to **My Platforms → Add Platform**
 * Select **Outfront – Inventory Availability (Source)** and click **Configure**
-{% endstep %}
 
-{% step %}
-### Authenticate
+#### Authenticate
 
 * Enter **Tenant ID**, **Client ID**, **Client Secret**, and **Scope**
 * Click **Connect**; MadConnect validates access automatically
 * Once connected, status shows **Configured**
-{% endstep %}
 
-{% step %}
-### Create Connection
+#### Create Connection
 
 * Choose **Outfront – Inventory Availability** as the source
 * Optionally define filters (Market, Format, Dates, etc.)
 * Choose your destination (S3, Snowflake, BigQuery, etc.)
-{% endstep %}
 
-{% step %}
-### Run or Schedule
+#### Run or Schedule
 
 * Run a **Manual Pull** for one-time data retrieval
 * Or configure a **Scheduled Sync** for recurring data refreshes (e.g., nightly)
-{% endstep %}
-{% endstepper %}
 
 ***
 
-**Important Notes**
+#### **Important Notes**
 
 1. Availability data reflects a **point-in-time snapshot**; schedule recurring pulls to maintain freshness.
 2. Large pulls can be optimized by applying filters per market or format.
@@ -108,7 +92,7 @@ The connector supports flexible filtering so users can narrow the returned data 
 
 ***
 
-**Data Dictionary**
+#### **Data Dictionary**
 
 ### `inventory_units_data.parquet`
 
