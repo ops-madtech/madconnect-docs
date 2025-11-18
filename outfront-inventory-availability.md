@@ -135,9 +135,9 @@ The connector supports flexible filtering so users can narrow the returned data 
 
 ### `inventory_avails_data.parquet`
 
-| Field       | Data Type            | Description                                                                                | Example                                                        |
-| ----------- | -------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
-| `unique_id` | string               | Matches the unit master `unique_id` for joins.                                             | `AT E9210251`                                                  |
-| `dates`     | map\<string, struct> | Dictionary keyed by ISO day (YYYY-MM-DD) for each unit and whether it is available or not. | `{ "2025-12-01": "Available", "2025-12-02": "Not Available" }` |
+| Field       | Data Type                      | Description                                                                                                                                                | Example                                                       |
+| ----------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| `unique_id` | string                         | Matches the unit master `unique_id` for joins.                                                                                                             | `AT E9210251`                                                 |
+| `dates`     | struct\<YYYY-MM-DD: string, …> | Wide struct with one string column per calendar day (e.g., `2026-03-02: string`) storing the daily availability state (`"Available"` / `"Not Available"`). | `{ "2026-03-02": "Available", "2026-03-03": "Available", … }` |
 
 Use the shared `unique_id` to join this avail calendar back to `inventory_units_data.parquet` when producing media plans or utilization dashboards.
