@@ -47,7 +47,7 @@ MadConnect enables seamless integration with the Google Ads Customer Match API, 
 ### **Audience Creation Steps**
 
 1. **Create a Segment (Optional)**
-   * Provide a unique `segment_name`. If `segment_id` is not provided, MadConnect will create the segment in Google Ads and return the `segment_id`.
+   * Provide a unique `segment_name`. If `segment_id` is not provided, MadConnect will create the segment in Google Ads and return the `segment_id` . The `action` field value needs to be `add` when creating an audience.
 2. **Add Members**
    * Use the `action` field set to `add` to send new members to the segment.
 3. **Remove Members**
@@ -98,6 +98,16 @@ To successfully send data to the Google Ads Customer Match API via MadConnect, t
    * Additional metadata such as `membership_life_span` and `upload_key_type` can be configured in the MadConnect UI when setting up the connection.
 
 For more details, refer to the [Google Ads Customer Match documentation](https://developers.google.com/google-ads/api/docs/remarketing/audience-segments/customer-match).
+
+### Common Errors
+
+The MadConnect App is marked as 'Blocked' during the OAuth process. `This app is blocked`
+
+1. Third-party app access is blocked, and the MadConnect OAuth client is not allow-listed
+2. Sensitive or high-risk Google Ads / DV360 scopes are restricted
+3. The user account is enrolled in Google’s Advanced Protection Program
+
+Ensuring that the MadConnect OAuth app is marked as _trusted_ or explicitly allowed in your organization’s App Access Control should resolve the problem.Please have your Google Ad's admin review these settings.
 
 _**Disclosure**_**:** _MadConnect's use and transfer of information received from Google APIs to any other app will adhere to_ [_Google API Services User Data Policy_](https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes)_, including the Limited Use requirements._
 
