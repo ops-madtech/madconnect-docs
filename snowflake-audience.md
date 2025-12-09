@@ -1,6 +1,6 @@
 # Snowflake - Audience
 
-## **Snowflake Source Connector – Universal Data Transfer Overview**
+### **Snowflake Source Connector – Universal Data Transfer Overview**
 
 MadConnect supports Snowflake as a first-class data source for **any data extraction**, including but not limited to:
 
@@ -14,7 +14,7 @@ When used inside the **Snowflake Native App**, Snowflake acts as a secure, fully
 
 ***
 
-## **1. Prerequisites**
+#### **1. Prerequisites**
 
 Before configuring a Snowflake source connection in MadConnect, ensure the following:
 
@@ -42,7 +42,7 @@ No additional authentication or credential exchange is required because permissi
 
 ***
 
-## **2. How the Snowflake Source Connector Works**
+#### **2. How the Snowflake Source Connector Works**
 
 The Snowflake source connector allows MadConnect to read from a **Snowflake table or view** and transport the data to any downstream destination that supports structured ingestion (audience APIs, conversions APIs, S3 buckets, HTTP endpoints, etc.).
 
@@ -59,7 +59,7 @@ This makes Snowflake a **universal source for all MadConnect connectors**, not o
 
 ***
 
-## **3. Authentication**
+#### **3. Authentication**
 
 #### **Snowflake Native App = Zero Configuration**
 
@@ -71,7 +71,7 @@ No credentials, OAuth, secrets, or token exchange is required.
 
 ***
 
-## **4. Source Configuration Fields (UI Overview)**
+#### **4. Source Configuration Fields (UI Overview)**
 
 When selecting Snowflake as a source, the following fields appear:
 
@@ -92,31 +92,31 @@ These fields define the **extraction behavior**, independent of the downstream u
 
 ***
 
-## **5. General Data Handling (Applies to All Use Cases)**
+#### **5. General Data Handling (Applies to All Use Cases)**
 
 MadConnect performs the following transformations automatically:
 
-#### **Normalization**
+**Normalization**
 
 1. Lowercasing of identifier-like strings
 2. Trimming whitespace
 3. Removing unsupported characters
 4. Standardizing timestamps
 
-#### **Hashing (Destination-Dependent)**
+**Hashing (Destination-Dependent)**
 
 1. Raw identifiers → hashed to **SHA-256** when required
 2. Pre-hashed identifiers → validated but not re-hashed
 3. Normalization applied before hashing
 
-#### **Incremental Handling**
+**Incremental Handling**
 
 1. Uses the marker column to detect new or updated rows
 2. Updates marker position after each successful run
 
 ***
 
-## **6. Audience Activation**&#x20;
+#### **6. Audience Activation**&#x20;
 
 #### **Most Commonly Supported Audience Identifiers**
 
@@ -128,7 +128,7 @@ MadConnect performs the following transformations automatically:
 | IDFA            | `idfa`      | `idfa_sha256`      |
 | External ID     | `extern_id` | `extern_id_sha256` |
 
-#### **Audience-Specific Behavior**
+**Audience-Specific Behavior**
 
 MadConnect:
 
@@ -138,9 +138,9 @@ MadConnect:
 
 ***
 
-## **7. Conversion/Event Uploads**&#x20;
+#### **7. Conversion/Event Uploads**&#x20;
 
-#### **Common Conversion Fields**
+**Common Conversion Fields**
 
 | Field                                 | Required | Notes                                    |
 | ------------------------------------- | -------- | ---------------------------------------- |
@@ -154,7 +154,7 @@ MadConnect performs timestamp, identifier, and payload validation depending on t
 
 ***
 
-## **8. Flexible Data Transfer**
+#### **8. Flexible Data Transfer**
 
 Snowflake can be used to transfer:
 
@@ -170,7 +170,7 @@ Snowflake is treated as a **general-purpose structured data source**.
 
 ***
 
-## **9. Choosing Full vs Incremental Sync**
+#### **9. Choosing Full vs Incremental Sync**
 
 | Use Case                | Mode        | Reason                       |
 | ----------------------- | ----------- | ---------------------------- |
@@ -184,7 +184,7 @@ More information on Full & Incremental transfers can be found [**here**](https:/
 
 ***
 
-## **10. Important Notes**
+#### **10. Important Notes**
 
 1. Table or view must be accessible to **MADCONNECT** via Snowflake grants
 2. All data remains inside the customer’s Snowflake account until transferred
