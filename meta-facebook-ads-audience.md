@@ -19,92 +19,194 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 
 ***
 
-#### Prerequisites
+### Prerequisites
 
-1. **Active Meta Ads Account**
-   * Ensure you have an active Meta Ads account with permissions to manage Custom Audiences.
-2. **OAuth Authentication**
-   * Authenticate your Meta Ads account using OAuth within MadConnect.
+Before configuring Meta in MadConnect, ensure the following:
 
-***
+#### **Meta Access Requirements**
 
-#### Configure Connector
-
-1. **Navigate to the My Platforms Section**
-   * Go to "My Platforms" in the MadConnect UI.
-2. **Add a New Platform**
-   * Click on "Add Platform."
-3. **Select Meta - Custom Audiences**
-   * Choose the "Meta - Custom Audiences" tile and click "Configure."
-4. **Go to Configuration**
-   * Open the "Configuration" tab.
-5. **Sign in with Meta**
-   * Click "Sign in with Meta" and log in using your Meta account credentials.
-6. **Authorize MadConnect**
-   * Grant MadConnect permission to access and manage your Meta Custom Audiences.
-7. **Verify Configuration**
-   * Ensure the platform status is marked as "Configured" under My Platforms.
+1. Active **Meta Ads Account**
+2. Permission to manage **Custom Audiences** (Admin or Advertiser-level access)
+3. Business Manager access aligned with the ad account
+4. No policy restrictions on the account (audience creation disabled for compliance reasons)
+5. To use Custom Audiences, the Business’ users must first sign Meta's Terms Of Service contracts. Verify status using the below link.
+   * [https://business.facebook.com/ads/manage/customaudiences/tos/?act=**\<AD\_ACCOUNT\_ID>**. ](https://business.facebook.com/ads/manage/customaudiences/tos/?act=%3CAD_ACCOUNT_ID%3E.)
 
 ***
 
-#### **Audience Schema Requirements for Meta Ads – Custom Audiences**
+#### **Authentication Requirements**
 
-To successfully send data to **Meta Custom Audiences** via **MadConnect**, the following minimum schema must be used:
+You must authenticate your Meta business using **OAuth** or **API token entry** (depending on your setup).
 
-1.  **ID Field(s) for Matching**
+**Option 1: OAuth Authentication (Recommended)**
 
+OAuth provides the most secure and stable authentication.
 
+**Steps**
 
-    | **ID Type**  | **Field Name**        | **Hashed** | **Formatting Guidelines**                                                   | **Example**                        |
-    | ------------ | --------------------- | ---------- | --------------------------------------------------------------------------- | ---------------------------------- |
-    | Email        | `email_sha256`        | Yes        | Trim whitespace, lowercase before hashing                                   | `5d41402abc4b2a76b9719d911017c592` |
-    | Phone        | `phone_sha256`        | Yes        | Remove symbols/letters, prefix with country code if `country_code` not used | `98f6bcd4621d373cade4e832627b4f6`  |
-    | First Name   | `fname_sha256`        | Yes        | Lowercase, remove punctuation, convert to Roman characters                  | `6dcd4ce23d88e2ee9568ba546c007c63` |
-    | Last Name    | `lname_sha256`        | Yes        | Same as First Name                                                          | `7c6a180b36896a0a8c02787eeafb0e4c` |
-    | Zip Code     | `postal_code_sha256`  | Yes        | US: First 5 digits only. UK: Area/District/Sector format                    | –                                  |
-    | Country Code | `country_code_sha256` | Yes        | ISO 3166-1 alpha-2 format (e.g., `us`), lowercase before hashing            | `us` → hashed                      |
-    | Birth Month  | `dobm_sha256`         | Yes        | Format MM (01–12), hash the result                                          | `01` → hashed                      |
-    | Birth Day    | `dobd_sha256`         | Yes        | Format DD (01–31), hash the result                                          | `15` → hashed                      |
-    | Birth Year   | `doby_sha256`         | Yes        | Format YYYY (1900–current), hash the result                                 | `1990` → hashed                    |
-    | Mobile Ad ID | `maid`                | No         | Not hashed; standard device ID                                              | `cdda802e-fb9c-47ad-0794d394c912`  |
+1. Go to **My Platforms → Meta – Custom Audiences → Configure**
+2. Click **Sign in with Meta**
+3. Log in with your Meta Business credentials
+4. Approve all requested permissions
+5. Once successful, the platform will appear as **Configured** in My Platforms
 
-💡 _For a complete list of supported match identifiers and multi-key matching guidelines, review the official_ [_Meta Custom Audiences Documentation._](https://developers.facebook.com/docs/marketing-api/audiences/guides/custom-audiences/#external_identifiers)
+**One-Time OAuth Link (Copy Icon)**
 
-2. **Segment ID Field**
-   * **Field Name:** `segment_id`
-   * **Data Type:** String
-   * **Description:** The unique ID assigned by Meta for the specific audience segment.
-   * **Example:** `987654321`
-3. **Segment Name Field**
-   * **Field Name:** `segment_name`
-   * **Data Type:** String
-   * **Description:** The name of the audience to be created in Meta. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Meta and return the assigned `segment_id`.
-   * **Example:** `Winter Campaign Audience`
-4. **Action Field**
-   * **Field Name:** `action`
-   * **Data Type:** String
-   * **Description:** Specifies whether to **add** or **remove** the user from the audience.
-   * **Accepted Values:** `add`, `remove`
-   * **Example:** `add`
+A copy icon generates a **single-use OAuth URL**, which can be shared with a teammate who must complete authentication.
+
+**Use cases:**
+
+1. Business admin must authenticate under a shared business account
+2. Authentication cannot be completed by the immediate user
+
+**Notes:**
+
+1. The link expires after one successful authentication
+2. A new link must be generated for additional authentication attempts
 
 ***
 
-#### **💡 How the Schema Works in MadConnect:**
+**Option 2: Token-Based Authentication (API Token Entry)**
 
-1. **Audience Creation:**
-   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in Meta using the provided name.
-   * The **`action`** field must be set to `add` during audience creation.
-2. **Managing Existing Audiences:**
-   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
-   * **Any valid ID field sent to Meta that the platform supports will be used for matching.** This allows flexibility for matching on a wide range of identifiers, from hashed emails and phone numbers to non-hashed Mobile Advertiser IDs (MADID).
-3. **Hashing Guidelines:**
-   * **SHA-256 hashing is required** for all personal identifiers except for **External Identifiers**, **App User IDs**, **Page Scoped User IDs**, and **MAID**.
-   * Normalize data before hashing (e.g., lowercase, remove whitespace/special characters).
-   * Names (first/last) support special characters and non-Roman alphabets but should include Romanized versions for better match rates.
-4. **UI Enhancements:**
-   * Users can configure metadata (e.g., **audience source**, **duration**) using dropdowns in the **MadConnect UI**.
-   * These settings can be modified at the **connection level** as needed.
+If you prefer not to use OAuth, you may manually enter your Meta access tokens.
 
+Required fields:
 
+1. **Access Token**
 
-For more details on Meta Custom Audiences, please refer to the[ Meta Custom Audiences documentation](https://www.facebook.com/business/help/744354708981227).
+These must be a valid token aligned to a Meta app with Custom Audience permissions.
+
+***
+
+### Connection Configuration (UI Fields)
+
+When creating a Meta Custom Audience connection in MadConnect, the destination configuration requires the following fields:
+
+**Meta Destination Fields**
+
+| Field                         | Required | Description                                                                                                |
+| ----------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| **Advertiser ID**             | Yes      | Meta Ad Account ID (e.g. 1234567890) associated with the Custom Audience                                   |
+| **Audience Source**           | Optional | Dropdown specifying audience origin (e.g., CRM, Website, App); affects metadata stored in Meta             |
+| **IDs**                       | Optional | Choose which identifier columns (emails, phones, MAIDs, etc.) are included, if you want to restrict fields |
+| **Replace Existing Audience** | Optional | “Yes/No” option — if “Yes,” MadConnect sends a full replacement set instead of add/remove operations       |
+
+These fields determine how MadConnect structures calls to Meta's Custom Audiences API.
+
+***
+
+### Audience Creation & Management Logic in MadConnect
+
+Meta uses the following fields to manage audiences:
+
+**Segment Fields**
+
+| Field             | Required                | Description                                |
+| ----------------- | ----------------------- | ------------------------------------------ |
+| **segment\_name** | Yes (for new audiences) | Name of the audience to be created in Meta |
+| **segment\_id**   | Required for updates    | Meta-assigned Custom Audience ID           |
+
+**Action Field**
+
+| Field      | Values      | Purpose                                                                              |
+| ---------- | ----------- | ------------------------------------------------------------------------------------ |
+| **action** | add, remove | Controls whether a user is added or removed. Use 'add' when creating a new audience. |
+
+#### **Creating a New Audience**
+
+* Provide **segment\_name** but **omit segment\_id**
+* First transfer will:
+  1. Create a new Custom Audience in Meta using segment\_name
+  2. Return the **segment\_id** in Reports → info
+* You then update the connection data with the new segment\_id for all future runs
+* Action must be **add** during initial creation
+
+#### **Updating an Existing Audience**
+
+* Provide **segment\_id**
+* MadConnect will add or remove users depending on the action field
+* Meta will match multiple identifier types automatically
+
+***
+
+### Matching Schema (Meta Custom Audiences)
+
+Meta supports a wide range of identifiers. MadConnect allows all supported ID fields to be included in a single dataset.
+
+**Supported ID Fields**
+
+| ID Type           | Field Name                       | Hashed?  | Notes                                    |
+| ----------------- | -------------------------------- | -------- | ---------------------------------------- |
+| Email             | `email_sha256`                   | Yes      | Lowercase + trim before hashing          |
+| Phone             | `phone_sha256`                   | Yes      | E.164 normalization before hashing       |
+| First Name        | `fname_sha256`                   | Yes      | Romanize when applicable                 |
+| Last Name         | `lname_sha256`                   | Yes      | Same normalization as fname              |
+| ZIP / Postal Code | `postal_code_sha256`             | Yes      | 5-digit (US), formatted (UK)             |
+| Country Code      | `country_code_sha256`            | Yes      | ISO-3166-1 alpha-2                       |
+| DOB Month         | `dobm_sha256`                    | Yes      | MM format                                |
+| DOB Day           | `dobd_sha256`                    | Yes      | DD format                                |
+| DOB Year          | `doby_sha256`                    | Yes      | YYYY format                              |
+| MAID              | `maid`                           | No       | Sent in plain form — not hashed          |
+| External IDs      | `extern_id` / `extern_id_sha256` | Optional | Either hashed or raw (Meta accepts both) |
+
+**Hashing Requirements**
+
+* All PII must use **SHA-256**
+* Pre-hashed fields must already be:
+  * Lowercased
+  * Trimmed
+  * Normalized according to Meta’s rules
+
+Meta's matching engine will unify all compatible identifiers into a single matched record.
+
+**Multi-Key Matching Behavior**
+
+Meta supports "best available" matching. MadConnect takes advantage of this by:
+
+* Sending all available IDs per row (email + phone + MAID + name + address)
+* Allowing Meta to match on any available identifiers
+* Improving audience scale without increasing operational overhead
+
+Any field you include that Meta supports will be used.
+
+***
+
+### Running Transfers in MadConnect
+
+Once platform configuration and connection setup are complete:
+
+1. Select your **source** (Snowflake, S3, etc.)
+2. Select **Meta – Custom Audiences** as the destination
+3. Provide:
+   * Advertiser ID
+   * Audience Source (optional)
+   * IDs field (optional)
+   * Replace Existing Audience flag
+4. Run a **Manual Transfer** or configure a **Scheduled Transfer**
+
+MadConnect will:
+
+* Normalize and hash identifiers
+* Validate Meta schema compliance
+* Create or update Custom Audiences
+* Manage add/remove membership logic
+* Handle rate limits, retries, and batching
+* Return metadata (segment\_id, counts, errors) in **Reports**
+
+***
+
+### **Important Notes**
+
+* Meta may delay audience activation while internal processing completes
+* Audience sizes under Meta’s reporting threshold will show as “<1,000 users”
+* Accounts with policy violations cannot create/update audiences
+* Using multiple identifiers increases match rate
+* Replace Audience = full replacement (Meta overwrites audience membership)
+
+***
+
+### **Additional Resources**
+
+* [Meta Custom Audiences Developer Documentation](https://www.facebook.com/business/help/744354708981227)
+* [Meta Ads Manager – Custom Audience Overview](https://www.facebook.com/business/help/744354708981227?id=2469097953376494)
+* [Meta Business Access & Permissions Guide](https://www.facebook.com/business/help/442345745885606)
