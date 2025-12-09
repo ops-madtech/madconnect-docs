@@ -1,84 +1,193 @@
 # Snowflake - Audience
 
-MadConnect integrates with Snowflake, enabling businesses to seamlessly connect their audience data stored in Snowflake to various advertising platforms for audience activation. This connector allows users to sync audience data tables or views directly from Snowflake to their desired destinations, facilitating smooth and efficient data transfers for targeted advertising campaigns.
+## **Snowflake Source Connector – Universal Data Transfer Overview**
 
-**Connection Type**: Source.
+MadConnect supports Snowflake as a first-class data source for **any data extraction**, including but not limited to:
 
-**Data Type:** Audiences.
+1. Audience activation
+2. Conversion/event pipelines
+3. Enrichment datasets
+4. Measurement or reporting exports
+5. Custom partner-specific payloads
 
-#### Prerequisites
+When used inside the **Snowflake Native App**, Snowflake acts as a secure, fully authorized data provider. All reading, validation, and transformation flows execute directly within the customer’s Snowflake environment, and no additional authentication configuration is required.
 
-To set up the **Snowflake - Audience** connector in MadConnect, ensure the following prerequisites are met:
+***
 
-* MADCONNECTUSER has access to the table containing audience data
+## **1. Prerequisites**
 
-```
-// Commands for granting MADCONNECT application access to the table 
+Before configuring a Snowflake source connection in MadConnect, ensure the following:
+
+#### **Snowflake Access Requirements**
+
+The Snowflake Native App must have read access to the table or view from which data will be extracted.
+
+To grant the required access to the **MADCONNECT** application, run the following commands:
+
+```sql
 GRANT USAGE ON DATABASE <DATABASE_NAME> TO APPLICATION MADCONNECT;
 GRANT USAGE ON SCHEMA <DATABASE_NAME>.<SCHEMA_NAME> TO APPLICATION MADCONNECT;
 GRANT SELECT ON TABLE <DATABASE_NAME>.<SCHEMA_NAME>.<TABLE_NAME> TO APPLICATION MADCONNECT;
 ```
 
-\
-**Schema**&#x20;
+These grants enable the Snowflake source connector to read data for:
 
-```
-| Key           | Data Type | Example                                                                 |
-| ------------- | --------- | ----------------------------------------------------------------------- |
-| <ID>          | String    | It can be any value such as TDID, UID2, EMAIL etc. Refer to table below |
-| segment_id    | String    | 22343245                                                                |
-| segment_name  | String    | Sport Lover                                                             |
-| action        | String    | Possible options are add/remove/opt-out 
-```
+1. Audiences
+2. Conversions
+3. Reporting/analytics datasets
+4. Custom partner integrations
+5. Any use case that extracts data from Snowflake
 
-Possible value of ids
+No additional authentication or credential exchange is required because permissions are handled natively within Snowflake.
 
-1. EMAIL - Email address, EMAIL\_HASH
-2. FNAME - First name, FNAME\_HASH
-3. LNAME - Last name, LNAME\_HASH
-4. PHONE - Phone number, PHONE\_HASH
-5. DOB - Date of birth, DOB\_HASH
-6. DOBM - Date of birth Month, DOBM\_HASH
-7. DOBY - Date of birth Year,  DOBY\_HASH
-8. DOBD - Date of birth Day, DOBD\_HASH
-9. GENDER - Gender, GENDER\_HASH
-10. LOCATION  - Location, LOCATION\_HASH
-11. CITY - City, CITY\_HASH
-12. STATE - State, STATE\_HASH
-13. STATE\_CODE - 2 digit, STATE\_CODE\_HASH
-14. COUNTRY - Country, COUNTRY\_HASH
-15. REGION - Region, REGION\_HASH
-16. REGION\_CODE, REGION\_CODE\_HASH
-17. IDFA - Apple Identifier for Advertising
-18. GAID - Google Advertising ID
-19. RIDA - Roku TV and Streaming Devices
-20. TVOS - Apple TV
-21. CHRM - Android TV / Google Chromecast Devices
-22. AFAI - Amazon Fire TV Devices
-23. SMSG - Samsung TVs
-24. HIP4 - IPv4 Address
-25. Hashed types are identified by adding \_\<hash\_algo> suffix to the types. Example: EMAIL\_SHA256 as shown below json
-26. UID2 - Universal ID 2.0
-27. ID5 - ID5 id
-28. RAMPID - LiveRamp RampID
-29. POSTAL\_CODE - Postal Code , POSTAL\_CODE\_HASH
-30. COUNTRY\_CODE - Country Code , COUNTRY\_CODE\_HASH
-31. DEVICE\_ID - Unknown device id
-32. TDID - GUID - The Trade Desk 36-character GUID (including dashes) for this user.
-33. DAID - GUID - The raw device ID for this user, sent in 36-character GUID format (including dashes). Use iOS IDFA or Android's AAID.
-34. UID2Token - String - The encrypted UID2 token, also known as an advertising token. This token is case-sensitive. Tokens are - generated and managed using UID2 APIs. For details about UID2 APIs, see UID2 Endpoints. For details about UID2 tokens, - see Raw IDs vs. Tokens.
-35. EUIDToken - String - The encrypted EUID token, also known as an advertising token. This token is case-sensitive. For details, see Unified IDs.
-36. EUID - String - The raw European Unified ID value, also known as EUID. This value is case-sensitive. EUID offers user transparency and privacy controls designed to meet market requirements in European regions with the same normalization and encoding of PII as UID2. See also European Unified ID Overview.
-37. IDL - String - "The 49-character or 70-character RampID (previously known as IdentityLink).
-38. NetID - String - The user's netID as a 70-character base64-encoded string. For details about netID, see the netID Developer Portal.
-39. FirstId - String - The user's First-id, a first-party cookie typically set by publishers in France. For details about First-id, see the First-id site.
-40. MADID - String  -  Mobile advertiser ID , Use all lowercase, and keep hyphens ,Hashing NOT required   39.  EXTERN\_ID - String - ID , no hashing required 40.  FI - String - first name initial, Hashing required, Use a-z only. Lowercase only. Special characters in UTF-8 format , FI\_HASH.&#x20;
-41. IDFA\_MD5 - MD5 hash of an iOS IDFA
-42. AAID\_MD5 MD5 hash of an Android AAID/GAID
-43. IDFA\_SHA256 SHA256 iOS IDFA
-44. AAID\_SHA256 SHA256 Android AAID/GAID
+***
 
-NOTE:
+## **2. How the Snowflake Source Connector Works**
 
-1. At-least one id should be present per object
-2. All id keys should be mentioned in lowercase. Example: email, idfa, gaid fname, dob\_hash
+The Snowflake source connector allows MadConnect to read from a **Snowflake table or view** and transport the data to any downstream destination that supports structured ingestion (audience APIs, conversions APIs, S3 buckets, HTTP endpoints, etc.).
+
+Key behaviors:
+
+1. Data is read directly from Snowflake using the app’s authorized roles
+2. No keys, tokens, or external authentication
+3. Table/view selection defines the input dataset
+4. MadConnect applies schema validation, normalization, hashing (when required), and formatting
+5. Supports both **full** and **incremental** sync patterns
+6. Output formatting is determined by the chosen **destination**
+
+This makes Snowflake a **universal source for all MadConnect connectors**, not only activation.
+
+***
+
+## **3. Authentication**
+
+#### **Snowflake Native App = Zero Configuration**
+
+No credentials, OAuth, secrets, or token exchange is required.
+
+1. The app is installed inside the customer’s Snowflake account
+2. Access is controlled via Snowflake grants (see prerequisites above)
+3. Any readable table or view can be used as the source
+
+***
+
+## **4. Source Configuration Fields (UI Overview)**
+
+When selecting Snowflake as a source, the following fields appear:
+
+| Field               | Required                 | Description                            |
+| ------------------- | ------------------------ | -------------------------------------- |
+| **Connection Name** | Yes                      | Friendly label for the connection      |
+| **Table Name**      | Yes                      | Snowflake table or view                |
+| **Sync Mode**       | Yes                      | Full or Incremental                    |
+| **Timezone**        | Optional                 | Interprets timestamps                  |
+| **Start Time**      | Optional                 | Start time for scheduled syncs         |
+| **Sync Frequency**  | Optional                 | How often data is pulled               |
+| **Unit**            | Optional                 | Minutes / Hours / Days                 |
+| **Marker Column**   | Required for Incremental | Column used to detect new/updated rows |
+| **Marker Type**     | Required for Incremental | Datetime or Numeric                    |
+| **Marker Position** | Auto-managed             | Last processed marker value            |
+
+These fields define the **extraction behavior**, independent of the downstream use case.
+
+***
+
+## **5. General Data Handling (Applies to All Use Cases)**
+
+MadConnect performs the following transformations automatically:
+
+#### **Normalization**
+
+1. Lowercasing of identifier-like strings
+2. Trimming whitespace
+3. Removing unsupported characters
+4. Standardizing timestamps
+
+#### **Hashing (Destination-Dependent)**
+
+1. Raw identifiers → hashed to **SHA-256** when required
+2. Pre-hashed identifiers → validated but not re-hashed
+3. Normalization applied before hashing
+
+#### **Incremental Handling**
+
+1. Uses the marker column to detect new or updated rows
+2. Updates marker position after each successful run
+
+***
+
+## **6. Audience Activation**&#x20;
+
+#### **Most Commonly Supported Audience Identifiers**
+
+| Identifier Type | Raw Field   | Hashed Field       |
+| --------------- | ----------- | ------------------ |
+| Email           | `email`     | `email_sha256`     |
+| Phone           | `phone`     | `phone_sha256`     |
+| MAID            | `maid`      | `maid_sha256`      |
+| IDFA            | `idfa`      | `idfa_sha256`      |
+| External ID     | `extern_id` | `extern_id_sha256` |
+
+#### **Audience-Specific Behavior**
+
+MadConnect:
+
+1. Normalizes and hashes identifiers if needed
+2. Supports multiple identifier types in the same row
+3. Supports `action` values (add/remove), depending on the destination
+
+***
+
+## **7. Conversion/Event Uploads**&#x20;
+
+#### **Common Conversion Fields**
+
+| Field                                 | Required | Notes                                    |
+| ------------------------------------- | -------- | ---------------------------------------- |
+| `event_time`                          | Yes      | Must be epoch seconds or valid timestamp |
+| `event_name` / destination equivalent | Yes      | Destination-specific                     |
+| ID fields                             | Optional | Same handling as audience IDs            |
+| `properties.*`                        | Optional | Additional metadata                      |
+| `event_number`                        | Optional | Unique event ID                          |
+
+MadConnect performs timestamp, identifier, and payload validation depending on the chosen destination.
+
+***
+
+## **8. Flexible Data Transfer**
+
+Snowflake can be used to transfer:
+
+1. Reporting/analytics exports
+2. Business logic datasets
+3. Enrichment tables
+4. Custom API payloads
+5. Look-alike seeds
+6. Offline measurement data
+7. Any curated table the customer wants to deliver downstream
+
+Snowflake is treated as a **general-purpose structured data source**.
+
+***
+
+## **9. Choosing Full vs Incremental Sync**
+
+| Use Case                | Mode        | Reason                       |
+| ----------------------- | ----------- | ---------------------------- |
+| Large fact tables       | Incremental | Avoid full scans             |
+| Event streams           | Incremental | Append-only data             |
+| Stable dimension tables | Full        | Simple refresh               |
+| Audiences               | Either      | Based on customer preference |
+| Custom feeds            | Either      | Destination-defined          |
+
+More information on Full & Incremental transfers can be found [**here**](https://docs.madconnect.io/connections#incremental-loads-and-marker-columns-in-madconnect).&#x20;
+
+***
+
+## **10. Important Notes**
+
+1. Table or view must be accessible to **MADCONNECT** via Snowflake grants
+2. All data remains inside the customer’s Snowflake account until transferred
+3. Case sensitivity is handled via MadConnect normalization
+4. Marker strategy is critical for large datasets
+5. Snowflake→MadConnect→Destination is secure, controlled, and fully auditable
