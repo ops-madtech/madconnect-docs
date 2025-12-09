@@ -114,18 +114,18 @@ Meta uses the following fields to manage audiences:
 
 #### **Creating a New Audience**
 
-* Provide **segment\_name** but **omit segment\_id**
-* First transfer will:
-  1. Create a new Custom Audience in Meta using segment\_name
-  2. Return the **segment\_id** in Reports → info
-* You then update the connection data with the new segment\_id for all future runs
-* Action must be **add** during initial creation
+1. Provide **segment\_name** but **omit segment\_id**
+2. First transfer will:
+   * Create a new Custom Audience in Meta using segment\_name
+   * Return the **segment\_id** in Reports → info
+3. You then update the connection data with the new segment\_id for all future runs
+4. Action must be **add** during initial creation
 
 #### **Updating an Existing Audience**
 
-* Provide **segment\_id**
-* MadConnect will add or remove users depending on the action field
-* Meta will match multiple identifier types automatically
+1. Provide **segment\_id**
+2. MadConnect will add or remove users depending on the action field
+3. Meta will match multiple identifier types automatically
 
 ***
 
@@ -151,11 +151,11 @@ Meta supports a wide range of identifiers. MadConnect allows all supported ID fi
 
 **Hashing Requirements**
 
-* All PII must use **SHA-256**
-* Pre-hashed fields must already be:
-  * Lowercased
-  * Trimmed
-  * Normalized according to Meta’s rules
+1. All PII must use **SHA-256**
+2. Pre-hashed fields must already be:
+   * Lowercased
+   * Trimmed
+   * Normalized according to Meta’s rules
 
 Meta's matching engine will unify all compatible identifiers into a single matched record.
 
@@ -163,9 +163,9 @@ Meta's matching engine will unify all compatible identifiers into a single match
 
 Meta supports "best available" matching. MadConnect takes advantage of this by:
 
-* Sending all available IDs per row (email + phone + MAID + name + address)
-* Allowing Meta to match on any available identifiers
-* Improving audience scale without increasing operational overhead
+1. Sending all available IDs per row (email + phone + MAID + name + address)
+2. Allowing Meta to match on any available identifiers
+3. Improving audience scale without increasing operational overhead
 
 Any field you include that Meta supports will be used.
 
@@ -186,27 +186,27 @@ Once platform configuration and connection setup are complete:
 
 MadConnect will:
 
-* Normalize and hash identifiers
-* Validate Meta schema compliance
-* Create or update Custom Audiences
-* Manage add/remove membership logic
-* Handle rate limits, retries, and batching
-* Return metadata (segment\_id, counts, errors) in **Reports**
+1. Normalize and hash identifiers
+2. Validate Meta schema compliance
+3. Create or update Custom Audiences
+4. Manage add/remove membership logic
+5. Handle rate limits, retries, and batching
+6. Return metadata (segment\_id, counts, errors) in **Reports**
 
 ***
 
 ### **Important Notes**
 
-* Meta may delay audience activation while internal processing completes
-* Audience sizes under Meta’s reporting threshold will show as “<1,000 users”
-* Accounts with policy violations cannot create/update audiences
-* Using multiple identifiers increases match rate
-* Replace Audience = full replacement (Meta overwrites audience membership)
+1. Meta may delay audience activation while internal processing completes
+2. Audience sizes under Meta’s reporting threshold will show as “<1,000 users”
+3. Accounts with policy violations cannot create/update audiences
+4. Using multiple identifiers increases match rate
+5. Replace Audience = full replacement (Meta overwrites audience membership)
 
 ***
 
 ### **Additional Resources**
 
-* [Meta Custom Audiences Developer Documentation](https://www.facebook.com/business/help/744354708981227)
-* [Meta Ads Manager – Custom Audience Overview](https://www.facebook.com/business/help/744354708981227?id=2469097953376494)
-* [Meta Business Access & Permissions Guide](https://www.facebook.com/business/help/442345745885606)
+1. [Meta Custom Audiences Developer Documentation](https://www.facebook.com/business/help/744354708981227)
+2. [Meta Ads Manager – Custom Audience Overview](https://www.facebook.com/business/help/744354708981227?id=2469097953376494)
+3. [Meta Business Access & Permissions Guide](https://www.facebook.com/business/help/442345745885606)
