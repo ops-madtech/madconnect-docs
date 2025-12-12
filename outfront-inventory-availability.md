@@ -89,6 +89,7 @@ The connector supports flexible filtering so users can narrow the returned data 
    * **Weekly Net Rate** = net\_rate/4
    * **CPM** = Weekly Net Rate/(imp\_18p/1000)
    * **Cost** = Weekly Net Rate \* # of weeks
+6. There is a maximum forward-looking window of **360 days from the current date**. Any custom or relative date range that results in an `endDate` beyond this limit will result in a failed transfer.
 
 ***
 
