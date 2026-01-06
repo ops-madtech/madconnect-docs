@@ -2,135 +2,217 @@
 
 ![](<.gitbook/assets/image (24).png>)
 
-#### Google Display & Video 360 Customer Match Connector Overview
+## Google Display & Video 360 (DV360) – Customer Match Overview
 
-MadConnect enables seamless integration with DV360 Customer Match, allowing you to upload and manage customer data for targeted advertising. Leverage your first-party data to create personalized ad campaigns, ensuring optimal reach and engagement. Maximize your advertising impact with efficient data synchronization directly from your CRM or data sources to DV360.
+MadConnect integrates with the Google Display & Video 360 (DV360) Customer Match API to enable advertisers to activate first-party audiences for targeting and suppression across DV360 inventory. This connector automates audience creation, population, and maintenance using Google-approved identifiers, fully managed within the MadConnect platform.
 
-***
-
-**Connector Overview**
-
-* **Source / Destination**: Destination
-* **Data Type**: Audience
-* **Description**: Activate your customer match audiences on Google DV360 by syncing your customer data.
-* **Supported Actions**: Create / Add / Remove
+MadConnect handles identifier normalization, hashing, schema validation, and API orchestration to ensure compliant and reliable audience delivery.
 
 ***
 
-**Prerequisites**
+### Connector Overview
 
-To activate audiences on Google DV360 using MadConnect, ensure the following prerequisites are met:
-
-1. **Meet Google's Requirements for Using Customer Match**:
-   * **Policy Compliance**: The advertiser account must have a good history of policy compliance.
-   * **Payment History**: The advertiser account must have a good payment history.
-   * **Allowlisting**: Customers with compliant accounts are automatically allowlisted by Google.
-2. **Account Requirements**:
-   * **OAuth Authentication**: Authenticate Google DV360 Account destination using OAuth.
-   * **Compliant Advertiser Account**: Ensure the account adheres to Google's Customer Match requirements.
-
-#### **⚠️ Important Notes on DV360 Customer Match**
-
-1. **Consent Requirement:**
-   * Currently, the **MadConnect DV360 connector** pushes IDs with the **consent state set to "granted."**
-   * Customers **must ensure** that they send **only those IDs** for which both **user\_data** and **personalization consent** have been **explicitly granted** by the user.
-   * Any IDs uploaded **without proper consent** may not comply with **Google’s policies** and could result in data rejection or enforcement actions.
-2. **Verify Data Upload Eligibility:**
-   * **Before sending data via MadConnect**, customers must **confirm that data upload features are enabled** for the audience's parent partner.
-   * To verify:
-     * Attempt to create a **Customer Match audience** manually within **DV360’s UI** under a relevant advertiser.
-     * If **data upload is not enabled**, any attempt to create or update **Customer Match audiences** via API will result in an **error**.
+| **Field**         | **Description**                                                                     |
+| ----------------- | ----------------------------------------------------------------------------------- |
+| Connector Type    | Destination                                                                         |
+| Data Type         | Customer Match (Hashed & Approved IDs)                                              |
+| Primary Use Case  | Audience Activation                                                                 |
+| Description       | Activate and manage Customer Match audiences in DV360 using first-party identifiers |
+| Supported Actions | Add / Remove                                                                        |
 
 ***
 
-**Configure Connector**
+### Prerequisites
 
-To configure the DV360 Customer Match connector in MadConnect, follow these steps for authentication:
+Before configuring the DV360 Customer Match connector, ensure the following:
 
-1. **Navigate to the My Platforms Section**:
-   * In the MadConnect UI, go to the **My Platforms** section.
-2. **Add a New Platform**:&#x20;
-   * Click on **Add Platform**.
-3. **Select Google DV360 - Customer Match**:&#x20;
-   * Choose the **Google DV360 - Customer Match** tile and click on **Configure**.
-4. **Go to Destination Configuration**:&#x20;
-   * Navigate to the **Configuration** tab.
-5. **Sign in with Google**:&#x20;
-   * Click the **Sign in with Google** button to authenticate your Google DV360 account.
-6. **Authenticate with Google**:&#x20;
-   * You will be redirected to Google’s OAuth login page. Sign in using your Google account credentials.
-7. **Authorize MadConnect:**&#x20;
-   * Grant MadConnect permission to access and manage your DV360 Customer Match audiences.
-8. **Redirect to MadConnect**:&#x20;
-   * After successful authentication, you will be redirected back to MadConnect, where the configuration will be completed.
+#### Access & Eligibility Requirements
 
-***
+1. An active DV360 Partner and Advertiser
+2. Partner and advertiser must have:
+3. Good policy compliance history
+4. Good billing and payment standing
+5. Customer Match allowlisting enabled at the partner level
+6. Eligible accounts are typically allowlisted automatically
 
-#### **Audience Schema Requirements for DV360 – Customer Match**
+#### Data Upload Eligibility
 
-To successfully send data to **Google DV360 Customer Match API** via **MadConnect**, the following minimum schema must be used:
+1. Customer Match uploads must be enabled for the advertiser’s parent partner
+2. Eligibility can be verified by attempting to create a Customer Match audience directly in the DV360 UI
+3. If audience creation is blocked in the UI, API-based uploads will fail
 
-1. **ID Field**
-   * **Field Name:** `email_sha256`, `phone_sha256`, `maid`, `postal_code`, `fname_sha256`, `lname_sha256`, `country_code`
-   * **Data Type:** String (Hashed for personal identifiers; plain for MAID and location data)
-   * **Description:** Contains audience member identifiers used for matching in DV360. The following ID types are supported:
-     * `email_sha256` – SHA-256 hashed email addresses.
-       * _Before hashing:_ Remove all whitespace and convert to lowercase.
-       * _Example:_ `5d41402abc4b2a76b9719d911017c592`
-     * `phone_sha256` – SHA-256 hashed phone numbers.
-       * _Before hashing:_ Format using **E.164** (includes country calling code).
-       * _Example:_ `98f6bcd4621d373cade4e832627b4f6`
-     * `postal_code` – Member’s postal zip code.
-       * _Must be used with:_ `country_code`, `fname_sha256`, and `lname_sha256`.
-       * `fname_sha256` – SHA-256 hashed first name.
-       * _Example:_ `12345`
-       * _Must be used with:_ `country_code`, `lname_sha256`, and `postal_code`.
-     * `lname_sha256` – SHA-256 hashed last name.
-       * _Before hashing:_ Remove whitespace and convert to lowercase.
-       * _Example:_ `7c6a180b36896a0a8c02787eeafb0e4c`
-       * _Must be used with:_ `country_code`, `fname_sha256`, and `postal_code`.
-     * `country_code` – Two-letter country code of the member.
-       * _Example:_ `US`
-       * Use ISO two-letter [country codes](https://developers.google.com/adwords/api/docs/appendix/codes-formats#country-codes).
-       * _Must be used with:_ `fname_sha256`, `lname_sha256`, and `postal_code`.
-     * `maid` – Mobile Advertising ID (non-hashed).
-       * _Example:_ `cdda802e-fb9c-47ad-0794d394c912`
+#### Consent Requirements
 
-_For a complete list of supported match identifiers and formatting guidelines, review the official_ [_DV360 Customer Match Documentation._](https://developers.google.com/display-video/api/reference/rest/v3/firstAndThirdPartyAudiences#contactinfo)
-
-2. **Segment ID Field**
-   * **Field Name:** `segment_id`
-   * **Data Type:** String
-   * **Description:** The unique ID assigned by Google for the specific audience segment.
-   * **Example:** `123456`
-3. **Segment Name Field**
-   * **Field Name:** `segment_name`
-   * **Data Type:** String
-   * **Description:** The name of the audience to be created in DV360. If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in DV360 and return the assigned `segment_id`.
-   * **Example:** `Spring Sale Audience`
-4. **Action Field**
-   * **Field Name:** `action`
-   * **Data Type:** String
-   * **Description:** Specifies whether to **add** or **remove** the user from the audience.
-   * **Accepted Values:** `add`, `remove`
-   * **Example:** `add`
+1. MadConnect submits Customer Match data with consent values set to Granted
+2. Customers must ensure:
+3. User data consent is granted
+4. Ad personalization consent is granted
+5. Uploading data without proper consent may violate Google policies
 
 ***
 
-#### **💡 How the Schema Works in MadConnect:**
+### Authentication Requirements
 
-1. **Audience Creation:**
-   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in DV360 using the provided name.
-   * The **`action`** field must be set to `add` during audience creation.
-2. **Managing Existing Audiences:**
-   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
-   * **Any valid ID field sent to DV360 that the platform supports will be used for matching.** This includes hashed emails, hashed phone numbers, MAIDs, and multi-field combinations like zip code, country code, and hashed names.
-3. **UI Enhancements:**
-   * Users can configure additional metadata (e.g., **audience source**, **lifespan**) via drop downs in the **MadConnect UI**.
-   * These settings can be modified at the **connection level** as needed.
+DV360 Customer Match requires OAuth authentication.
 
-For more information on Google DV360 Audience Activation, please review the[ Google Customer Match documentation](https://developers.google.com/display-video/api/guides/audiences/upload-customer-match).
+#### OAuth Authentication (Required)
+
+1. Navigate to My Platforms → Google DV360 – Customer Match
+2. Click Configure
+3. Select Sign in with Google
+4. Authenticate using a Google account with DV360 access
+5. Approve permissions to manage Customer Match audiences
+6. Upon success, the platform status will display Configured in My Platforms
+
+OAuth tokens are securely stored and automatically refreshed by MadConnect.
 
 ***
 
-_**Disclosure**_**:** _MadConnect's use and transfer of information received from Google APIs to any other app will adhere to_ [_Google API Services User Data Policy_](https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes)_, including the Limited Use requirements._
+#### One-Time OAuth Link (Copy Icon)
+
+A copy icon generates a single-use OAuth URL.
+
+Use cases
+
+1. A business administrator must authenticate under a shared Google account
+2. Authentication cannot be completed by the initiating user
+
+Notes
+
+1. The link expires after one successful authorization
+2. A new link must be generated for additional authentication attempts
+
+***
+
+### Connection Configuration (UI Fields)
+
+When creating a connection with Google DV360 – Customer Match as the destination, the following fields are required or available in the UI.
+
+#### DV360 Destination Fields
+
+| Field            | Required | Description                                                                    |
+| ---------------- | -------- | ------------------------------------------------------------------------------ |
+| Advertiser ID    | Yes      | DV360 Advertiser ID under the authenticated partner                            |
+| Audience Source  | Optional | Metadata describing the origin of the audience (e.g., CRM, Website, App)       |
+| Audience Type    | Yes      | Defines the identifier category being uploaded (e.g., Contact Info, MAID)      |
+| Retention (days) | Yes      | Number of days users remain in the audience (DV360-supported retention window) |
+
+These fields control how DV360 interprets and manages the resulting Customer Match audience.
+
+***
+
+### Audience Creation & Management Logic
+
+DV360 uses the following fields to manage Customer Match audiences.
+
+#### Segment Fields
+
+| Field         | Required            | Description                               |
+| ------------- | ------------------- | ----------------------------------------- |
+| segment\_name | Yes (new audiences) | Name of the DV360 audience to be created  |
+| segment\_id   | Required (updates)  | Existing DV360 Customer Match audience ID |
+
+#### Action Field
+
+| Field  | Required | Description                                 |
+| ------ | -------- | ------------------------------------------- |
+| action | Yes      | Controls membership updates (add or remove) |
+
+***
+
+#### Creating a New Audience
+
+1. Provide segment\_name
+2. Omit segment\_id
+3. Set action = add
+4. MadConnect will:
+5. Create a new Customer Match audience in DV360
+6. Upload identifiers
+7. Return the generated segment\_id in the Reports → info object
+
+***
+
+#### Updating an Existing Audience
+
+1. Provide the existing segment\_id
+2. Set action to add or remove
+3. MadConnect will update membership for that audience
+
+***
+
+### Matching Keys (DV360 Customer Match)
+
+At least one supported identifier must be present per row.\
+MadConnect will normalize and hash identifiers when raw values are provided.
+
+#### Supported Identifier Fields
+
+| **ID Type**  | **Field Name**        | **Hashed** | **Notes**                          |
+| ------------ | --------------------- | ---------- | ---------------------------------- |
+| Email        | email / email\_sha256 | Yes        | Lowercase + trim before hashing    |
+| Phone        | phone / phone\_sha256 | Yes        | Must be E.164 before hashing       |
+| MAID         | maid                  | No         | Mobile Advertising ID (plain text) |
+| First Name   | fname / fname\_sha256 | Yes        | Used with last name + postal       |
+| Last Name    | lname / lname\_sha256 | Yes        | Used with first name + postal      |
+| Postal Code  | postal\_code          | No         | Used with name + country           |
+| Country Code | country\_code         | No         | ISO-3166-1 alpha-2                 |
+
+Important:\
+Name, postal code, and country code must be supplied together as a valid matching group.
+
+***
+
+### MadConnect Standard Schema Example (Audience Connectors)
+
+Your source file or table should generally follow this structure to ensure seamless integration:
+
+| **Field Name** | **Data Type** | **Required?**             | **Description**                                                                               |
+| -------------- | ------------- | ------------------------- | --------------------------------------------------------------------------------------------- |
+| segment\_name  | String        | Yes (Create)              | Name of the audience (e.g., "Holiday Shoppers").                                              |
+| segment\_id    | String        | Yes (Update)              | The segment ID as it appears in the destination platform (only if updating an existing list). |
+| action         | String        | Yes                       | add or remove. Use add for creation.                                                          |
+| email\_sha256  | String        | At least one supported ID | User's email address.                                                                         |
+
+
+
+***
+
+### Hashing & Normalization Requirements
+
+1. Algorithm: SHA-256
+2. Normalization:
+3. Lowercase all PII
+4. Trim whitespace
+5. Remove punctuation for names
+6. Phone Numbers:
+7. Convert to E.164 format before hashing
+8. Pre-hashed values:
+9. Must already meet Google normalization requirements
+
+Improper normalization may reduce match rates or cause API rejection.
+
+***
+
+### Important Notes & Limitations
+
+1. Does not support true “replace” semantics
+2. Full replacement must be modeled as remove + add
+3. Audience availability may be delayed while Google processes uploads
+4. Audience size may not display until minimum thresholds are met
+5. Common API errors indicate:
+6. Missing consent
+7. Partner-level Customer Match not enabled
+8. Schema or identifier violations
+
+***
+
+### Disclosure
+
+MadConnect’s use and transfer of information received from Google APIs complies with the Google API Services User Data Policy, including Limited Use requirements.
+
+***
+
+### Resources
+
+* [Google DV360 Customer Match Documentation](https://developers.google.com/display-video/api/guides/audiences/upload-customer-match)
+* [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy#additional_requirements_for_specific_api_scopes)
