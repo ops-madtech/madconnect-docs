@@ -1,6 +1,6 @@
 # Kochava
 
-![](https://lh7-us.googleusercontent.com/6hg2WJAszusHRA5jwrlt9JjKM\_2udaLPNXBFOwgrKp\_yacv\_wMlhYfzZLvDMPNrlSHuhnw6sQiytoYjKrCu\_-U-RRMiZSpF8YJjR2YQ4Veuq\_9uFiZH-uSscpKaGv0AVkqlLjNNYaN3mjXbqIE1pyw)
+![](https://lh7-us.googleusercontent.com/6hg2WJAszusHRA5jwrlt9JjKM_2udaLPNXBFOwgrKp_yacv_wMlhYfzZLvDMPNrlSHuhnw6sQiytoYjKrCu_-U-RRMiZSpF8YJjR2YQ4Veuq_9uFiZH-uSscpKaGv0AVkqlLjNNYaN3mjXbqIE1pyw)
 
 &#x20;[Kochava](https://www.kochava.com/) is the industry standard for secure, real-time data solutions. We help people-based marketers establish identity, define and activate audiences, and measure and optimize their marketing across connected devices.
 
@@ -22,7 +22,7 @@ To configure Kochava as source,
 2. Go to My Platforms. Ensure that Kochava displays in your instance of  My Platforms.
 3. Click Kochava.
 4. Copy Bucket Name, Bucket Region, AWS Access Key, AWS Secret Key.
-5. Setup S3 bucket using above details in your [Kochava account](https://go.kochava.com/). Reference: [https://support.kochava.com/analytics-reports-api/pulling-reports/?scrollto=marker\_8](https://support.kochava.com/analytics-reports-api/pulling-reports/?scrollto=marker\_8)
+5. Setup S3 bucket using above details in your [Kochava account](https://go.kochava.com/). Reference: [https://support.kochava.com/analytics-reports-api/pulling-reports/?scrollto=marker\_8](https://support.kochava.com/analytics-reports-api/pulling-reports/?scrollto=marker_8)
 6. Make sure to inform MadConnect customer success manager once this report is set up in Kochava.
 
 #### Configuring Kochava as Destination
@@ -46,4 +46,4 @@ The data attributes for event data depend on the selected data type in Kochava. 
 
 The MadConnect team will assist  to map the fields from Source to Destination platform.
 
-\
+<br>

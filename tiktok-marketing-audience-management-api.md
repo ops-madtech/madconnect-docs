@@ -88,4 +88,4 @@ To successfully send data to TikTok via the Streaming API, the following schema 
 
 For more detailed instructions, refer to the [TikTok Business API](https://business-api.tiktok.com/portal/docs?id=1739940585975809) documentation.
 
-\
+<br>

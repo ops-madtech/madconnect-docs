@@ -1,8 +1,7 @@
 # TikTok Marketing - Data Insights
 
-![](https://lh7-us.googleusercontent.com/-kPbeFBJpZqW\_8FCf85212FqYj6RITRO0ELqraJIMnLF-u1Zl0e3g0MJR-EgLsw9Nc1gxEkLmNhEm7qKR5KW16i9RoKbtNcZ9do4YzygoU8P7UBAhNUX8iCPqmXVqnzzQBqqp0YYXZcGN7r0ovybOA)\
-\
-
+![](https://lh7-us.googleusercontent.com/-kPbeFBJpZqW_8FCf85212FqYj6RITRO0ELqraJIMnLF-u1Zl0e3g0MJR-EgLsw9Nc1gxEkLmNhEm7qKR5KW16i9RoKbtNcZ9do4YzygoU8P7UBAhNUX8iCPqmXVqnzzQBqqp0YYXZcGN7r0ovybOA)\
+<br>
 
 Brief Description: TikTok, a leading social media platform, offers TikTok Ads, a dynamic advertising solution empowering businesses to reach a vast, engaged audience. It blends creativity and technology, providing various ad formats tailored for brand exposure, customer engagement, and driving conversions, making it a key tool in modern digital marketing strategies.
 
@@ -23,4 +22,4 @@ To configure TikTok as source,
 3. Login using your TikTok credentials.
 4. Click allow to authenticate using OAuth 2.0
 
-\
+<br>

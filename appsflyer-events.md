@@ -6,8 +6,8 @@ AppsFlyer is a mobile attribution and marketing analytics platform that provides
 
 AppsFlyer Events API enables seamless integration and tracking of mobile app events. Marketers gain detailed insights into user interactions, optimizing campaigns for increased engagement and superior performance measurement on the AppsFlyer platform
 
-[https://dev.appsflyer.com/hc/reference/post\_s2s\_inappevent](https://dev.appsflyer.com/hc/reference/post\_s2s\_inappevent)&#x20;
+[https://dev.appsflyer.com/hc/reference/post\_s2s\_inappevent](https://dev.appsflyer.com/hc/reference/post_s2s_inappevent)&#x20;
 
 **Connection Type:** Destination.
 
-**Data Type:** Events.\
+**Data Type:** Events.<br>

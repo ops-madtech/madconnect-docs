@@ -91,4 +91,4 @@ To send event data to Amazon Ads, adhere to the following schema:
 
 For more details on Amazon Ads’ Conversions API, refer to the [Amazon DSP Conversion Event API Documentation](https://advertising.amazon.com/API/docs/en-us/dsp-conversion-builder#tag/Conversion-Event-Data).
 
-\
+<br>

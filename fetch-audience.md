@@ -19,4 +19,4 @@ To import Fetch Rewards audience segments using MadConnect, you will need to do 
 
 Ensure you have the correct Connection ID before initiating the audience import process. If you need assistance or more information, please contact your Fetch representative.
 
-\
+<br>

@@ -64,4 +64,4 @@ MadConnect enables seamless integration with Yahoo DSP Reporting, allowing you t
 
 For more detailed information on using the [Yahoo DSP Reporting API](https://developer.yahooinc.com/dsp/api/docs/reporting/dimensions.html), please review the Yahoo DSP API documentation or contact your Yahoo representative.
 
-\
+<br>

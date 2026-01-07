@@ -1,6 +1,6 @@
 # LinkedIn- Audience Insights
 
-![](https://lh7-us.googleusercontent.com/EW8AaNmoTl\_FETTOtmzHDQ-9xDi9vHuZAq09Hqmcs7q-vJs9mekQxZtw1yYJggodAd7egO6LpbWtmoNCXCSn\_ETfDM063wpe\_qyQRPDhOknhleJVGO3B\_Uxbrc0mVIyUOUV8g5s-qhO2GUo97R8vLQ)
+![](https://lh7-us.googleusercontent.com/EW8AaNmoTl_FETTOtmzHDQ-9xDi9vHuZAq09Hqmcs7q-vJs9mekQxZtw1yYJggodAd7egO6LpbWtmoNCXCSn_ETfDM063wpe_qyQRPDhOknhleJVGO3B_Uxbrc0mVIyUOUV8g5s-qhO2GUo97R8vLQ)
 
 LinkedIn enables businesses to target their audiences using accurate, profile-based first-party data, to reach a highly engaged audience with native ads in a professional feed across desktop and mobile. The platform enables businesses to create, measure, and optimize campaigns all in one place, and drive leads, build brand awareness, and nurture key relationships at every stage of your sales cycle.
 
@@ -28,4 +28,4 @@ To configure LinkedIn as source,
 
 
 
-\
+<br>

@@ -19,4 +19,4 @@ To configure Airship as a destination,
 3. Under destination configuration follow instructions and enter relevant configuration information.
 4. The connector is now ready to be used as a destination.
 
-\
+<br>
