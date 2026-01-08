@@ -177,4 +177,4 @@ Improper normalization or hashing may cause upload failures or low match rates.
 
 ### **Resources**
 
-1. [Snapchat Marketing API](snapchat-customer-lists.md#snapchat-marketing-api-for-customer-lists-connection-overview) – Audiences
+1. [Snapchat Marketing API](https://developers.snap.com/api/marketing-api/Ads-API/audience-creation/customer-lists) – Audiences
