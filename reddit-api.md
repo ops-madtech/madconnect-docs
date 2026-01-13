@@ -54,7 +54,7 @@ Reddit Audiences requires OAuth authentication.
 
 OAuth tokens are securely stored via the platform.
 
-<figure><img src=".gitbook/assets/unknown.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/unknown (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 

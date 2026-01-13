@@ -51,7 +51,7 @@ Before activating this connector, ensure you have the following:
 4. In the left-hand folder tree, click the folder that holds your data extension (or click **Data Extensions** to see everything).
 5. In the list on the right, find the **External Key** column—each row shows the key.
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
