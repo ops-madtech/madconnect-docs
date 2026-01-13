@@ -2,103 +2,180 @@
 
 ![](<.gitbook/assets/image (46).png>)
 
-## **Reddit Ads – Audience Connector Overview**
+## Reddit Ads – Audiences Connector Overview
 
-MadConnect integrates with Reddit Ads, enabling advertisers to seamlessly sync and manage their audiences. With this connector, businesses can efficiently target specific user segments on Reddit by leveraging existing customer data, ensuring relevant ad delivery and higher engagement.
+MadConnect integrates with the Reddit Ads API to enable advertisers to activate and manage first-party audiences for targeting and suppression. The Reddit Audiences connector supports creating new audiences and updating existing ones using approved, hashed identifiers, allowing advertisers to efficiently reach relevant Reddit users based on first-party data.
 
-***
-
-### **Connector Overview**
-
-* **Connector Type**: Destination
-* **Data Type**: Audience
-* **Description**: Audiences in Reddit Ads allow advertisers to target specific groups of users based on hashed emails or Mobile Advertising IDs (MAIDs).
-* **Supported Actions**: Create / Add / Remove
+MadConnect manages normalization, hashing enforcement, schema validation, and API orchestration to ensure compliant and reliable audience delivery to Reddit.
 
 ***
 
-### **Prerequisites**
+### Connector Overview
 
-1. **Active Reddit Ads Account**
-   * Ensure you have an active Reddit Ads account with the necessary permissions to manage audiences.
-2. **OAuth Authentication**
-   * Authenticate your Reddit Ads account using OAuth within MadConnect.
-3. **Ensure the data for activation contains necessary inputs:**
-   * Confirm that the audience data aligns with MadConnect’s standard schema, including required fields such as user\_id, segment\_id, segment\_name, and action.
-
-***
-
-### **Configure Connector**
-
-1. **Navigate to the My Platforms Section**
-   * Go to "My Platforms" in the MadConnect UI.
-2. **Add a New Platform**
-   * Click on "Add Platform."
-3. **Select Reddit Ads – Audience Connector**
-   * Choose the "Reddit Ads – Audience" tile and click "Configure."
-4. **Go to Destination Configuration**
-   * Open the "Destination Configuration" tab.
-5. **Sign in with Reddit**
-   * Click "Sign in with Reddit" and log in with your account credentials.
-6. **Authorize MadConnect**
-   * Grant MadConnect permission to access and manage your Reddit audiences.
-7. **Verify Configuration**
-   * Ensure the platform status is marked as "Configured" under My Platforms.
+| Field             | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| Connector Type    | Destination                                                        |
+| Data Type         | Audience Activation                                                |
+| Primary Use Case  | First-party Audience Activation                                    |
+| Description       | Create and manage Reddit custom audiences using hashed identifiers |
+| Supported Actions | Create / Add / Remove                                              |
 
 ***
 
-### **Schema Requirements for Reddit Ads – Audience Connector**
+### Prerequisites
 
-To successfully sync data with **Reddit Ads** via **MadConnect**, the following schema must be used:
+Before configuring the Reddit Audiences connector, ensure the following:
 
-* **ID Field**
-  * **Field Name:** `email_hash`, `maid_hash`
-  * **Data Type:** String (Hashed)
-  * **Description:** Contains the hashed emails and/or Mobile Advertising IDs (MAIDs) used for audience matching.
-    * **Both identifiers can be uploaded together** in the same request to improve match accuracy.
-  * **Accepted Identifiers:**
-    * **`email_hash`** – SHA-256 hashed email addresses.
-    * **`maid_hash`** – SHA-256 hashed Mobile Advertising IDs.
-  * **Example:**
-    * Email: `5d41402abc4b2a76b9719d911017c592`
-    * MAID: `cdda802e-fb9c-47ad-0794d394c912`
-* **Segment ID Field**
-  * **Field Name:** `segment_id`
-  * **Data Type:** String
-  * **Description:** The unique identifier assigned by Reddit Ads for the specific audience segment.
-    * Used for adding/removing members from existing audiences.
-  * **Example:** `123456789`
-* **Segment Name Field**
-  * **Field Name:** `segment_name`
-  * **Data Type:** String
-  * **Description:** The name of the audience to be created in Reddit Ads.
-    * If a `segment_id` is not provided, MadConnect will use the `segment_name` to create a new audience in Reddit and return the assigned `segment_id`.
-  * **Example:** `Holiday Promo Audience`
-* **Action Field**
-  * **Field Name:** `action`
-  * **Data Type:** String
-  * **Description:** Specifies whether to **add** or **remove** the user from the audience.
-    * Required for both audience creation and member management.
-  * **Accepted Values:** `add`, `remove`
-  * **Example:** `add`
+#### Reddit Account Requirements
+
+1. An active Reddit Ads account
+2. Permissions to manage Audiences within Reddit Ads Manager
+3. Ability to authenticate via OAuth 2.0
+
+#### MadConnect Requirements
+
+1. An active MadConnect account
+2. Audience data aligned to the MadConnect Standard Audience Schema
 
 ***
 
-### **💡 How the Schema Works in MadConnect:**
+### Authentication Requirements
 
-1. **Audience Creation:**
-   * If a **`segment_name`** is provided and **`segment_id`** is not, MadConnect will **create a new audience** in Reddit Ads using the provided name.
-   * The **`action`** field must be set to `add` during audience creation.
-2. **Managing Existing Audiences:**
-   * If a **`segment_id`** exists, IDs will be **added or removed** based on the **`action`** field.
-   * **Both hashed emails and MAIDs can be included in a single request** to optimize audience matching.
-3. **Accepted Hashing Algorithm:**
-   * **SHA-256** is required for both **emails** and **MAIDs**.
-4. **Data Normalization Before Hashing:**
-   * **Email:**
-     * Remove whitespace and convert to lowercase.
-     * _Example:_ `Example.Email+test@gmail.com` → `exampleemail@gmail.com`
-   * **MAID:**
-     * Remove whitespace and ensure all letters are lowercase before hashing.
+Reddit Audiences requires OAuth authentication.
 
-For more details on Reddit Ads audiences, please refer to the [Reddit Ads documentation](https://ads-api.reddit.com/docs/v3/operations/Update%20Custom%20Audience%20Users).
+#### OAuth Authentication (Required)
+
+1. Navigate to **My Platforms** → **Reddit Ads – Audiences**
+2. Click **Configure**
+3. Select **Connect to Reddit Account**
+4. Log in using your Reddit Ads credentials
+5. Approve permissions to manage Reddit Segments
+6. Upon success, the platform status will show **Configured** in **My Platforms**
+
+OAuth tokens are securely stored via the platform.
+
+<figure><img src=".gitbook/assets/unknown.png" alt=""><figcaption></figcaption></figure>
+
+***
+
+### Connection Configuration (UI Fields)
+
+Once the connector is configured, create a connection and provide the following when Reddit is selected as the destination.
+
+#### Reddit Destination Fields
+
+| Field         | Required | Description                  |
+| ------------- | -------- | ---------------------------- |
+| Advertiser ID | Yes      | Reddit ad account identifier |
+
+This field determines which Reddit advertiser account the audience will be created or updated under.
+
+***
+
+### Audience Creation & Management Logic
+
+Reddit audiences are managed using the following core fields.
+
+#### Segment Fields
+
+| Field         | Required     | Description                               |
+| ------------- | ------------ | ----------------------------------------- |
+| segment\_name | Yes (Create) | Name of the Reddit audience to be created |
+| segment\_id   | Yes (Update) | Existing Reddit audience (segment) ID     |
+
+#### Action Field
+
+| Field  | Required | Description                                 |
+| ------ | -------- | ------------------------------------------- |
+| action | Yes      | Controls membership updates (add or remove) |
+
+***
+
+#### Creating a New Audience
+
+1. Provide segment\_name
+2. Omit segment\_id
+3. Set action = add
+
+MadConnect will:
+
+1. Create a new Reddit audience
+2. Upload hashed identifiers
+3. Return the generated **segment\_id** in **Reports** → **info**
+
+***
+
+#### Updating an Existing Audience
+
+1. Provide the existing **segment\_id**
+2. Set **action** to **add** or **remove**
+3. MadConnect will update membership for that audience
+
+***
+
+### Matching Keys (Reddit Audiences)
+
+Reddit supports hashed identifiers only and allows multiple identifier types in a single request.
+
+#### Supported Identifier Fields
+
+| ID Type | Field Name    | Hashed | Notes                                |
+| ------- | ------------- | ------ | ------------------------------------ |
+| Email   | email\_sha256 | Yes    | SHA-256 hashed email                 |
+| MAID    | maid\_sha256  | Yes    | SHA-256 hashed mobile advertising ID |
+
+Important Reddit Behavior
+
+1. Multiple identifier types (e.g., email + MAID) may be included in the same upload to improve match rates
+
+***
+
+### MadConnect Standard Audience Schema Example
+
+Your source file or table should generally follow this structure to ensure seamless integration.
+
+| Field Name    | Data Type | Required?                 | Description                                          |
+| ------------- | --------- | ------------------------- | ---------------------------------------------------- |
+| segment\_name | String    | Yes (Create)              | Name of the audience (e.g., Holiday Shoppers).       |
+| segment\_id   | String    | Yes (Update)              | Reddit audience ID (required only when updating).    |
+| action        | String    | Yes                       | Accepted values: add or remove.                      |
+| email\_sha256 | String    | At least one supported ID | User’s email address, normalized and SHA-256 hashed. |
+
+Notes
+
+1. At least one supported identifier is required per row
+2. email\_sha256 is shown as an example; maid\_sha256 may also be used
+3. This schema is shared across all MadConnect audience connectors
+
+***
+
+### Hashing & Normalization Requirements
+
+1. Algorithm: **SHA-256**
+2. **Normalization (before hashing):**
+   * Lowercase values
+   * Remove whitespace
+3. **Email-specific requirement (Reddit):**
+   * Remove . and + symbols from the username portion of the email
+   * Example: Example.Email+test@gmail.com → exampleemail@gmail.com
+4. **MAID normalization:**
+   * Lowercase
+   * Remove whitespace
+
+Incorrect normalization is the most common cause of low match rates.
+
+***
+
+### Important Notes & Limitations
+
+1. Reddit may require a minimum audience size before an audience can be used for targeting
+2. Match rates depend heavily on data quality and normalization accuracy
+3. Newly created audiences may take time to become available in the UI
+4. API errors often indicate normalization or hashing issues
+
+***
+
+### Resources
+
+1. [Reddit Ads API – Audiences](https://ads-api.reddit.com/docs/v3/operations/Update%20Custom%20Audience%20Users)
+
