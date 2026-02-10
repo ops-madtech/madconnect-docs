@@ -12,8 +12,8 @@ To configure the BigQuery connector, you’ll provide a **Google Cloud service a
 
 **Required permissions (recommended):**
 
-* BigQuery Data Viewer
 * BigQuery Job User
+* BigQuery Data Viewer
 
 The JSON key is securely stored and used only for executing queries defined in your connection.
 
