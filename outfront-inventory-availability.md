@@ -20,80 +20,83 @@ MadConnect’s **Outfront – Inventory Availability** connector enables teams t
 
 **Platform Prerequisites**
 
-#### Authentication
+Before configuring the connector in MadConnect, ensure you have:
 
-You must have the following credentials to authenticate the connector to Outfront’s inventory data service. MadConnect stores them securely and manages token refresh.
+1. **Authentication**
+   * Tenant ID
+   * Client ID
+   * Client Secret
+   * Scope (access permissions for Outfront data)
 
-* Tenant ID
-* Client ID
-* Client Secret
-* Scope (access permissions for Outfront data)
+These credentials authenticate the connector to Outfront’s inventory data service. MadConnect stores them securely and manages token refresh.
 
-#### Access Requirements
+**Access Requirements**
 
-* Active Outfront partner account with data-access entitlement
-* Network permissions allowing outbound HTTPS connections to the Outfront service
+1. Active Outfront partner account with data-access entitlement
+2. Network permissions allowing outbound HTTPS connections to the Outfront service
 
 ***
 
-#### **Filters & Parameters**
+**Filters & Parameters**
 
-The connector supports flexible filtering so users can narrow the returned data set before ingestion. Common filters include:
+**Step 1 Connection Configuration** This step allows you to define the filter criteria for the data
 
-| Filter                    | Description                                               | Example                     |
-| ------------------------- | --------------------------------------------------------- | --------------------------- |
-| **Market Name**           | Geographic market or DMA to filter inventory              | `New York`, `Los Angeles`   |
-| **Media Format**          | Format category such as Poster, Bulletin, Digital Display | `Digital Display`           |
-| **Start Date / End Date** | Date range to restrict available inventory window         | `2025-04-01` – `2025-04-30` |
+| Filter           | Description                                                                                                                                                                   | Example                    |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **Market Name**  | Geographic market or DMA to filter inventory                                                                                                                                  | `New York`, `Los Angeles`  |
+| **Media Format** | Format category such as Poster, Bulletin, Digital Display                                                                                                                     | `Digital Display`          |
+| **Unit ID Type** | The connector allows users to request data for specific ad units by either the Outfront ID (OMS), Geopath Spot ID or the Geopath Frame ID. Select the ID type to be utlilized | `Geopath - Frame`          |
+| **Unit IDs**     | Once a Unit ID Type is selected, add your IDs as a comma delimited list                                                                                                       | `3042578,3042580,30842554` |
+| **Digital**      | A flag to filter for Digital ad units. Yes = Digital, No = Static, Empty (null) = All                                                                                         | `Yes`                      |
+
+**Step 3: Run Configuration** This step allows you to set the configuration for each data pull
+
+| Configuration            | Description                                                                                       | Available Options                         |
+| ------------------------ | ------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **Load Type**            | Configure incremental loading to only process new or updated records on subsequent runs.          | `Full Load`                               |
+| **Transfer Type**        | Configure whether the pull should happen manually or on a scheduled basis                         | `Manual Transfer` or `Scheduled Transfer` |
+| **Window Configuration** | Set a fixed date range or a forward rolling date range. Avails is available for the next 350 days | `Fixed Window` or `Rolling Window`        |
 
 * Multiple filters can be combined. Empty filters return all available data for authorized markets.
-* Outfront data is sold on a Monday to Sunday schedule. Please select a Monday start date and Sunday end date.
-* Flight start lead time is 21 days for static units and 7 days for digital units.
-* Maximum availability period is a rolling 12 months.
+* Outfront data is sold on a Monday to Sunday schedule. Please select a Monday start date and Sunday end date
+* Flight start lead time is 21 days for static units and 7 days for digital units
+* Maximum availability period is a rolling 12 months
 
 ***
 
-#### **Setting Up the Connector in MadConnect**
+**Setting Up the Connector in MadConnect**
 
-#### Add Platform
-
-* Go to **My Platforms → Add Platform**
-* Select **Outfront – Inventory Availability (Source)** and click **Configure**
-
-#### Authenticate
-
-* Enter **Tenant ID**, **Client ID**, **Client Secret**, and **Scope**
-* Click **Connect**; MadConnect validates access automatically
-* Once connected, status shows **Configured**
-
-#### Create Connection
-
-* Choose **Outfront – Inventory Availability** as the source
-* Optionally define filters (Market, Format, Dates, etc.)
-* Choose your destination (S3, Snowflake, BigQuery, etc.)
-
-#### Run or Schedule
-
-* Run a **Manual Pull** for one-time data retrieval
-* Or configure a **Scheduled Sync** for recurring data refreshes (e.g., nightly)
+1. **Add Platform**
+   * Go to **My Platforms → Add Platform**
+   * Select **Outfront – Inventory Availability (Source)** and click **Configure**
+2. **Authenticate**
+   * Enter **Tenant ID**, **Client ID**, **Client Secret**, and **Scope**
+   * Click **Connect**; MadConnect validates access automatically
+   * Once connected, status shows **Configured**
+3. **Create Connection**
+   * Choose **Outfront – Inventory Availability** as the source
+   * Optionally define filters (Market, Format, Dates, etc.)
+   * Choose your destination (S3, Snowflake, BigQuery, etc.)
+4. **Run or Schedule**
+   * Run a **Manual Pull** for one-time data retrieval
+   * Or configure a **Scheduled Sync** for recurring data refreshes (e.g., nightly)
 
 ***
 
-#### **Important Notes**
+**Important Notes**
 
 1. Availability data reflects a **point-in-time snapshot**; schedule recurring pulls to maintain freshness.
 2. Large pulls can be optimized by applying filters per market or format.
-3. Some markets or formats may return partial data depending on Outfront account permissions. Inquiry quantity limitation is 100 per market.
+3. Some markets or formats may return partial data depending on Outfront account permissions. Inquiry quantity limitation is 100 per market
 4. Rate and impression values are subject to Outfront’s data refresh cadence.
-5. These are some standard planning metrics and their calculations:
+5. These are some standard planning metrics and their calculations
    * **Weekly Net Rate** = net\_rate/4
    * **CPM** = Weekly Net Rate/(imp\_18p/1000)
    * **Cost** = Weekly Net Rate \* # of weeks
-6. There is a maximum forward-looking window of **360 days from the current date**. Any custom or relative date range that results in an `endDate` beyond this limit will result in a failed transfer.
 
 ***
 
-#### **Data Dictionary**
+**Data Dictionary**
 
 ### `inventory_units_data.parquet`
 
@@ -129,7 +132,7 @@ The connector supports flexible filtering so users can narrow the returned data 
 | `marketing_info`         | string            | Narrative blurb for sales context.                                       | `This highly visible bulletin is located just west of Ross Circle on Stone Mountain Highway...` |
 | `production_spec`        | string            | Production specification code.                                           | `JP104G-P`                                                                                      |
 | `package_name`           | string            | Internal package grouping identifier (blank if standalone).              | `WEHOPK2`                                                                                       |
-| `restrictions`           | string            | Sales restrictions or category carveouts.                                | `Alcohol-P.O.`                                                                                  |
+| `restrictions`           | string            | Sales restrictions or category carveouts.                                | \`Alcohol-P.O.                                                                                  |
 | `enabled_for_automation` | string (`Y`/`N`)  | Can be bought on an impression basis                                     | `N`                                                                                             |
 | `active_date`            | string (ISO date) | Unit go-live date in YYYY-MM-DD.                                         | `2009-01-01`                                                                                    |
 | `inactive_date`          | string (ISO date) | Unit sunset date; empty string when active.                              | \`\`                                                                                            |
