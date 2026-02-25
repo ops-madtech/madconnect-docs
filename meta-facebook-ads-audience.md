@@ -15,7 +15,7 @@ MadConnect integrates seamlessly with Meta’s Custom Audiences API, enabling ad
 | **Connector Type**    | Destination                                                                                                                                |
 | **Data Type**         | Custom Audiences                                                                                                                           |
 | **Description**       | Custom audiences allow advertisers to target their ads to a specific set of people with whom they have already established a relationship. |
-| **Supported Actions** | Create / Add / Remove                                                                                                                      |
+| **Supported Actions** | Create / Add / Remove / Replace / Delete                                                                                                   |
 
 ***
 
@@ -84,12 +84,10 @@ When creating a Meta Custom Audience connection in MadConnect, the destination c
 
 **Meta Destination Fields**
 
-| Field                         | Required | Description                                                                                                |
-| ----------------------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| **Advertiser ID**             | Yes      | Meta Ad Account ID (e.g. 1234567890) associated with the Custom Audience                                   |
-| **Audience Source**           | Optional | Dropdown specifying audience origin (e.g., CRM, Website, App); affects metadata stored in Meta             |
-| **IDs**                       | Optional | Choose which identifier columns (emails, phones, MAIDs, etc.) are included, if you want to restrict fields |
-| **Replace Existing Audience** | Optional | “Yes/No” option — if “Yes,” MadConnect sends a full replacement set instead of add/remove operations       |
+| Field               | Required | Description                                                                                    |
+| ------------------- | -------- | ---------------------------------------------------------------------------------------------- |
+| **Advertiser ID**   | Yes      | Meta Ad Account ID (e.g. 1234567890) associated with the Custom Audience                       |
+| **Audience Source** | Optional | Dropdown specifying audience origin (e.g., CRM, Website, App); affects metadata stored in Meta |
 
 These fields determine how MadConnect structures calls to Meta's Custom Audiences API.
 
@@ -108,9 +106,9 @@ Meta uses the following fields to manage audiences:
 
 **Action Field**
 
-| Field      | Values      | Purpose                                                                              |
-| ---------- | ----------- | ------------------------------------------------------------------------------------ |
-| **action** | add, remove | Controls whether a user is added or removed. Use 'add' when creating a new audience. |
+| Field      | Values                       | Purpose                                                                              |
+| ---------- | ---------------------------- | ------------------------------------------------------------------------------------ |
+| **action** | add, remove, delete, replace | Controls whether a user is added or removed. Use 'add' when creating a new audience. |
 
 #### **Creating a New Audience**
 
@@ -124,7 +122,11 @@ Meta uses the following fields to manage audiences:
 #### **Updating an Existing Audience**
 
 1. Provide **segment\_id**
-2. MadConnect will add or remove users depending on the action field
+2. Use action:
+   * `add` → incremental additions
+   * `remove` → incremental removals
+   * `replace` → full audience overwrite
+   * `delete` → permantely deletes audience
 3. Meta will match multiple identifier types automatically
 
 ***
