@@ -1,8 +1,6 @@
 # Snowflake - Data store
 
-## Snowflake Inc. – Data Store (Destination)
-
-#### **Snowflake Destination Connector – Structured Data Ingestion Overview**
+### **Snowflake Destination Connector – Structured Data Ingestion Overview**
 
 MadConnect supports Snowflake as a **destination data store**, enabling structured datasets to be written directly into a customer-controlled Snowflake environment.
 
