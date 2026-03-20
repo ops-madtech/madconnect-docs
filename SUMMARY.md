@@ -137,3 +137,4 @@
 * [SFTP (Destination)](sftp-destination.md)
 * [Google BigQuery - Source](google-bigquery-source.md)
 * [Amazon Ads - Reporting](amazon-ads-reporting.md)
+* [VideoAmp - Audience](videoamp-audience.md)
