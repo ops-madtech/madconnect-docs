@@ -136,3 +136,4 @@
 * [Outfront Inventory Availability](outfront-inventory-availability.md)
 * [SFTP (Destination)](sftp-destination.md)
 * [Google BigQuery - Source](google-bigquery-source.md)
+* [Amazon Ads - Reporting](amazon-ads-reporting.md)
