@@ -2,108 +2,118 @@
 
 ![](<.gitbook/assets/image (30).png>)
 
-## **Amazon DSP – Advertiser Audiences Connector Overview**
+## Amazon Ads – DSP Audiences
 
-### **Connector Overview**
+### **Amazon Ads - DSP Audiences Connector Overview**
 
-* **Source / Destination**: Destination
-* **Data Type**: Audience
-* **Description**: Sync your first-party audience data to Amazon DSP for precise targeting in programmatic advertising campaigns. This connector enables audience creation, audience membership updates, and seamless activation within Amazon DSP and Amazon Marketing Cloud (AMC).
-* **Supported Actions**: Create / Add / Remove
+#### **Connector Overview**
 
-> **Note**: If you want to send audiences to both **Amazon DSP & AMC**, use a **connectionId**. If you want to send audiences to **Amazon DSP only**, use an **advertiserId**.
-
-***
-
-### **Prerequisites**
-
-To activate the connector, ensure the following:
-
-1. **Active Amazon DSP Account**
-   * Ensure you have an active Amazon DSP account with permissions to manage audiences.
-2. **Authentication Requirements**
-   * **OAuth Authentication**: Authenticate using your Amazon Ads account credentials within MadConnect.
-   * If OAuth is not available, connect using **Client ID** and **Client Secret** obtained from your Amazon Ads Developer account.
+| Field                       | Value                                                                                                                                                                                    |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Source / Destination**    | Destination                                                                                                                                                                              |
+| **Data Type**               | Audience                                                                                                                                                                                 |
+| **Description**             | Sync first-party audience data to Amazon DSP for activation in programmatic campaigns. This connector supports audience creation and membership updates for targeting within Amazon DSP. |
+| **Supported Actions**       | Create / Add / Remove                                                                                                                                                                    |
+| **Amazon Activation Input** | Use **advertiserId** when activating audiences directly in DSP                                                                                                                           |
 
 ***
 
-### **Configure Connector**
+#### **Prerequisites**
 
-To configure the **Amazon DSP – Advertiser Audiences** API connector in MadConnect, follow these steps:
+Ensure the following before configuring:
 
-1. **Navigate to the  Platforms Section**
-   * In the **MadConnect UI**, go to **"My Platforms"**.
-2. **Add a New Platform**
-   * Click on **"Add Platform"**.
-3. **Select Amazon DSP – Advertiser Audiences**
-   * Choose the **"Amazon DSP – Advertiser Audiences"** tile and click **"Configure"**.
-4. **Go to Configuration**
-   * Navigate to the **"Configuration"** tab.
-5. **Sign in with Amazon**
-   * Click the **"Sign in with Amazon"** button.
-6. **Authenticate with Amazon**
-   * You will be redirected to **Amazon’s login page**. Sign in using your Amazon Ads account credentials.
-7. **Authorize MadConnect**
-   * Grant MadConnect permission to manage audiences in Amazon DSP.
-8. **Verify Configuration**
-   * Ensure the connector status is marked as **"Configured"** under **My Platforms**.
+1. **Active Amazon DSP Account**\
+   Permissions to create and manage audiences
+2. **Authentication**
+   * OAuth via Amazon Ads (recommended)
+   * OR Client ID / Client Secret from Amazon Ads Developer account
+3. **DSP Advertiser ID**\
+   Required for audience activation
+   * Found in the **Amazon DSP UI → Campaign Manager → Advertiser**
+   * Typically visible in the **URL or advertiser settings**
 
 ***
 
-### **Audience Schema Requirements for Amazon DSP – Advertiser Audiences**
+#### **Authentication Requirements**
 
-To successfully send audience data to Amazon DSP via MadConnect, ensure your data follows the required schema:
+MadConnect supports two methods for authenticating with Amazon Ads:
 
-#### **ID Field**
+**Option 1: OAuth (Recommended)**
 
-* **Field Name**: `hashed_email`, `hashed_phone`, `hashed_address`, `hashed_first_name`, `hashed_last_name`, `hashed_city`, `hashed_state`, `hashed_zip`
-* **Data Type**: String (Hashed using SHA-256)
-* **Description**: Contains user identifiers that Amazon DSP will use for audience matching.
-* **Example**:
-  * Email: `c67a544ff3ec2feafb9b22…`
-  * Phone: `f0e4c2f76c58916ec258f2…`
-  * Zip Code: `3130329451cc782b7dfda79…`
+The easiest and most secure method.
 
-#### **Segment Name Field**
-
-* **Field Name**: `segment_name`
-* **Data Type**: String
-* **Description**: The name of the audience being created or updated in Amazon DSP.
-* **Example**: `Holiday_Shoppers_Q4`
-
-#### **Segment ID Field**
-
-* **Field Name**: `audience_id`
-* **Data Type**: String
-* **Description**: Unique identifier for the audience segment within Amazon DSP.
-* **Example**: `347891`
-
-#### **Country Code Field**
-
-* **Field Name**: `country_code`
-* **Data Type**: String (ISO 3166 format)
-* **Description**: Indicates the country of the uploaded audience data.
-* **Example**: `US`
-
-#### **Action Field**
-
-* **Field Name**: `action`
-* **Data Type**: String
-* **Description**: Specifies whether to add or remove users from the audience.
-* **Accepted Values**: `add`, `remove`
-* **Example**: `add`
+1. Click **"Sign in with Amazon"**
+2. Log in using your Amazon Ads credentials
+3. Grant permissions to MadConnect
+4. Connector will automatically store and manage tokens
 
 ***
 
-### **Important Notes**
+**Option 2: Manual OAuth (Advanced)**
 
-* **All PII data must be hashed using SHA-256** before sending.
-* **Country code is highly recommended** to improve audience match rates.
-* **Amazon DSP requires at least 2,000 matched users per audience** for activation.
-* **Audience updates are processed within 15 minutes** but may take up to **36 hours to appear in DSP**.
+For users who prefer to manage credentials directly or are working in restricted environments.
 
-For more details on the **Amazon DSP Advertiser Audiences API**, refer to the [Amazon API Documentation](https://advertising.amazon.com/API/docs/en-us/guides/amazon-marketing-cloud/audiences/audience-management-service).
+Enable **“Allow me to enter the tokens manually”**, then provide:
+
+| Field             | Description                               |
+| ----------------- | ----------------------------------------- |
+| **Client ID**     | Your Amazon Ads application client ID     |
+| **Client Secret** | Your Amazon Ads application client secret |
+| **Access Token**  | OAuth access token used for API requests  |
+| **Refresh Token** | Token used to refresh the access token    |
 
 ***
 
-Let me know if you need any modifications or additional details! 🚀
+#### **Connection Configuration Fields**
+
+When creating a connection that uses **Amazon DSP –  Audiences** as the destination, the following fields are required:
+
+| Field                | Description                                                                                                                                                             |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Advertiser ID**    | The Amazon DSP advertiser identifier used to route the audience to the correct advertiser account. This is required when activating audiences directly into Amazon DSP. |
+| **External User ID** | A unique user identifier defined by the data provider to represent an individual. Amazon uses this field for audience matching.                                         |
+
+**Advertiser ID**
+
+To locate your **Amazon DSP Advertiser ID**:
+
+1. Log in to the **Amazon DSP console**
+2. Go to **Campaign Manager**
+3. Select the advertiser
+4. The ID is typically visible in the **URL** or within **advertiser settings**
+
+**External User ID**
+
+MadConnect supports two behaviors for this field:
+
+* If an **external\_user\_id** value is available in your source data, it can be mapped directly
+* If this field is not available, MadConnect will automatically generate and encrypt/hash a value using the provided **email** or **phone** field
+
+> This allows users to continue activating audiences even when their source data does not include a native external user identifier.
+
+***
+
+#### **Audience Schema Requirements**
+
+| Field                                                      | Required              | Description                                                                                                        |
+| ---------------------------------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `segment_name`                                             | For create            | Name of the audience being created                                                                                 |
+| `segment_id`                                               | For updates           | Existing Amazon audience identifier                                                                                |
+| `action`                                                   | Yes                   | Supported values: `add`, `remove`                                                                                  |
+| `email_sha256` / `phone_sha256` / other hashed identifiers | Required for matching | User identifiers used for Amazon matching                                                                          |
+| `external_user_id`                                         | Preferred             | Unique identifier for the individual user; can be supplied directly or generated by MadConnect from email or phone |
+
+#### **Important Notes**
+
+* **external\_user\_id is required by Amazon**, but MadConnect can generate it if missing
+* **All PII must be SHA-256 hashed** before ingestion
+* **Minimum audience size**: \~2,000 matched users
+* **Processing time**:
+  * \~15 minutes for ingestion
+  * Up to 36 hours to appear in DSP
+
+***
+
+#### **Additional Resources**
+
+* [Amazon DSP Audience Management API](https://advertising.amazon.com/API/docs/en-us/guides/amazon-marketing-cloud/audiences/audience-management-service)
