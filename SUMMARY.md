@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Overview](README.md)
+* [Google Ads Data Manager - Audience](google-ads-data-manager-audience.md)
 * [mParticle - Events](mparticle-events.md)
 * [mParticle - Audience](mparticle-audience.md)
 * [Kochava](kochava.md)
