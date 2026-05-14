@@ -73,6 +73,12 @@ When creating a Google Ads Data Manager Audiences connection in MadConnect, the 
 | **Ad User Data Consent**       | Yes      | Indicates whether user data consent has been granted for the uploaded records.                                                                                                                                                               |
 | **Ad Personalization Consent** | Yes      | Indicates whether uploaded records can be used for ad personalization.                                                                                                                                                                       |
 
+#### Locating the Advertiser ID in Google Ads UI
+
+The Advertiser ID is located in the top left by the account name. **Remove all dashes - from the ID** when inputting value in the MadConnect UI.
+
+<figure><img src=".gitbook/assets/image (78).png" alt=""><figcaption></figcaption></figure>
+
 These fields determine how MadConnect structures calls to Google’s Data Manager audience APIs.
 
 ***
