@@ -29,6 +29,8 @@
 * [Pinterest- Ads Management API](pinterest-ads-management-api.md)
 * [Pinterest - Ads Analytics API](pinterest-ads-analytics-api.md)
 * [Google DV360](google-dv360.md)
+* [Amazon Ads Data Manager](amazon-ads-data-manager.md)
+* [Nexxen - Audiences](nexxen-audiences.md)
 * [LiveRamp - ID Match and Retrieval API](liveramp-id-match-and-retrieval-api.md)
 * [LiveRamp - Transcoding](liveramp-transcoding.md)
 * [Amazon Ads -  DSP Events](amazon-ads-dsp-events.md)
