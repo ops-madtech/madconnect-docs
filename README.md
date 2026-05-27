@@ -1,41 +1,77 @@
 # Overview
 
-Connectors are at the heart of the MadConnect platform. Creating connectors on MadConnect is a simple drag-and-drop process. MadConnect currently supports the following types of connectors:
+## Source & Destination Connectors
 
-* Streaming Connectors
-* Batch Connectors
-* Pull Connectors
-* Push Connectors
+MadConnect integrations are built around a connector-based model that separates where data comes from from where it is sent. This design allows customers to create flexible, reusable data workflows across a wide range of platforms and use cases.At a high level:
 
-### Streaming Connectors
+* **Source connectors** define where data originates
+* **Destination connectors** define where data is delivered
+* **Connections** combine a source and a destination into an executable workflow
 
-Streaming Connectors are bi-directional data connectors designed for non-scheduled platform-to-platform communication via individual row or small batch rapid transfer of data
+This separation enables MadConnect to support many platforms and use cases while maintaining consistency, scalability, and control.
 
-Examples:
+***
 
-* Meta Marketing API
-* Snapchat Conversions API
+#### Source Connectors <a href="#source-connectors" id="source-connectors"></a>
 
-### Batch Connectors
+A source connector represents a system where data is read from.Sources may include:
 
-Batch Connectors are used for scheduled, large file transfer of data between platforms. They are designed for the purpose of transferring large volumes of data.&#x20;
+* Data warehouses and cloud storage platforms
+* Advertising and measurement platforms (for reporting data)
+* Operational or partner systems
 
-Example:
+Source connectors are responsible for:
 
-File transfer from source AWS S3 to destination cloud storage.
+* Accessing data from the underlying platform
+* Exposing available datasets, tables, or objects
+* Supporting scheduling and incremental data extraction where applicable
 
-### Pull Connectors
+A single source connector can be reused across multiple connections and destinations.
 
-A Pull Connector is a type of streaming connector from which data is fetched from the Destination connector side via API.
+***
 
-Example:
+#### Destination Connectors <a href="#destination-connectors" id="destination-connectors"></a>
 
-Facebook Analytics Connector.
+A destination connector represents a system where data is delivered.Destinations typically include:
 
-### Push Connectors
+* Advertising platforms
+* Measurement and analytics systems
+* Partner APIs and downstream data platforms
 
-A Push Connector is a type of streaming connector in which data is pushed from the Source connector side via API.
+Destination connectors are responsible for:
 
-Example:
+* Enforcing schema and API requirements
+* Supporting platform-specific actions and behaviors
+* Validating data before delivery
 
-Snapchat Conversions Connector.
+A single destination connector can be reused across multiple connections and sources.
+
+***
+
+#### The Connector Framework <a href="#the-connector-framework" id="the-connector-framework"></a>
+
+MadConnect uses a standardized connector framework to ensure integrations are consistent, secure, and scalable across the platform.At a high level, each connector defines:
+
+* How MadConnect authenticates with an external system
+* What data schemas, identifiers, or metrics are supported
+* How data is read from or delivered to the platform
+* Platform-specific validation, constraints, and error handling
+
+Connectors are modular and reusable, meaning the same connector can be used across multiple workspaces and connections. The connector framework is tightly integrated with:
+
+* **Cloud Configuration**, which defines where execution occurs
+* **Schemas and Mappings**, which define how data is structured
+* **Execution and Monitoring**, which ensures workflows are reliable and observable
+
+This approach allows MadConnect to support a growing ecosystem of platforms while maintaining a consistent user experience.
+
+***
+
+#### Connector-Specific Documentation <a href="#connector-specific-documentation" id="connector-specific-documentation"></a>
+
+Each source and destination connector has its own documentation page that outlines:
+
+* Supported use cases
+* Required and optional fields
+* Supported identifiers, metrics, and actions
+* Platform-specific limitations or requirements<br>
