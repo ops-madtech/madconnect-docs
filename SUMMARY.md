@@ -61,3 +61,4 @@
 * [Google BigQuery - Source](google-bigquery-source.md)
 * [Amazon Ads - Reporting](amazon-ads-reporting.md)
 * [VideoAmp - Audience](videoamp-audience.md)
+* [Amazon Ads Data Manager DSP Audiences](amazon-ads-data-manager-dsp-audiences.md)
