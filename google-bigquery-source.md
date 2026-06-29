@@ -14,6 +14,7 @@ To configure the BigQuery connector, you’ll provide a **Google Cloud service a
 
 * BigQuery Job User
 * BigQuery Data Viewer
+* Storage Object User - Required when GCS Bucket is used for large tables
 
 The JSON key is securely stored and used only for executing queries defined in your connection.
 
@@ -39,11 +40,13 @@ Once the connector is configured, each connection using BigQuery as a source req
   The dataset where your source table or view lives.
 * **BigQuery Table**\
   The primary table or view to query from.
-* **SQL Query**\
-  A valid BigQuery SQL query used to select and shape the data.\
-  This can reference the table directly or include joins, filters, and transformations as needed.
+*   **SQL Query**\
+    A valid BigQuery SQL query used to select and shape the data.\
+    This can reference the table directly or include joins, filters, and transformations as needed.&#x20;
 
-Queries should return only the fields required by the destination schema to optimize performance.
+    Queries should return only the fields required by the destination schema to optimize performance.
+* **Google Cloud Storage (GCS) Bucket URI**\
+  &#xNAN;_(Optional)_ A valid GCS bucket URI used as a staging location for exporting large BigQuery tables. Recommended for large tables to improve performance and reliability over direct query-based extraction.
 
 ***
 

@@ -8,12 +8,12 @@ MadConnect integrates with Pinterest’s Customer List Audiences API to allow ad
 
 ### &#x20;Connector Overview
 
-| Field                 | Description                                                                                                                            |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Connector Type**    | Destination                                                                                                                            |
-| **Data Type**         | Customer List Audiences                                                                                                                |
-| **Description**       | Upload customer data (emails, device IDs, external IDs) to create Customer List Audiences in Pinterest Ads for targeting or exclusion. |
-| **Supported Actions** | Create / Add / Remove                                                                                                                  |
+| Field                 | Description                                                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Connector Type**    | Destination                                                                                                              |
+| **Data Type**         | Customer List Audiences                                                                                                  |
+| **Description**       | Upload customer data (emails, MAID, IDFA) to create Customer List Audiences in Pinterest Ads for targeting or exclusion. |
+| **Supported Actions** | Create / Add / Remove                                                                                                    |
 
 ***
 
