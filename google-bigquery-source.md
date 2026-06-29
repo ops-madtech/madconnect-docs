@@ -46,7 +46,7 @@ Once the connector is configured, each connection using BigQuery as a source req
 
     Queries should return only the fields required by the destination schema to optimize performance.
 * **Google Cloud Storage (GCS) Bucket URI**\
-  &#xNAN;_(Optional)_ A valid GCS bucket URI used as a staging location for exporting large BigQuery tables. Recommended for large tables to improve performance and reliability over direct query-based extraction.
+  (Optional) A valid GCS bucket URI used as a staging location for exporting large BigQuery tables. Recommended for large tables to improve performance and reliability over direct query-based extraction.
 
 ***
 
