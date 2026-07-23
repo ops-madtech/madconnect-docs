@@ -11,6 +11,7 @@
 * [Google Ads - Offline Conversions](google-ads-offline-conversions.md)
 * [Google Ads - Click Conversions](google-ads-click-conversions.md)
 * [Google Ads - API Reporting](google-ads-api-reporting.md)
+* [Lamar Inventory Availability](lamar-inventory-availability.md)
 * [Bing Ads - Events](bing-ads-events.md)
 * [Bing Ads - Audiences](bing-ads-audiences.md)
 * [Google Ads Manager](google-ads-manager.md)
