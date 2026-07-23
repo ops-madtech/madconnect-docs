@@ -22,9 +22,10 @@ MadConnect enables seamless integration with **Lamar's Extended Availability API
 
 Before configuring the connector in MadConnect, ensure you have:
 
-1. **Authentication**
-   * Client ID
-   * Client Secret
+**Authentication**
+
+* Client ID
+* Client Secret
 
 These must be issued for a Lamar account with access to the Extended Availability API (\`/ext-availability\`). MadConnect stores them securely and manages token refresh.
 
