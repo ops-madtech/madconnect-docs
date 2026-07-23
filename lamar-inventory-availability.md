@@ -6,7 +6,7 @@ MadConnect enables seamless integration with **Lamar's Extended Availability API
 
 ***
 
-**Connector Overview**
+#### **Connector Overview**
 
 | Field                 | Description                                                                      |
 | --------------------- | -------------------------------------------------------------------------------- |
@@ -18,7 +18,7 @@ MadConnect enables seamless integration with **Lamar's Extended Availability API
 
 ***
 
-**Platform Prerequisites**
+#### **Platform Prerequisites**
 
 Before configuring the connector in MadConnect, ensure you have:
 
@@ -31,8 +31,8 @@ These must be issued for a Lamar account with access to the Extended Availabilit
 
 **Access Requirements**
 
-1. Ensure the Client ID/Secret ID you provide has access to the specific displays (by Geopath ID or Display ID) you want to check availability for
-2. Network permissions allowing outbound HTTPS connections to the Lamar Inventory service
+* Ensure the Client ID/Secret ID you provide has access to the specific displays (by Geopath ID or Display ID) you want to check availability for
+* Network permissions allowing outbound HTTPS connections to the Lamar Inventory service
 
 **Know Your IDs and Date Window Before Configuring**
 
@@ -43,7 +43,7 @@ We recommend confirming the Geopath IDs or Display IDs you want to check, and yo
 
 ***
 
-**Setting Up the Connector in MadConnect**
+#### **Setting Up the Connector in MadConnect**
 
 * **Add Platform**
   * Go to **My Platforms → Add Platform**
@@ -69,9 +69,9 @@ We recommend confirming the Geopath IDs or Display IDs you want to check, and yo
 
 ***
 
-**Data Dictionary**
+#### **Data Dictionary**
 
-Availability Output
+**Availability Output**
 
 <table><thead><tr><th width="178">Field</th><th width="164">Data Type</th><th width="215">Description</th><th>Example</th></tr></thead><tbody><tr><td><code>`display_id`</code></td><td>string</td><td>Lamar's display identifier, returned when `unitIdType` is `display_ids`.</td><td><code>`072.002272`</code></td></tr><tr><td><code>`geopath_id`</code></td><td>int64</td><td>GeoPath spot identifier, returned when `unitIdType` is `geopath_ids`. Returned as a number, not a string.</td><td><code>`4060`</code></td></tr><tr><td><code>`display_type`</code></td><td>string</td><td>Lamar's own display/media format. Values are Lamar's real inventory categories (e.g. "Poster", "Jr Bulletin"), not a fixed enum.</td><td><code>`Poster`</code></td></tr><tr><td><code>`availability`</code></td><td>string (enum)</td><td>Availability status for the requested date window. Confirmed values: `AVAILABLE`, `PARTIALLY_AVAILABLE`, `UNAVAILABLE`.</td><td><code>`PARTIALLY_AVAILABLE`</code></td></tr><tr><td><code>`cost`</code></td><td>float64</td><td>Estimated cost for the display over the requested date window.</td><td><code>`996.43`</code></td></tr><tr><td>`<code>currency</code>`</td><td>string</td><td>Currency code for `cost`.</td><td><code>`USD`</code></td></tr><tr><td><code>`days_available`</code></td><td>array&#x3C;string> or null</td><td>Individual dates within the requested window the display is open. Only populated when `availability` is `PARTIALLY_AVAILABLE`; `null` for `AVAILABLE`/`UNAVAILABLE`.</td><td><code>`["2026-08-01", "2026-08-02", "2026-08-31"]`</code></td></tr></tbody></table>
 
