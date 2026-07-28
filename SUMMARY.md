@@ -39,6 +39,7 @@
 * [Amazon - S3](amazon-s3.md)
 * [Snowflake - Audience](snowflake-audience.md)
 * [Snowflake - Data store](snowflake-data-store.md)
+* [Viant DSP - Audience Activation](viant-dsp-audience-activation.md)
 * [DV360 - Reporting](dv360-reporting.md)
 * [Snapchat - Reporting](snapchat-reporting.md)
 * [Amazon S3 - Destination](amazon-s3-destination.md)
