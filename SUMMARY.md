@@ -42,6 +42,7 @@
 * [Viant DSP - Audience Activation](viant-dsp-audience-activation.md)
 * [Databricks - Source](databricks-source.md)
 * [Google Analytics - Reporting](google-analytics-reporting.md)
+* [Bing Ads - Reporting](bing-ads-reporting.md)
 * [Databricks - Destination](databricks-destination.md)
 * [DV360 - Reporting](dv360-reporting.md)
 * [Snapchat - Reporting](snapchat-reporting.md)
