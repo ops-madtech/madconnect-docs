@@ -1,6 +1,8 @@
-# Tiktok Marketing - Ad Measurement
+---
+hidden: true
+---
 
-![](https://lh7-us.googleusercontent.com/-kPbeFBJpZqW_8FCf85212FqYj6RITRO0ELqraJIMnLF-u1Zl0e3g0MJR-EgLsw9Nc1gxEkLmNhEm7qKR5KW16i9RoKbtNcZ9do4YzygoU8P7UBAhNUX8iCPqmXVqnzzQBqqp0YYXZcGN7r0ovybOA)
+# TikTok Marketing - Reporting
 
 MadConnect enables seamless integration with **TikTok Ads Reporting,** allowing you to pull performance and exposure data — at the Advertiser, Ad Account, Campaign, Ad Group, and Ad level — directly from TikTok Ads into your analytics or reporting tools. Gain valuable insights to optimize your advertising strategies and improve campaign effectiveness with real-time data synchronization. .
 
@@ -134,3 +136,5 @@ Click into an individual batch to open the Batch Inspection view for a detailed 
 ***
 
 For more information, see the official :[Tiktok Ads Reporting Official API Documentation](https://business-api.tiktok.com/portal/docs)
+
+<br>
