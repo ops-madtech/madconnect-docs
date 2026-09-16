@@ -2,6 +2,7 @@
 
 * [Overview](README.md)
 * [TheTradeDesk - My Reports](thetradedesk-my-reports.md)
+* [The Trade Desk Marketplace - Reporting](the-trade-desk-marketplace-reporting.md)
 * [Google Ads Data Manager - Audience](google-ads-data-manager-audience.md)
 * [The Trade Desk - Audience Activation](the-trade-desk-audience-activation.md)
 * [The Trade Desk - Raw Offline Measurement Conversion](the-trade-desk-raw-offline-measurement-conversion.md)
