@@ -50,7 +50,7 @@ MadConnect only writes the file — the Import itself is set up once in Permutiv
 
 1. Go to **Connectivity → Imports → Create Import**
 2. Choose **S3** as the source type, and select (or create) your S3 connection
-3. Choose the **schema** and **table** — the table is the exact folder MadConnect will upload files into (see [File Format & Location](permutive-audience.md#file-format--location) below)
+3. Choose the **schema** and **table** — the table is the exact folder MadConnect will upload files into (see [File Format and Location](permutive-audience.md#file-format-and-location) below)
 4. Choose **User Segment** as the data type
 5. Map your columns:
    * **User ID** → your identifier column, with its identifier type declared (this must match what you choose as Import Identifier in MadConnect)
@@ -148,7 +148,7 @@ Each row's `action` value decides what happens to that person and that segment:
 
 **If the same segment code appears more than once in a run with different actions** (for example, `create` and `delete` both sent for code `1001`): **both are sent to Permutive**, not just the last one. Permutive does not guarantee the order these are applied in, so the final state of that segment isn't predictable from our side. If you need a segment created and later deleted in a specific order, send those in separate runs rather than the same one.
 
-## File Format & Location
+## File Format and Location
 
 MadConnect writes one file per run (or one per 1,000,000 rows, if a run is larger — extra files are created automatically, no action needed) directly into your configured S3 Bucket Path. **No sub-folder is created** — files land straight in that one folder:
 
