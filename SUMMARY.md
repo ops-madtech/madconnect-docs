@@ -73,3 +73,6 @@
 * [VideoAmp - Audience](videoamp-audience.md)
 * [Amazon Ads Data Manager DSP Audiences](amazon-ads-data-manager-dsp-audiences.md)
 * [Roku Ads Reporting](roku-ads-reporting.md)
+* [Permutive - Audience](permutive-audience.md)
+* [Amazon Redshift - Source](amazon-redshift-source.md)
+* [Amazon Redshift - Destination](amazon-redshift-destination.md)
