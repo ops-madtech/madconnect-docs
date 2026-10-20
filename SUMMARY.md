@@ -77,3 +77,4 @@
 * [Amazon Redshift - Source](amazon-redshift-source.md)
 * [Amazon Redshift - Destination](amazon-redshift-destination.md)
 * [AdsWizz - Reporting Connector](adswizz-reporting-connector.md)
+* [DoubleVerify - Reporting Connector](doubleverify-reporting-connector.md)
