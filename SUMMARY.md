@@ -76,3 +76,4 @@
 * [Permutive - Audience](permutive-audience.md)
 * [Amazon Redshift - Source](amazon-redshift-source.md)
 * [Amazon Redshift - Destination](amazon-redshift-destination.md)
+* [AdsWizz - Reporting Connector](adswizz-reporting-connector.md)
