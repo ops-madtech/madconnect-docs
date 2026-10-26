@@ -79,3 +79,4 @@
 * [AdsWizz - Reporting Connector](adswizz-reporting-connector.md)
 * [DoubleVerify - Reporting Connector](doubleverify-reporting-connector.md)
 * [Google Campaign Manager 360 - Reporting](google-campaign-manager-360-reporting.md)
+* [The Trade Desk Marketplace - Audience](the-trade-desk-marketplace-audience.md)
