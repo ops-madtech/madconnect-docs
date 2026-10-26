@@ -78,3 +78,4 @@
 * [Amazon Redshift - Destination](amazon-redshift-destination.md)
 * [AdsWizz - Reporting Connector](adswizz-reporting-connector.md)
 * [DoubleVerify - Reporting Connector](doubleverify-reporting-connector.md)
+* [Google Campaign Manager 360 - Reporting](google-campaign-manager-360-reporting.md)
